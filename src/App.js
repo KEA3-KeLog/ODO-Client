@@ -11,7 +11,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path={"/"} element={<MainPage />} />
-        <Route path='/' element={<MyblogPage />} />
+        <Route path='/myblogpage' element={<MyblogPage />} />
         <Route path='/test' element={<Test />} />
       </Routes>
     </div>

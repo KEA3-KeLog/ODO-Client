@@ -319,7 +319,6 @@ function myblogpage() {
                 </div>
             </div>
         </div>
-
     )
 }
 export default myblogpage;
