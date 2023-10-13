@@ -1,0 +1,219 @@
+/* CSS로 폰트CSS불러오기 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+
+.section-main-bg {
+    position: relative;
+    background: url("../assets/main_bg.png") no-repeat center fixed;
+    background-size: cover;
+    object-fit: cover;
+    height: 100vh;
+}
+
+.section-main-bg-title {
+    position: absolute;
+    color: black;
+    font-size: 3.5vw;
+    font-weight: 600;
+    letter-spacing: -1.5px;
+    top: 56%;
+    left: 10%;
+}
+
+.section-main-bg-title::after {
+    content: "새롭고 다채로운 경험을 시작하세요.";
+    font-weight: 400;
+}
+
+.section-content {
+    display: flex;
+    margin: 56px 16% 0 16%;
+}
+
+.h-fontstyle {
+    min-width: 170px;
+    float: left;
+    color: #000000;
+    font-size: 34px;
+    font-family: 'Roboto';
+    font-weight: 500;
+}
+
+.section-tag {
+    flex-grow: 1;
+    padding: 20px 0 20px 120px;
+}
+
+.section-tag-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 24px;
+}
+
+.section-tag-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.tag-item {
+    background-color: #efefef;
+    color: black;
+    border: 1px rgba(0,0,0,0) solid;
+    border-radius: 50px;
+    min-width: 100px;
+    width: fit-content;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.search-box {
+    display: flex;
+    width: 100%;
+    height: 20px;
+    background: #efefef;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.dropdown {
+    display : inline-block;
+}
+
+.dropdown-btn {
+    background-color: #efefef;
+    border: none;
+    display: flex;
+}
+
+.dropdown-btn-icon {
+    border: none;
+    background: url("../assets/icon_downarrow.svg") no-repeat;
+    margin-top: 5px;
+    margin-left: 5px;
+    width: 30px;
+    height: 20px;
+}
+
+.dropdown-item {
+    display : none;
+    position : absolute;
+    z-index : 1; /*다른 요소들보다 앞에 배치*/
+    box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
+}
+
+.dropdown-item a {
+    display : block;
+    padding : 12px 20px;
+    background-color: white;
+}
+
+.dropdown-item a:hover {
+    background-color: #f6f6f6;
+}
+
+.dropdown:hover .dropdown-item {
+    display: block;
+}
+
+.input-style {
+    flex-grow: 1;
+    border: none;
+    margin: 0 20px 0 30px;
+    background-color: #efefef;
+}
+
+.search-icon {
+    border: none;
+    background: url("../assets/icon_search.svg") no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
+.section-post {
+    margin: 56px 16% 0 16%;
+}
+
+.move-to-posts {
+    border: none;
+    display: flex;
+    color: #000000;
+    background-color: white;
+    font-size: 34px;
+    font-family: "Roboto";
+    font-weight: 500;
+    line-height: 55px;
+}
+
+.move-to-posts-icon {
+    background: url("../assets/icon_rightarrow.svg") no-repeat;
+    width: 24px;
+    height: 30px;
+    margin: 12px 0 0 20px;
+}
+
+.section-post-view-1 {
+    display: flex;
+    padding-top: 30px;
+}
+
+.post-view-1-item {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    width: 24%;
+    height: auto;
+}
+
+.post-view-1-title {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.post-view-1-date {
+    color: #848484;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.post-view-1-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*프로필 사진과 by저자 를 묶는 div*/
+.post-view-1-profile {
+    display: flex;
+}
+
+.post-view-1-author-name {
+    display: block;
+    color: #848484;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.post-view-1-like {
+    padding-top: 10px;
+}
+
+.section-post-view-2 {
+    display: grid;
+    gap: 1%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.section-post-view-2-item {
+    display: flex;
+    flex-direction: column;
+    width: 24%;
+}
+
+.post-view-2-item:nth-child(1) {
+    grid-row: 1 / span2;
+}

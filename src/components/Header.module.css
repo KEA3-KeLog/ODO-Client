@@ -1,0 +1,27 @@
+.header-content {
+    padding: 60px 60px 0 60px;
+}
+
+.icon-profile-area {
+    float: right;
+}
+
+.icon-profile-button {
+    float: right;
+    border: none;
+    background: url("../assets/icon_profile.svg") no-repeat;
+    width: 40px;
+    height: 40px;
+}
+
+.navigate {
+    color: black;
+    margin: 20px;
+    padding: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navigate:hover {
+    text-decoration: underline;
+}
