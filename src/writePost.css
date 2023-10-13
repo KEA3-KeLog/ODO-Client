@@ -1,0 +1,85 @@
+.Head {
+    padding: 40px;
+
+}
+
+.toolbar {
+    width: 70%;
+    margin-left : 100px;
+    box-Shadow: 0px 4px 4px gray;
+}
+.bottom {
+    width: 100%;
+    bottom: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #EDEDED;
+}
+.Write {
+    text-align: center;
+    padding: 20px;
+
+}
+
+.Write div {
+    margin-top: 17px;
+
+}
+
+#title_txt {
+    width: 91%;
+    padding-bottom: 0px;
+    border: none;
+    font-size: 35px;
+    font-weight: bold;
+}
+#tag_txt {
+    padding-left: 15px;
+    width: 91%;
+    padding-bottom: 20px;
+    border: none;
+    font-size: 20px;
+    border-bottom: solid 1px #ababab;
+
+}
+#content_txt {
+    padding-left: 15px;
+    width: 91%;
+    resize: none;
+    border: none;
+    height: 580px;
+    font-size: 20px;
+
+}
+
+#title_txt:focus { outline : none; }
+#content_txt:focus { outline : none; }
+.post_save {
+    text-align: right;
+    vertical-align: middle;
+    margin-right: 110px;
+}
+#post_save_button {
+    left: 8000px;
+    width: 120px;
+    margin: 10px;
+    padding: 13px;
+    border-radius: 40px;
+    border: solid 1px #ababab;
+    cursor: pointer;
+    background-color: #ffffff;
+    font-size: 14px;
+    color: #000000;
+}
+#post_submit_button {
+    right: 100px;
+    width: 120px;
+    padding: 13px;
+    border-radius: 40px;
+    border: solid 1px #ababab;
+    cursor: pointer;
+    background-color: #2F2F2F;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+}
