@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import "./login.css";
 import Button from 'react-bootstrap/Button';
-import ODOLogo from './img/logo.png';
-import naverLogo from './img/naver.png';
-import kakaoLogo from './img/kakao.jpg';
-import googleLogo from './img/google.jpg';
+import ODOLogo from '../img/logo.png';
+import naverLogo from '../img/naver.png';
+import kakaoLogo from '../img/kakao.jpg';
+import googleLogo from '../img/google.jpg';
 import { useState, useEffect } from 'react';
 function login() {
     //let [fade, setFade] = useState('');

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import "./writePost.css";
-import toolbar from "./img/toolbar.png";
+import toolbar from "../img/toolbar.png";
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 function login() {
