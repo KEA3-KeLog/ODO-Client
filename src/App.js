@@ -1,4 +1,5 @@
 import './App.css';
+<<<<<<< HEAD
 import {Route, Routes} from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import MyblogPage from './pages/myblogpage';
@@ -14,6 +15,15 @@ function App() {
         <Route path='/myblogpage' element={<MyblogPage />} />
         <Route path='/test' element={<Test />} />
       </Routes>
+=======
+import Login from './login';
+import WritePost from './writePost'
+function App() {
+  return (
+    <div className="App">
+     {/* <Login /> */}
+     <WritePost />
+>>>>>>> origin/yungi
     </div>
   );
 }
