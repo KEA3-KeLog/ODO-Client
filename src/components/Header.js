@@ -10,7 +10,7 @@ function Header() {
     return (
         <>
             <Navbar className="bg-body-tertiary">
-                <Container className={styles[`header-content`]}>
+                <div className={styles[`header-content`]}>
                     <Navbar.Brand onClick={() => { navigate('/') }}>
                         <img
                             alt="logo_ODO"
@@ -23,13 +23,15 @@ function Header() {
                         className={styles[`icon-profile-button`]}
                         onClick={()=>{console.log("아이콘버튼클릭")}}
                     />
-                    <Nav.Link
-                        className={styles.navigate}
-                        onClick={() => { navigate('/') }}>메인페이지</Nav.Link>
-                    <Nav.Link
-                        className={styles.navigate}
-                        onClick={() => { navigate('/') }}>상점</Nav.Link>
-                </Container>
+                    <div className={styles[`header-navigate`]}>
+                        <Nav.Link
+                            className={styles.navigate}
+                            onClick={() => { navigate('/') }}>메인페이지</Nav.Link>
+                        <Nav.Link
+                            className={styles.navigate}
+                            onClick={() => { navigate('/') }}>상점</Nav.Link>
+                    </div>
+                </div>
             </Navbar>
         </>
     );

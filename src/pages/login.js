@@ -29,13 +29,13 @@ function login() {
 
     return (
         <>
-            <img style={{ paddingTop: 200 }}
-                className="ODOLogo"
-                src={ODOLogo}
-                width="180px"
-
-            />
-            <div style={{ paddingTop: 70 }}>
+            <div className={"odoLogo"}>
+                <img
+                    src={ODOLogo}
+                    width="180px"
+                />
+            </div>
+            <div style={{ paddingTop: 50 }}>
                 <Button
                     className="naverLogin">
                     <img className="naverLogo"
@@ -46,7 +46,7 @@ function login() {
                     </div> */}
 
                 </Button>
-            </div >
+            </div>
             <div style={{ paddingTop: 10 }}>
                 <Button
                     className="kakaoLogin"
@@ -71,13 +71,11 @@ function login() {
                 </Button>
             </div>
             <div style={{ paddingTop: 50 }}
-            className="signIn">
+                className="signIn">
                 <text className="normal">아직 회원이 아니신가요? </text>
-                <text className="bold">회원가입</text>
+                <text className={"bold"}>회원가입</text>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="200%" viewBox="0 0 1440 0" fill="none">
-                <path d="M120 0L1646 232.5L1380.5 451.5L-65 405.5L-93.5 96L120 0Z" fill="#F3F3F3" />
-            </svg>
+            <div className={"login-footer"}></div>
         </>
 
 

@@ -12,16 +12,34 @@
 .section-main-bg-title {
     position: absolute;
     color: black;
-    font-size: 3.5vw;
+    font-size: 3.4vw;
     font-weight: 600;
     letter-spacing: -1.5px;
-    top: 56%;
+    top: 46%;
     left: 10%;
 }
 
 .section-main-bg-title::after {
     content: "새롭고 다채로운 경험을 시작하세요.";
     font-weight: 400;
+}
+
+.section-main-bg-subtitle {
+    position: absolute;
+    font-size : 1.8vw;
+    font-weight: 400;
+    top: 68%;
+    left: 10%;
+}
+
+.section-main-bg-button {
+    position: absolute;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
+    top: 80%;
+    left: 10%;
 }
 
 .section-content {

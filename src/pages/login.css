@@ -1,8 +1,15 @@
 
-.ODOlogo {
-    margin: auto;
+.odoLogo {
     display: block; 
     flex-shrink: 0;
+    text-align: center;
+    align-items: center;
+    height: 200px;
+}
+
+.odoLogo img {
+    padding-top: 7%;
+    margin: auto;
 }
 
 .naverLogin {
@@ -119,7 +126,7 @@
 
 
 .signIn {
-    width: 187px;
+    width: 200px;
     height: 15px;
     top: 695px;
     left: 635px;
@@ -128,7 +135,6 @@
 
 .normal {
     color: #000;
-
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
@@ -136,7 +142,6 @@
 }
 
 .bold {
-
     color: #000;
     font-size: 13px;
     font-style: normal;
@@ -144,9 +149,10 @@
     line-height: normal;
 }
 
-.polygon-2 {
-    width: 1739.5px;
-height: 451.5px;
-flex-shrink: 0;
-fill: #F3F3F3;
+.login-footer {
+    margin-top: 60px;
+    background: url("../assets/Polygon 2.svg") no-repeat;
+    background-size: cover;
+    height: 268px;
+    width: 100%;
 }

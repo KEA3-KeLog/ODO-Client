@@ -1,5 +1,5 @@
 import './myblogpage.css';
-
+import NavBar from '../components/Navigationbar';
 import styled from "styled-components";
 
 const SelectBoxWrapper = styled.div`
@@ -74,6 +74,8 @@ function myblogpage() {
     };
 
     return (
+        <>
+        <NavBar />
         <div class="container">
             <ion-icon name="chevron-down-outline"></ion-icon>
             <div class="child first">
@@ -319,6 +321,7 @@ function myblogpage() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 export default myblogpage;

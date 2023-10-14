@@ -22,6 +22,8 @@ function MainPage() {
             <div className={styles[`section-main-bg`]}>
                 <Header/>
                 <p className={styles[`section-main-bg-title`]}>내 목소리로 듣는 블로그<br /></p>
+                <p className={styles[`section-main-bg-subtitle`]}>ODO와 함께 시작하세요</p>
+                <button className={styles[`section-main-bg-button`]}>자세히보기</button>
             </div>
 
             <div className={styles[`section-content`]}>
