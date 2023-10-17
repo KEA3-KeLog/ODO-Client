@@ -21,9 +21,6 @@ function MainPage() {
         <>
             <div className={styles[`section-main-bg`]}>
                 <Header/>
-                <p className={styles[`section-main-bg-title`]}>내 목소리로 듣는 블로그<br /></p>
-                <p className={styles[`section-main-bg-subtitle`]}>ODO와 함께 시작하세요</p>
-                <button className={styles[`section-main-bg-button`]}>자세히보기</button>
             </div>
 
             <div className={styles[`section-content`]}>
@@ -34,10 +31,12 @@ function MainPage() {
                         <div className={styles[`tag-item`]}>ReactJS</div>
                         <div className={styles[`tag-item`]}>Springboot</div>
                         <div className={styles[`tag-item`]}>Python</div>
+                        <div className={styles[`tag-item`]}>Javascript</div>
                     </div>
                     <div className={styles[`section-tag-2`]}>
                         <div className={styles[`tag-item`]}>Javascript</div>
                         <div className={styles[`tag-item`]}>ReactJS</div>
+                        <div className={styles[`tag-item`]}>Springboot</div>
                         <div className={styles[`tag-item`]}>Springboot</div>
                     </div>
                 </div>
@@ -56,7 +55,7 @@ function MainPage() {
                             <a href="#">태그 검색</a>
                         </div>
                     </div>
-                    <input type={"text"} className={styles[`input-style`]} placeholder={"'현영'님이 작성한 블로그"}/>
+                    <input type={"text"} className={styles[`input-style`]} placeholder={"'현영'님이 작성한 블로그 클론 코딩 회고록! 지금 검색해 보세요."}/>
                     <div className={styles[`search-icon`]}/>
                 </div>
             </div>
@@ -64,7 +63,7 @@ function MainPage() {
             <div className={styles[`section-post`]}>
                 <button className={styles[`move-to-posts`]}>
                     연관포스트
-                    <span className={styles[`move-to-posts-icon`]} />
+                    <span className={styles[`move-to-posts-icon`]}/>
                 </button>
                 <div className={styles[`section-post-view-1`]}>
                     <div className={styles[`post-view-1-item`]}>
@@ -72,18 +71,21 @@ function MainPage() {
                             alt={"post image"}
                             src={require('../assets/Rectangle 31.png')}
                         />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                        <div className={styles[`post-view-1-content`]}>
+                            <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                            <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                            <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                            <div className={styles[`post-view-1-footer`]}>
+                                <div className={styles[`post-view-1-profile`]}>
+                                    <img
+                                        alt={""}
+                                        src={require("../assets/author_profile.svg").default}
+                                    />
+                                    <p className={styles[`post-view-1-author-name`]}>by <span
+                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                </div>
+                                <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
                     </div>
                     <div className={styles[`post-view-1-item`]}>
@@ -91,18 +93,21 @@ function MainPage() {
                             alt={"post image"}
                             src={require('../assets/Rectangle 31.png')}
                         />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                        <div className={styles[`post-view-1-content`]}>
+                            <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                            <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                            <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                            <div className={styles[`post-view-1-footer`]}>
+                                <div className={styles[`post-view-1-profile`]}>
+                                    <img
+                                        alt={""}
+                                        src={require("../assets/author_profile.svg").default}
+                                    />
+                                    <p className={styles[`post-view-1-author-name`]}>by <span
+                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                </div>
+                                <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
                     </div>
                     <div className={styles[`post-view-1-item`]}>
@@ -110,18 +115,21 @@ function MainPage() {
                             alt={"post image"}
                             src={require('../assets/Rectangle 31.png')}
                         />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                        <div className={styles[`post-view-1-content`]}>
+                            <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                            <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                            <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                            <div className={styles[`post-view-1-footer`]}>
+                                <div className={styles[`post-view-1-profile`]}>
+                                    <img
+                                        alt={""}
+                                        src={require("../assets/author_profile.svg").default}
+                                    />
+                                    <p className={styles[`post-view-1-author-name`]}>by <span
+                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                </div>
+                                <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
                     </div>
                     <div className={styles[`post-view-1-item`]}>
@@ -129,18 +137,21 @@ function MainPage() {
                             alt={"post image"}
                             src={require('../assets/Rectangle 31.png')}
                         />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                        <div className={styles[`post-view-1-content`]}>
+                            <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                            <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                            <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                            <div className={styles[`post-view-1-footer`]}>
+                                <div className={styles[`post-view-1-profile`]}>
+                                    <img
+                                        alt={""}
+                                        src={require("../assets/author_profile.svg").default}
+                                    />
+                                    <p className={styles[`post-view-1-author-name`]}>by <span
+                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                </div>
+                                <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
                     </div>
                 </div>
@@ -149,112 +160,132 @@ function MainPage() {
             <div className={styles[`section-post`]}>
                 <button className={styles[`move-to-posts`]}>
                     인기포스트
-                    <span className={styles[`move-to-posts-icon`]} />
+                    <span className={styles[`move-to-posts-icon`]}/>
                 </button>
-                {/*첫번째 아이템*/}
                 <div className={styles[`section-post-view-2`]}>
-                    <div className={styles[`post-view-2-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 10.png')}
-                        />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                    {/*첫번째 아이템*/}
+                    <div className={styles[`post-view-2-frame-1`]}>
+                        <div className={styles[`post-view-2-item`]}>
+                            <img className={styles[`post-view-2-item-img`]}
+                                 alt={"post image"}
+                                 src={require('../assets/Rectangle 10.png')}
+                            />
+                            <div className={styles[`post-view-1-content`]}>
+                                <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                                <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                                <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                                <div className={styles[`post-view-1-footer`]}>
+                                    <div className={styles[`post-view-1-profile`]}>
+                                        <img
+                                            alt={""}
+                                            src={require("../assets/author_profile.svg").default}
+                                        />
+                                        <p className={styles[`post-view-1-author-name`]}>by <span
+                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                    </div>
+                                    <div className={styles[`post-view-1-like`]}>🖤 12</div>
+                                </div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
                     </div>
                     {/*두번째 아이템*/}
-                    <div className={styles[`post-view-2-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 20.png')}
-                        />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                    <div className={styles[`post-view-2-frame-2`]}>
+                        <div className={styles[`post-view-2-item`]}>
+                            <img className={styles[`post-view-2-item-img`]}
+                                 alt={"post image"}
+                                 src={require('../assets/Rectangle 20.png')}
+                            />
+                            <div className={styles[`post-view-1-content`]}>
+                                <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                                <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                                <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                                <div className={styles[`post-view-1-footer`]}>
+                                    <div className={styles[`post-view-1-profile`]}>
+                                        <img
+                                            alt={""}
+                                            src={require("../assets/author_profile.svg").default}
+                                        />
+                                        <p className={styles[`post-view-1-author-name`]}>by <span
+                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                    </div>
+                                    <div className={styles[`post-view-1-like`]}>🖤 12</div>
+                                </div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
-                    </div>
-                    <div className={styles[`post-view-2-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 20.png')}
-                        />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                        <div className={styles[`post-view-2-item`]}>
+                            <img className={styles[`post-view-2-item-img`]}
+                                 alt={"post image"}
+                                 src={require('../assets/Rectangle 20.png')}
+                            />
+                            <div className={styles[`post-view-1-content`]}>
+                                <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                                <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                                <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                                <div className={styles[`post-view-1-footer`]}>
+                                    <div className={styles[`post-view-1-profile`]}>
+                                        <img
+                                            alt={""}
+                                            src={require("../assets/author_profile.svg").default}
+                                        />
+                                        <p className={styles[`post-view-1-author-name`]}>by <span
+                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                    </div>
+                                    <div className={styles[`post-view-1-like`]}>🖤 12</div>
+                                </div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
-                    </div>
-                    <div className={styles[`post-view-2-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 20.png')}
-                        />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                        <div className={styles[`post-view-2-item`]}>
+                            <img className={styles[`post-view-2-item-img`]}
+                                 alt={"post image"}
+                                 src={require('../assets/Rectangle 20.png')}
+                            />
+                            <div className={styles[`post-view-1-content`]}>
+                                <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                                <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                                <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                                <div className={styles[`post-view-1-footer`]}>
+                                    <div className={styles[`post-view-1-profile`]}>
+                                        <img
+                                            alt={""}
+                                            src={require("../assets/author_profile.svg").default}
+                                        />
+                                        <p className={styles[`post-view-1-author-name`]}>by <span
+                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                    </div>
+                                    <div className={styles[`post-view-1-like`]}>🖤 12</div>
+                                </div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
-                    </div>
-                    <div className={styles[`post-view-2-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 20.png')}
-                        />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                        <div className={styles[`post-view-2-item`]}>
+                            <img className={styles[`post-view-2-item-img`]}
+                                 alt={"post image"}
+                                 src={require('../assets/Rectangle 20.png')}
+                            />
+                            <div className={styles[`post-view-1-content`]}>
+                                <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                                <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                                <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                                <div className={styles[`post-view-1-footer`]}>
+                                    <div className={styles[`post-view-1-profile`]}>
+                                        <img
+                                            alt={""}
+                                            src={require("../assets/author_profile.svg").default}
+                                        />
+                                        <p className={styles[`post-view-1-author-name`]}>by <span
+                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                    </div>
+                                    <div className={styles[`post-view-1-like`]}>🖤 12</div>
+                                </div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div className={styles[`section-post`]}>
                 <button className={styles[`move-to-posts`]}>
                     최신포스트
-                    <span className={styles[`move-to-posts-icon`]} />
+                    <span className={styles[`move-to-posts-icon`]}/>
                 </button>
                 <div className={styles[`section-post-view-1`]}>
                     <div className={styles[`post-view-1-item`]}>
@@ -262,18 +293,21 @@ function MainPage() {
                             alt={"post image"}
                             src={require('../assets/Rectangle 31.png')}
                         />
-                        <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                        <p>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                        <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                        <div className={styles[`post-view-1-footer`]}>
-                            <div className={styles[`post-view-1-profile`]}>
-                                <img
-                                    alt={""}
-                                    src={require("../assets/author_profile.svg").default}
-                                />
-                                <p className={styles[`post-view-1-author-name`]}>by <span style={{color:"black", fontWeight:"650"}}>hyun_dev</span></p>
+                        <div className={styles[`post-view-1-content`]}>
+                            <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
+                            <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                            <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                            <div className={styles[`post-view-1-footer`]}>
+                                <div className={styles[`post-view-1-profile`]}>
+                                    <img
+                                        alt={""}
+                                        src={require("../assets/author_profile.svg").default}
+                                    />
+                                    <p className={styles[`post-view-1-author-name`]}>by <span
+                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                </div>
+                                <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
-                            <div className={styles[`post-view-1-like`]}>🖤 12</div>
                         </div>
                     </div>
                     <div className={styles[`post-view-1-item`]}>

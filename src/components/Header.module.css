@@ -15,17 +15,64 @@
 }
 
 .header-navigate {
-    display: flex;
+    display: inline-flex;
+    padding: 40px 0 10px 70px;
     flex-direction: column;
+    font-size: 20px;
 }
 
 .navigate {
     color: black;
-    padding: 20px;
+    margin-bottom: 16px;
     text-decoration: none;
     font-weight: bold;
+    position: relative;
+    flex-grow: 0;
+    width: fit-content;
 }
 
-.navigate:hover {
-    text-decoration: underline;
+.navigate::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 0;
+    background: black;
+    transition: all .5s ease-out;
+}
+
+.navigate:hover::after {
+    width: 100%;
+}
+
+.section-main-bg-text-box {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+}
+
+.section-main-bg-title {
+    color: black;
+    font-size: 2.8vw;
+    font-weight: 600;
+    letter-spacing: -1.5px;
+}
+
+.section-main-bg-title::after {
+    content: "새롭고 다채로운 경험을 시작하세요.";
+    font-weight: 400;
+}
+
+.section-main-bg-subtitle {
+    font-size : 1.8vw;
+    font-weight: 400;
+}
+
+.section-main-bg-button {
+    background: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px 10px 20px;
 }

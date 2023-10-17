@@ -1,12 +1,15 @@
 import { useCallback } from "react";
-import "./login.css";
+import "./Login.css";
 import Button from 'react-bootstrap/Button';
 import ODOLogo from '../img/logo.png';
 import naverLogo from '../img/naver.png';
 import kakaoLogo from '../img/kakao.jpg';
 import googleLogo from '../img/google.jpg';
 import { useState, useEffect } from 'react';
-function login() {
+import {useNavigate} from "react-router-dom";
+function Login() {
+    let navigate = useNavigate()
+
     //let [fade, setFade] = useState('');
 
     /*useEffect(() => {
@@ -72,14 +75,15 @@ function login() {
             </div>
             <div style={{ paddingTop: 50 }}
                 className="signIn">
-                <text className="normal">아직 회원이 아니신가요? </text>
-                <text className={"bold"}>회원가입</text>
+                <text className="normal">아직 회원이 아니신가요?</text>
+                <button className={"bold"}
+                    onClick={()=>{
+                        navigate('/signin1')
+                    }}>회원가입</button>
             </div>
             <div className={"login-footer"}></div>
         </>
-
-
     );
 };
 
-export default login;
+export default Login;

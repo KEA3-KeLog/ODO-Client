@@ -1,0 +1,83 @@
+.section-header {
+    background: url("../assets/Polygon_signin.svg") no-repeat;
+    background-size: cover;
+    height: 300px;
+    width: 100%;
+}
+
+.logo {
+    background: url("../assets/logo_white.png");
+    background-size: cover;
+    width: 150px;
+    height: 94px;
+    position: absolute;
+    top: 4%;
+    left: 3%;
+}
+
+.header-text {
+    position: absolute;
+    top: 12%;
+    left: 25%;
+}
+
+.header-title {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header-sub-title {
+    color: white;
+    font-size: 22px;
+    font-weight: 400;
+    padding-top: 12px;
+}
+
+.section-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 33%;
+    left: 25%;
+}
+
+.section-content h2 {
+    color: black;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.content-information {
+
+}
+
+.content-information-item {
+    display: flex;
+    flex-direction: row;
+    margin: 52px 0 0 0;
+}
+
+.item-title {
+    font-weight: bold;
+    color: #8E8E8E;
+    font-size: 17px;
+    width: 160px;
+}
+
+.item-content {
+    color: black;
+    font-size: 17px;
+}
+
+.button-style {
+    border-radius: 32px;
+    border: 1px solid #000000;
+    background-color: #000000;
+    padding: 14px 30px;
+    margin: 80px 0 0 10px;
+    color: #FFFFFF;
+    font-weight: bold;
+    width: 160px;
+    font-size: 14px;
+}

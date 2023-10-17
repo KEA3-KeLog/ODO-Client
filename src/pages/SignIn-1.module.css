@@ -1,0 +1,118 @@
+.section-header {
+    background: url("../assets/Polygon_signin.svg") no-repeat;
+    background-size: cover;
+    height: 300px;
+    width: 100%;
+}
+
+.logo {
+    background: url("../assets/logo_white.png");
+    background-size: cover;
+    width: 150px;
+    height: 94px;
+    position: absolute;
+    top: 4%;
+    left: 3%;
+}
+
+.header-text {
+    position: absolute;
+    top: 12%;
+    left: 25%;
+}
+
+.header-title {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header-sub-title {
+    color: white;
+    font-size: 22px;
+    font-weight: 400;
+    padding-top: 12px;
+}
+
+.section-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 30%;
+    left: 25%;
+}
+
+.section-content h2 {
+    color: black;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.input-information {
+    display: flex;
+    margin-top: 30px;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #c9c9c9;
+    border-radius: 16px;
+    width: 900px;
+    height: 250px;
+}
+
+.input-information-item {
+    margin: 16px 50px 16px 50px;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+}
+
+.input-information-item:nth-child(2) {
+    margin: 20px 50px 20px 50px;
+}
+
+.input-information-item h2 {
+    width: 150px;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+input::placeholder {
+    font-weight: bold;
+}
+
+.input-style {
+    border: none;
+    margin: 0 20px 0 30px;
+    outline: none;
+    width: 500px;
+}
+
+.horizontal-line {
+    height: 1px;
+    background: #e1e1e1;
+}
+
+.section-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-prev {
+    border-radius: 16px;
+    border: 1px solid #CACACA;
+    background-color: #FFFFFF;
+    padding: 6px 30px;
+    margin: 20px;
+    font-weight: bold;
+}
+
+.button-next {
+    border-radius: 16px;
+    border: 1px solid #000000;
+    background-color: #000000;
+    padding: 6px 30px;
+    margin: 20px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
