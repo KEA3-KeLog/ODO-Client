@@ -1,0 +1,94 @@
+.section-side-profile {
+    position: absolute;
+    top: 110px;
+    right: 52px;
+}
+
+.profile-box-polygon {
+    background: url("../assets/Polygon 3.svg");
+    width: 24px;
+    height: 12px;
+    margin-left: 189px;
+}
+
+.profile-box {
+    box-sizing: content-box;
+    border: 1px solid #CACACA;
+    background-color: #FFFFFF;
+    padding-bottom: 20px;
+}
+
+.box-text {
+    padding: 28px 20px 24px 24px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 210%;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: row;
+    padding: 8px 20px 20px 24px;
+}
+
+.user-profile-img {
+    width: 56px;
+    height: 56px;
+}
+
+.user-profile-info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.user-profile-info h4 {
+    margin: 0 0 4px 0;
+}
+
+.user-profile-info-email {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ababab;
+}
+
+.user-profile-point {
+    display: flex;
+    margin-top: 6px;
+}
+
+.user-profile-point .icon {
+    background: url("../assets/icon_point.svg") no-repeat;
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+}
+
+.user-profile-point .point {
+    font-size: 12px;
+    font-weight: bold;
+    color: #ababab;
+}
+
+.box-horizontal {
+    height: 1px;
+    background: #d9d9d9;
+}
+
+.section-router {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-router button {
+    border: none;
+    background-color: white;
+    color: black;
+    opacity: 0.5;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 14px 22px 14px 22px;
+    text-align: left;
+}
+
+

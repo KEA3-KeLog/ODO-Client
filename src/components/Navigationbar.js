@@ -10,19 +10,19 @@ function MainNav() {
     // navModal 영역 밖 클릭 시 모달창 닫기
     const modalEl = useRef();
 
-    useEffect(()=>{
-        console.log("modalEl.current: ", modalEl.current);
-        const handleClickOutside=(e)=>{
-            if (navModalOpen && !modalEl.current.contains(e.target)) {
-                console.log("먀");
-                setNavModalOpen(false);
-            }
-        }
-        window.addEventListener("click", handleClickOutside);
-        return()=>{
-            window.removeEventListener("click", handleClickOutside);
-        };
-    }, [navModalOpen]);
+    // useEffect(()=>{
+    //     console.log("modalEl.current: ", modalEl.current);
+    //     const handleClickOutside=(e)=>{
+    //         if (navModalOpen && !modalEl.current.contains(e.target)) {
+    //             console.log("먀");
+    //             setNavModalOpen(false);
+    //         }
+    //     }
+    //     window.addEventListener("click", handleClickOutside);
+    //     return()=>{
+    //         window.removeEventListener("click", handleClickOutside);
+    //     };
+    // }, [navModalOpen]);
 
     return (
         <>

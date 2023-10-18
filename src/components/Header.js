@@ -5,10 +5,13 @@ import styles from './Header.module.css';
 import {useNavigate} from "react-router-dom";
 import SideProfile from "./SideProfile";
 import React, {useState} from "react";
+import SideProfileUser from "./SideProfile-user";
 
 function Header() {
     let navigate = useNavigate();
-    // sideProfile이 값이1 일때 sideProfile 보이기
+    // sideProfile=0 안보임
+    // sideProfile=1 로그인 안 된 상태
+    // sideProfile=2 로그인 되서 프로필이 보임
     const [sideProfile, setSideProfile] = useState(0);
 
     return (
@@ -28,12 +31,13 @@ function Header() {
                         type={"button"}
                         className={styles[`icon-profile-button`]}
                         onClick={() => {
-                            if (sideProfile===1) {
-                                setSideProfile(0);
-                            } else {
+                            if (sideProfile===0) {
                                 setSideProfile(1);
-                            }
-                        }}
+                            } else if (sideProfile===1) {
+                                setSideProfile(2);
+                            } else {
+                                setSideProfile(0);
+                        }}}
                     />
                 </div>
                 <div className={styles[`header-navigate`]}>
@@ -54,12 +58,23 @@ function Header() {
                 <p className={styles[`section-main-bg-subtitle`]}>ODO와 함께 시작하세요</p>
                 <button className={styles[`section-main-bg-button`]}>자세히보기</button>
             </div>
-            {
-                sideProfile == 1
-                    ? <SideProfile/> : null
-            }
+            <ShowSideProfile sideProfile={sideProfile} />
+            {/*{*/}
+            {/*    sideProfile == 1*/}
+            {/*        ? <SideProfile/> : null*/}
+            {/*}*/}
         </>
     );
 }
 
 export default Header;
+
+function ShowSideProfile(props) {
+    if (props.sideProfile==0) {
+        return null;
+    } else if (props.sideProfile==1) {
+        return <SideProfile/>;
+    } else {
+        return <SideProfileUser/>
+    }
+}
