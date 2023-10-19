@@ -10,6 +10,14 @@ import {useNavigate} from "react-router-dom";
 function Login() {
     let navigate = useNavigate()
 
+    const handleKakaoButtonClick = () => {
+        window.location.href = 'http://localhost:8080/oauth/kakao';
+    };
+
+    const handleNaverButtonClick = () => {
+        window.location.href = 'http://localhost:8080/oauth/naver';
+    };
+
     //let [fade, setFade] = useState('');
 
     /*useEffect(() => {
@@ -40,7 +48,8 @@ function Login() {
             </div>
             <div style={{ paddingTop: 50 }}>
                 <Button
-                    className="naverLogin">
+                    className="naverLogin"
+                    onClick={handleNaverButtonClick}>
                     <img className="naverLogo"
                         src={naverLogo} />
                     <text className="naverText">네이버 로그인</text>
@@ -53,6 +62,7 @@ function Login() {
             <div style={{ paddingTop: 10 }}>
                 <Button
                     className="kakaoLogin"
+                    onClick={handleKakaoButtonClick}
                 ><img className="kakaoLogo"
                     src={kakaoLogo} />
                     <text className="kakaoText">카카오 로그인</text>
