@@ -1,34 +1,57 @@
-import { useCallback } from "react";
+
 import "./writePost.css";
 import toolbar from "../img/toolbar.png";
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
-function login() {
+import PostService from '../service/PostService';
+import { useNavigate } from 'react-router-dom';
+
+
+function createPost(event, tag, title, contents) {
+    event.preventDefault();
+    let post = {
+        tag: tag,
+        title: title,
+        contents: contents
+    };
+    console.log("board => " + JSON.stringify(post));
+    PostService.createPost(post);
+}
+
+function WritePost() {
+    const navigate = useNavigate();
+    const [title, setTitle] = useState("");
+    const [tag, setTag] = useState("");
+    const [contents, setContents] = useState("");
+    
+
 
     return (
         <>
-        
             <div className="Head">
 
             </div>
             <img className="toolbar"
-            src={toolbar} />
+                src={toolbar} />
             <div className="Write">
                 <div>
-                    <input type='text' id="title_txt" placeholder="제목을 입력하세요" />
+                    <input type='text' id="title_txt" placeholder="제목을 입력하세요" name="title"
+                        value={title} onChange={(e) => setTitle(e.target.value)} />
                 </div>
                 <div>
-                    <input type='text' id="tag_txt" placeholder="태그를 입력하세요" />
+                    <input type='text' id="tag_txt" placeholder="태그를 입력하세요" name="tag"
+                        value={tag} onChange={(e) => setTag(e.target.value)} />
                 </div>
-
                 <div>
-                    <textarea id='content_txt' placeholder="내용을 입력하세요."></textarea>
+                    <textarea id='content_txt' placeholder="내용을 입력하세요." name="contents"
+                        value={contents} onChange={(e) => setContents(e.target.value)}></textarea>
                 </div>
             </div>
             <div className="bottom">
                 <div className='post_save'>
                     <button id="post_save_button"> 임시저장 </button>
-                    <button id="post_submit_button"> 게시하기 </button>
+                    <button id="post_submit_button" onClick={(e) => {createPost(e, title, tag, contents);
+                           navigate('/myblogpage');}}> 게시하기 </button>
                 </div>
 
             </div>
@@ -38,4 +61,4 @@ function login() {
     );
 };
 
-export default login;
+export default WritePost;
