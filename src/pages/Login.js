@@ -18,6 +18,10 @@ function Login() {
         window.location.href = 'http://localhost:8080/oauth/naver';
     };
 
+    const handleGoogleButtonClick = () => {
+        window.location.href = 'http://localhost:8080/oauth/google';
+    };
+
     //let [fade, setFade] = useState('');
 
     /*useEffect(() => {
@@ -60,6 +64,8 @@ function Login() {
                 </Button>
             </div>
             <div style={{ paddingTop: 10 }}>
+                {/*버튼을 클릭했을 때 http://localhost:8080/oauth/kakao 로 리디렉트*/}
+                {/*그럼 백앤드에서 카카오 인증 서버에 oauth code 를 가져오기 위한 URL 로 리디렉트*/}
                 <Button
                     className="kakaoLogin"
                     onClick={handleKakaoButtonClick}
@@ -71,6 +77,7 @@ function Login() {
             <div style={{ paddingTop: 10 }}>
                 <Button
                     className="googleLogin"
+                    onClick={handleGoogleButtonClick}
                 ><img className="googleLogo"
                     src={googleLogo} />
                     <text className="googleText">구글 로그인</text>

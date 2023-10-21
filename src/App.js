@@ -11,6 +11,7 @@ import SignIn2 from "./pages/SignIn-2";
 import SideProfile from "./components/SideProfile";
 import KakaoRedirectPage from "./components/KakaoRedirectPage";
 import NaverRedirectPage from "./components/NaverRedirectPage";
+import GoogleRedirectPage from "./components/GoogleRedirectPage";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                 <Route path={'/sideprofile'} element={<SideProfile/>}/>
                 <Route path="/oauth/redirected/kakao" element={<KakaoRedirectPage />}></Route>
                 <Route path="/oauth/redirected/naver" element={<NaverRedirectPage />}></Route>
+                <Route path="/oauth/redirected/google" element={<GoogleRedirectPage />}></Route>
             </Routes>
         </div>
     );
