@@ -2,7 +2,57 @@
     padding: 40px;
 }
 
-.posting-main{
-    text-align: center;
-    padding: 20px;
+.Mains {
+    display: grid;
+    grid-template-columns: 18% 64% 18%;
+}
+
+.row {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.Post_head {
+    width: 100%;
+    border-bottom: solid 1px #d3d3d3;
+}
+.Post_summary {
+    width: 100%;
+    border-bottom: solid 1px #d3d3d3;
+}
+
+
+#tag {
+    width: 120px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 40px;
+    border: solid 1px #d7d7d7;
+    cursor: pointer;
+    background-color: #d7d7d7;
+    font-size: 15px;
+    color: #000000;
+}
+
+#title {
+    margin-bottom: 50px;
+}
+
+#thin {
+    font-weight: 150;
+    color:#767676;
+}
+
+#bold {
+    font-weight: bold;
+    color: #000000;
+}
+
+#Mains-left {
+    border-right: solid 1px #ffffff;
+}
+
+#Mains-right {
+    border-left: solid 1px #FFFFFF;
 }

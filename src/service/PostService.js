@@ -11,8 +11,8 @@ class PostService {
         return axios.post(POST_API_BASE_URL, posts);
     }
 
-    getOnePost(no) {
-        return axios.get(POST_API_BASE_URL + "/" + no);
+    getOnePost(id) {
+        return axios.get(POST_API_BASE_URL + "/" + id);
     }
 }
 

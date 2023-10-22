@@ -7,25 +7,19 @@ import PostService from '../service/PostService';
 import { useNavigate } from 'react-router-dom';
 
 
-function createPost(event, tag, title, contents) {
-    event.preventDefault();
-    let post = {
-        tag: tag,
-        title: title,
-        contents: contents
-    };
-    console.log("board => " + JSON.stringify(post));
-    PostService.createPost(post);
-}
 
 function WritePost() {
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [tag, setTag] = useState("");
     const [contents, setContents] = useState("");
+
+    let post = {
+        tag: tag,
+        title: title,
+        contents: contents
+    };
     
-
-
     return (
         <>
             <div className="Head">
@@ -50,8 +44,12 @@ function WritePost() {
             <div className="bottom">
                 <div className='post_save'>
                     <button id="post_save_button"> 임시저장 </button>
-                    <button id="post_submit_button" onClick={(e) => {createPost(e, title, tag, contents);
-                           navigate('/myblogpage');}}> 게시하기 </button>
+                    <button id="post_submit_button" onClick={(e) => {
+                        e.preventDefault();
+                        PostService.createPost(post).then(res => {
+                            navigate('/postview/' + res.data);
+                        });
+                    }}> 게시하기 </button>
                 </div>
 
             </div>
