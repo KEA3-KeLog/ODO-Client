@@ -1,18 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
+import {SyncLoader} from 'react-spinners';
+import styled from "styled-components";
 
-// KakaoRedirectPage, NaverRedirectPage, GoogleRedirectPage 하나로 합치기 위해 작업 중인 코드 입니다.
 const LoginRedirectPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [serverType, setServerType] = useState()
+    const params = useParams();
 
-    const handleOAuthKakao = async (code) => {
+    const handleOAuthLogin = async (code) => {
         try {
-            // 카카오로부터 받아온 code를 서버에 전달합니다.
+            // 받아온 code를 서버에 전달합니다.
             // 회원가입 & 로그인
-            const response = await axios.get(`http://localhost:8080/oauth/login/kakao?code=${code}`);
+            const response = await axios.get(`http://localhost:8080/oauth/login/${params.sns}?code=${code}`);
             let dataList = [];
             dataList = response.data; // 응답 데이터
             // alert("로그인 성공: " + dataList)
@@ -27,7 +28,9 @@ const LoginRedirectPage = () => {
                 });
             } else {
                 // 이미 로그인 정보가 있으면 /sign1으로 가지 않고 바로 / 로 이동
-                navigate("/");
+                navigate("/", {
+                    state: dataList[2]
+                });
             }
         } catch (error) {
             console.log("정보는 불러오지만 400 에러가 발생합니다. 해결 아직 못함ㅜㅜ");
@@ -37,20 +40,29 @@ const LoginRedirectPage = () => {
     // location 값이 변경될 때만 실행되는 코드
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
-        // 버튼을 클릭했을 때 리디렉트 됬었던 http://localhost:8080/oauth/kakao 로 부터 인가 코드(code)를 받아옵니다.
-        const code = searchParams.get('code');  // 카카오는 Redirect 시키면서 code를 쿼리 스트링으로 준다.
+        // 버튼을 클릭했을 때 리디렉트 됬었던 http://localhost:8080/oauth/{kakao/nave/google} 로 부터 인가 코드(code)를 받아옵니다.
+        const code = searchParams.get('code');  // Redirect 시키면서 code를 쿼리 스트링으로 준다.
         if (code) {
             // alert("CODE = " + code)
             // console.log(code);
-            handleOAuthKakao(code);
+            handleOAuthLogin(code);
         }
     }, [location]);
 
     return (
-        <div>
-            <div>빙글빙글 돌아가는 로딩 아이콘</div>
-        </div>
+        <Wrapper>
+            <h3>잠시만 기다려 주세요</h3>
+            <SyncLoader margin={10}/>
+        </Wrapper>
     );
 };
 
-export default KakaoRedirectPage;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+`
+
+export default LoginRedirectPage;

@@ -6,6 +6,7 @@ function SignIn2() {
     const navigate = useNavigate();
     const location = useLocation();
     const email = location.state.email;
+    const id = location.state.id;
     const userBlogAddress = location.state.userBlogAddress;
 
     return (
@@ -31,7 +32,7 @@ function SignIn2() {
                 <button className={styles[`button-style`]}
                         onClick={() => {
                             navigate("/", {
-                                state: "ok"
+                                state: id
                             });
                         }}>ODO 둘러보기
                 </button>

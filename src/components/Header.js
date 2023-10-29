@@ -1,5 +1,3 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import styles from './Header.module.css';
 import {useNavigate} from "react-router-dom";
@@ -67,11 +65,7 @@ function Header(props) {
                 <p className={styles[`section-main-bg-subtitle`]}>ODO와 함께 시작하세요</p>
                 <button className={styles[`section-main-bg-button`]}>자세히보기</button>
             </div>
-            <ShowSideProfile sideProfile={sideProfile} />
-            {/*{*/}
-            {/*    sideProfile == 1*/}
-            {/*        ? <SideProfile/> : null*/}
-            {/*}*/}
+            <ShowSideProfile sideProfile={sideProfile} id={props.id}/>
         </>
     );
 }
@@ -84,6 +78,6 @@ function ShowSideProfile(props) {
     } else if (props.sideProfile==1) {
         return <SideProfile/>;
     } else {
-        return <SideProfileUser/>
+        return <SideProfileUser id={props.id}/>
     }
 }

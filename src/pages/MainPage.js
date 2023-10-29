@@ -11,11 +11,13 @@ function MainPage() {
 
     // 로그인 여부를 판별해야 합니다.
     const location = useLocation();
+    const id = location.state;
     const [login, setLogin] = useState(false);
+    // console.log("현재 user의 id는?" + id);
 
     useEffect(() => {
         // 회원가입 후 메인페이지로 돌아올때 login값을 true 로 바꾸어 header의 프로필 사진 부분을 변경하도록 합니다.
-        if (location.state === "ok"){
+        if (id != null){
             setLogin(true);
         }
     }, []);
@@ -23,7 +25,7 @@ function MainPage() {
     return (
         <>
             <div className={styles[`section-main-bg`]}>
-                <Header sideProfileUser={login} />
+                <Header sideProfileUser={login} id={id}/>
             </div>
 
             <div className={styles[`section-content`]}>

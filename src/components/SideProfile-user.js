@@ -1,8 +1,10 @@
 import styles from './SideProfile-user.module.css';
 import {useNavigate} from "react-router-dom";
 
-function SideProfile() {
+function SideProfile(props) {
     const navigate = useNavigate();
+    // axios 요청을 해서 현재 user의 blognickname, email, id 를 받습니다.
+
 
     return (
         <div className={styles[`section-side-profile`]}>
@@ -10,7 +12,7 @@ function SideProfile() {
             <div className={styles[`profile-box`]}>
                 <div className={styles[`box-text`]}>
                     안녕하세요!<br/>
-                    현영 님
+                    {props.id} 현영님
                 </div>
                 <div className={styles[`user-profile`]}>
                     <img className={styles[`user-profile-img`]}
@@ -27,10 +29,10 @@ function SideProfile() {
                 <div className={styles[`box-horizontal`]}/>
                 <div className={styles[`section-router`]}>
                     <button onClick={()=>{
-                        navigate('./myblogpage');
+                        navigate(`./myblogpage/${props.id}`);
                     }}>마이페이지</button>
                     <button onClick={()=>{
-                        navigate('./myblogpage');
+                        navigate(`./myblogpage/${props.id}`);
                     }}>내 블로그</button>
                     <button onClick={()=>{
                         navigate('./login');

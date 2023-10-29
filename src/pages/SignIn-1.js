@@ -48,6 +48,7 @@ function SignIn1() {
                     navigate("/signin2", {
                         state: {
                             email: email,
+                            id: id,
                             userBlogAddress: userBlogAddress
                         }
                     });
