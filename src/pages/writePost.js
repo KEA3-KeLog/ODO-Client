@@ -17,7 +17,8 @@ function WritePost() {
     let post = {
         tag: tag,
         title: title,
-        contents: contents
+        contents: contents,
+        userId: 0
     };
     
     return (

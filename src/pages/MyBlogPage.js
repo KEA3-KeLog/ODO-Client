@@ -5,7 +5,9 @@ import PostService from '../service/PostService';
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import styles from "./MainPage.module.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
+
 
 const SelectBoxWrapper = styled.div`
   display: flex;
@@ -40,13 +42,14 @@ export const Select = styled.select`
 `;
 
 function MyBlogPage() {
+    const userId = useParams().userId
     const [state, setState] = useState({
         posts: []
     })
     const navigate = useNavigate();
 
     useEffect(() => {
-        PostService.getPosts().then(function (res) {
+        PostService.getPosts(userId).then(function (res) {
             console.log(res.data);
             setState({ posts: res.data });
         });
@@ -122,7 +125,7 @@ function MyBlogPage() {
                 <div className="child first">
                     <div className="profile">
                         <div className='profile_image'>
-                            <img src='image/Ellipse 15.png' alt="Profile" />
+                            <img src={require('../image/Ellipse 15.png')} alt="Profile" />                              
                         </div>
                         <div className='volumeControl'>
                             {
@@ -242,10 +245,10 @@ function MyBlogPage() {
                         <div><strong>최신글</strong></div>
                         <br></br>
                         <div className='PostCard'>
-                            <div className='PostCardBlock' onClick={() => {navigate('/postview/' + postArr[0]['id']);}}>
+                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[0]['postId']); }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
-                                        <img src='image\Rectangle 28.png' alt="P" />
+                                        <img src={require('../image/Rectangle 28.png')} alt="P" />
                                     </div>
                                 </div>
                                 <div className='PostCardBlockContents'>
@@ -263,10 +266,10 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => {navigate('/postview/' + postArr[1]['id']);}}>
+                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[1]['postId']); }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
-                                        <img src='image\Rectangle 29.png' />
+                                    <img src={require('../image/Rectangle 29.png')} />
                                     </div>
                                 </div>
                                 <div className='PostCardBlockContents'>
@@ -284,10 +287,10 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => {navigate('/postview/' + postArr[2]['id']);}}>
+                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[2]['postId']); }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
-                                        <img src='image\Rectangle 30.png' alt="P" />
+                                        <img src={require('../image/Rectangle 30.png')} alt="P" />
                                     </div>
                                 </div>
                                 <div className='PostCardBlockContents'>
@@ -305,10 +308,10 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => {navigate('/postview/' + postArr[3]['id']);}}>
+                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[3]['postId']); }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
-                                        <img src='image\Rectangle 31.png' />
+                                        <img src={require('../image/Rectangle 31.png')} />
                                     </div>
                                 </div>
                                 <div className='PostCardBlockContents'>
@@ -326,10 +329,10 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => {navigate('/postview/' + postArr[4]['id']);}}>
+                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[4]['postId']); }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
-                                        <img src='image\Rectangle 31.png' />
+                                        <img src={require('../image/Rectangle 31.png')} />
                                     </div>
                                 </div>
                                 <div className='PostCardBlockContents'>
@@ -347,10 +350,10 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => {navigate('/postview/' + postArr[5]['id']);}}>
+                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[5]['postId']); }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
-                                        <img src='image\Rectangle 31.png' />
+                                        <img src={require('../image/Rectangle 31.png')} />
                                     </div>
                                 </div>
                                 <div className='PostCardBlockContents'>
@@ -368,10 +371,10 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => {navigate('/postview/' + postArr[6]['id']);}}>
+                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[6]['postId']); }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
-                                        <img src='image\Rectangle 31.png' />
+                                        <img src={require('../image/Rectangle 31.png')} />
                                     </div>
                                 </div>
                                 <div className='PostCardBlockContents'>
@@ -389,10 +392,10 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => {navigate('/postview/' + postArr[7]['id']);}}>
+                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[7]['postId']); }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
-                                        <img src='image\Rectangle 31.png' />
+                                        <img src={require('../image/Rectangle 31.png')} />
                                     </div>
                                 </div>
                                 <div className='PostCardBlockContents'>
@@ -417,7 +420,7 @@ function MyBlogPage() {
                             <span className='workTitle'>2023 블로그 기여도</span>
                         </div>
                         <div>
-                            <img src='image\Rectangle 65.png' className='workimage' />
+                            <img src={require('../image/Rectangle 65.png')} className='workimage' />
                         </div>
                     </div>
                 </div>

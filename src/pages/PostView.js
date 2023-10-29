@@ -7,23 +7,21 @@ import { useParams } from "react-router-dom";
 
 
 function PostView() {
-    const id = useParams().id;
+    const postId = useParams().postId;
     const [title, setTitle] = useState("");
     const [tag, setTag] = useState("");
     const [contents, setContents] = useState("");
+    const [summary, setSummary] = useState("");
     let state = {
         posts: []
     }
     useEffect(() => {
-        PostService.getPosts().then(res => {
-            console.log(res);
-            state = { post: res.data };
-        });
-        PostService.getOnePost(id).then(res => {
+        PostService.getOnePost(postId).then(res => {
             console.log(res);
             setTag(res.data.tag);
             setTitle(res.data.title);
             setContents(res.data.contents);
+            setSummary(res.data.summary);
         });
     });
 
@@ -48,8 +46,7 @@ function PostView() {
                     <div className="Post_summary">
                         <div className="row">
                             <h2>*AI 요약</h2>
-                            JSX 문법은 자바스크립트와 HTML을 동시작성 가능하다는 장점이 있다.<br/>
-                            가독성이 높고 편리하기 때문에 프론트엔드 개발자에게 추천.
+                            {summary}
                         </div><br/>
                     </div>
                     <div className="Post_contents">

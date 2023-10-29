@@ -19,9 +19,9 @@ function App() {
         <div className='App'>
             <Routes>
                 <Route path={"/"} element={<MainPage/>}/>
-                <Route path='/myblogpage' element={<MyBlogPage/>}/>
+                <Route path='/myblogpage/:userId' element={<MyBlogPage />}/>
                 <Route path='/writepost' element={<WritePost/>}/>
-                <Route path='/postview/:id' element={<PostView/>}/>
+                <Route path='/postview/:postId' element={<PostView/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/store' element={<Store/>}/>
                 <Route path={'/signin1'} element={<SignIn1/>}/>
