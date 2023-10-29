@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+### REACT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**`Login.js`**
 
-## Available Scripts
+1. 사용자가 로그인 버튼을 클릭한다.
+2. `http://localhost:8080/oauth/kakao` 로 리디렉트
 
-In the project directory, you can run:
+**`KakaoRedirectPage.js`**
 
-### `npm start`
+1. Auth code 를 받기위한 페이지로 redirect 된 유저는 auth code 를 받음
+   ```
+   const searchParams = new *URLSearchParams*(location.search);
+   const code = searchParams.get('code');
+   ```
+   
+3. 받은 code 를 axios.get 으로
+`http://localhost:8080/oauth/login/kakao?code=${code}` 백앤드에 전달
+4. `KakaoRedirectPage.js` 에서 blogName 이 null 값이라면 최초회원이라 생각하여 `/signin1` 으로 리디렉트 하여 추가정보를 받고,
+    - [ ]  null 값이 아니라면 `/` 로 이동.. 이동하고 기존 회원이라는 것을 알려주어야 한다.
+    또한 받은 data 들을 넘겨주어야 한다? 아니면 db에서 받아오거나!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**`SignIn-1.js`**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. 사용자에게 BlogName, BlogAddress, Nickname 을 받아서 백앤드에 전달
+2. 전달에 성공하면 `/signin2` 로 email, blogAddress데이터와 함께  리디렉트
 
-### `npm test`
+**`SignIn-2.js`**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. 사용자의 이메일과 blogAddress 를 보여주고
+2. odo 둘러보기 버튼을 눌러 메인페이지로 넘어갈 때 최조회원이 아님을 알려줌
 
-### `npm run build`
+**`MainPage.js`**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. `Header.js` 컴포넌트에 프로필 바꿔야되~ 알려주고
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**`Header.js`**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. 
+    - [ ]  DB에서 가져온 회원의 정보를 보여줌
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[[Spring] 쉬운 확장이 가능한 OAuth2.0 로그인 구현(카카오, 네이버, 구글 등) (Security 사용 X)](https://ttl-blog.tistory.com/1434)
