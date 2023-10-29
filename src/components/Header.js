@@ -7,9 +7,9 @@ import SideProfile from "./SideProfile";
 import React, {useState} from "react";
 import SideProfileUser from "./SideProfile-user";
 
-function Header() {
+function Header(props) {
     let navigate = useNavigate();
-    // sideProfile=0 안보임
+    // sideProfile=0 클릭안해서 안보이는 상태
     // sideProfile=1 로그인 안 된 상태
     // sideProfile=2 로그인 되서 프로필이 보임
     const [sideProfile, setSideProfile] = useState(0);
@@ -31,9 +31,18 @@ function Header() {
                         type={"button"}
                         className={styles[`icon-profile-button`]}
                         onClick={() => {
-                            if (sideProfile===0) {
+                            // 로그인 안 된 상태에서 클릭했을 때 로그인하세요! 모달이 뜹니다
+                            if (sideProfile===0 && !props.sideProfileUser) {
+                                console.log(sideProfile);
+                                console.log(props.sideProfileUser);
+                                console.log("로그인 안 된 상태에서 클릭했을 때 로그인하세요! 모달이 뜹니다")
                                 setSideProfile(1);
-                            } else if (sideProfile===1) {
+                            }
+                            // 로그인 된 상태에서 클릭했을 때 유저 프로필 모달이 뜹니다.
+                            else if (sideProfile===0 && props.sideProfileUser) {
+                                console.log(sideProfile);
+                                console.log(props.sideProfileUser)
+                                console.log("로그인 된 상태에서 클릭했을 때 유저 프로필 모달이 뜹니다.")
                                 setSideProfile(2);
                             } else {
                                 setSideProfile(0);

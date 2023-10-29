@@ -1,26 +1,29 @@
 import styles from "./MainPage.module.css"
 import Header from "../components/Header";
 import {useInView} from "react-intersection-observer";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
 
 function MainPage() {
     const {ref, inView} = useInView({
         threshold: 0.5
     });
 
-    // 보일때, 안 보일때 실행할 작업
+    // 로그인 여부를 판별해야 합니다.
+    const location = useLocation();
+    const [login, setLogin] = useState(false);
+
     useEffect(() => {
-        if (inView) {
-            // 화면에 보임
-        } else {
-            // 화면에서 사라짐
+        // 회원가입 후 메인페이지로 돌아올때 login값을 true 로 바꾸어 header의 프로필 사진 부분을 변경하도록 합니다.
+        if (location.state === "ok"){
+            setLogin(true);
         }
-    }, [inView]);
+    }, []);
 
     return (
         <>
             <div className={styles[`section-main-bg`]}>
-                <Header/>
+                <Header sideProfileUser={login} />
             </div>
 
             <div className={styles[`section-content`]}>
