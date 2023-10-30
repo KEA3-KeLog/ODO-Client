@@ -18,7 +18,7 @@ function App() {
             <Routes>
                 <Route path={"/"} element={<MainPage/>}/>
                 <Route path='/myblogpage/:userId' element={<MyBlogPage />}/>
-                <Route path='/writepost' element={<WritePost/>}/>
+                <Route path='/writepost/:userId' element={<WritePost/>}/>
                 <Route path='/postview/:postId' element={<PostView/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/store' element={<Store/>}/>

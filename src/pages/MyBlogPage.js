@@ -117,6 +117,11 @@ function MyBlogPage() {
         );
     };
 
+    // 글 작성 버튼을 클릭해서 /writepost/:userId 로 갑니다
+    const handleWritePostButtonClick = () => {
+        navigate(`../../writepost/${userId}`)
+    };
+
     return (
         <>
             <NavBar />
@@ -179,7 +184,9 @@ function MyBlogPage() {
                             </div>
                         </div>
                         <div className='buttons'>
-                            <button>글 작성</button>
+                            <button
+                                onClick={handleWritePostButtonClick}
+                            >글 작성</button>
                             <button>프로필 편집</button>
                         </div>
                         <div className='firstLink'>

@@ -4,7 +4,7 @@ import toolbar from "../img/toolbar.png";
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import PostService from '../service/PostService';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 
 
@@ -14,11 +14,13 @@ function WritePost() {
     const [tag, setTag] = useState("");
     const [contents, setContents] = useState("");
 
+    const userId = useParams().userId;
+
     let post = {
         tag: tag,
         title: title,
         contents: contents,
-        userId: 0
+        userId: userId
     };
     
     return (
