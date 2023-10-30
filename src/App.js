@@ -10,9 +10,7 @@ import Store from './pages/Store';
 import SignIn1 from './pages/SignIn-1'
 import SignIn2 from "./pages/SignIn-2";
 import SideProfile from "./components/SideProfile";
-import KakaoRedirectPage from "./components/KakaoRedirectPage";
-import NaverRedirectPage from "./components/NaverRedirectPage";
-import GoogleRedirectPage from "./components/GoogleRedirectPage";
+import LoginRedirectPage from "./components/LoginRedirectPage";
 
 function App() {
     return (
@@ -27,9 +25,7 @@ function App() {
                 <Route path={'/signin1'} element={<SignIn1/>}/>
                 <Route path={'/signin2'} element={<SignIn2/>}/>
                 <Route path={'/sideprofile'} element={<SideProfile/>}/>
-                <Route path="/oauth/redirected/kakao" element={<KakaoRedirectPage />}></Route>
-                <Route path="/oauth/redirected/naver" element={<NaverRedirectPage />}></Route>
-                <Route path="/oauth/redirected/google" element={<GoogleRedirectPage />}></Route>
+                <Route path={'/oauth/redirected/:sns'} element={<LoginRedirectPage />}></Route>
             </Routes>
         </div>
     );
