@@ -3,6 +3,8 @@ import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import PostService from '../service/PostService';
 import { useParams } from "react-router-dom";
+import ReactMarkdown from 'react-markdown'; // 마크다운
+import remarkGfm from 'remark-gfm'; // 마크다운
 
 
 
@@ -22,6 +24,7 @@ function PostView() {
             setTitle(res.data.title);
             setContents(res.data.contents);
             setSummary(res.data.summary);
+            
         });
     });
 
@@ -51,7 +54,9 @@ function PostView() {
                     </div>
                     <div className="Post_contents">
                         <div className="row"><br/><br/><br/>
-                            {contents}
+                            {/* 마크다운 */}
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown>
+                            {/* 마크다운 */}
                         </div>
                     </div>
                    

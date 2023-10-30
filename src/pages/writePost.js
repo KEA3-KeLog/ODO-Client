@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import PostService from '../service/PostService';
 import {useNavigate, useParams} from 'react-router-dom';
+import MarkdownEditor from "./MarkdownEditor";
 
 
 
@@ -15,6 +16,10 @@ function WritePost() {
     const [contents, setContents] = useState("");
 
     const userId = useParams().userId;
+
+    const handleContentChange = (newContent) => {
+        setContents(newContent); // 마크다운 컨텐트 업데이트
+      };
 
     let post = {
         tag: tag,
@@ -40,8 +45,7 @@ function WritePost() {
                         value={tag} onChange={(e) => setTag(e.target.value)} />
                 </div>
                 <div>
-                    <textarea id='content_txt' placeholder="내용을 입력하세요." name="contents"
-                        value={contents} onChange={(e) => setContents(e.target.value)}></textarea>
+                    <MarkdownEditor onContentChange={handleContentChange} />
                 </div>
             </div>
             <div className="bottom">
