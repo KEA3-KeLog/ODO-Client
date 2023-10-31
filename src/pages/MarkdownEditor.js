@@ -6,6 +6,7 @@ const MarkdownEditor = ({ onContentChange }) => {
   const [content, setContent] = useState("");
   const [isSelectVisible, setSelectVisible] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState(1);
+  const [isRendered, setIsRendered] = useState(false);
 
 
   const handleContentChange = (e) => {
@@ -52,6 +53,7 @@ const MarkdownEditor = ({ onContentChange }) => {
 
   return (
     <div>
+    <div>
       <textarea
         id='content_txt'
         value={content}
@@ -59,6 +61,7 @@ const MarkdownEditor = ({ onContentChange }) => {
         placeholder="내용을 입력하세요"
       />
       
+    </div>
 
       {isSelectVisible && (
           <div>
@@ -74,8 +77,14 @@ const MarkdownEditor = ({ onContentChange }) => {
 
 
 
+{/* 조건부 렌더링을 통해 해당 요소를 접었다 폈다할 수 있도록 함 */}
+<button onClick={() => setIsRendered(!isRendered)}>
+        {isRendered ? "미리보기 접기" : "미리보기 보기"}
+      </button>
+{isRendered && (
+        <div className="markdown-rendered-content" dangerouslySetInnerHTML={renderMarkdown(content)} />
+      )}
 
-      <div className="markdown-rendered-content" dangerouslySetInnerHTML={renderMarkdown(content)} />
       
       {/* <div>
                     <textarea id='content_txt' placeholder="내용을 입력하세요." name="contents"
