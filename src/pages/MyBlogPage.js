@@ -50,8 +50,9 @@ function MyBlogPage() {
 
     useEffect(() => {
         PostService.getPosts(userId).then(function (res) {
-            console.log(res.data);
+            console.log("이게뭐야"+res.data);
             setState({ posts: res.data });
+            console.log("posts state: "+state);
         });
     }, []);
     // window.onload = () => {
