@@ -50,9 +50,7 @@ function MyBlogPage() {
 
     useEffect(() => {
         PostService.getPosts(userId).then(function (res) {
-            console.log("이게뭐야"+res.data);
             setState({ posts: res.data });
-            console.log("posts state: "+state);
         });
     }, []);
     // window.onload = () => {
@@ -125,7 +123,7 @@ function MyBlogPage() {
 
     return (
         <>
-            <NavBar />
+            <NavBar userId={userId}/>
             <div className="container">
                 <ion-icon name="chevron-down-outline"></ion-icon>
                 <div className="child first">
@@ -253,7 +251,11 @@ function MyBlogPage() {
                         <div><strong>최신글</strong></div>
                         <br></br>
                         <div className='PostCard'>
-                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[0]['postId']); }}>
+                            <div className='PostCardBlock' onClick={() => {
+                                navigate('/postview/' + postArr[0]['postId'], {
+                                    state: userId
+                                });
+                            }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
                                         <img src={require('../image/Rectangle 28.png')} alt="P" />
@@ -274,7 +276,11 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[1]['postId']); }}>
+                            <div className='PostCardBlock' onClick={() => {
+                                navigate('/postview/' + postArr[1]['postId'], {
+                                    state: userId
+                                });
+                            }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
                                     <img src={require('../image/Rectangle 29.png')} />
@@ -295,7 +301,11 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[2]['postId']); }}>
+                            <div className='PostCardBlock' onClick={() => {
+                                navigate('/postview/' + postArr[2]['postId'], {
+                                    state: userId
+                                });
+                            }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
                                         <img src={require('../image/Rectangle 30.png')} alt="P" />
@@ -316,7 +326,11 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[3]['postId']); }}>
+                            <div className='PostCardBlock' onClick={() => {
+                                navigate('/postview/' + postArr[3]['postId'], {
+                                    state: userId
+                                });
+                            }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
                                         <img src={require('../image/Rectangle 31.png')} />
@@ -337,7 +351,11 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[4]['postId']); }}>
+                            <div className='PostCardBlock' onClick={() => {
+                                navigate('/postview/' + postArr[4]['postId'], {
+                                    state: userId
+                                });
+                            }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
                                         <img src={require('../image/Rectangle 31.png')} />
@@ -358,7 +376,11 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[5]['postId']); }}>
+                            <div className='PostCardBlock' onClick={() => {
+                                navigate('/postview/' + postArr[5]['postId'], {
+                                    state: userId
+                                });
+                            }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
                                         <img src={require('../image/Rectangle 31.png')} />
@@ -379,7 +401,11 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[6]['postId']); }}>
+                            <div className='PostCardBlock' onClick={() => {
+                                navigate('/postview/' + postArr[6]['postId'], {
+                                    state: userId
+                                });
+                            }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
                                         <img src={require('../image/Rectangle 31.png')} />
@@ -400,7 +426,11 @@ function MyBlogPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='PostCardBlock' onClick={() => { navigate('/postview/' + postArr[7]['postId']); }}>
+                            <div className='PostCardBlock' onClick={() => { 
+                                navigate('/postview/' + postArr[7]['postId'], {
+                                    state: userId
+                                });
+                            }}>
                                 <div className='PostCardBlockImage'>
                                     <div className='PostCardBlockImage_Link' style={{ paddingTop: '55.1921%' }}>
                                         <img src={require('../image/Rectangle 31.png')} />

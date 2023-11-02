@@ -2,10 +2,11 @@
 import "./writePost.css";
 import toolbar from "../img/toolbar.png";
 import Button from 'react-bootstrap/Button';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostService from '../service/PostService';
 import {useNavigate, useParams} from 'react-router-dom';
 import MarkdownEditor from "./MarkdownEditor";
+import NavBar from "../components/Navigationbar";
 
 
 
@@ -30,6 +31,7 @@ function WritePost() {
     
     return (
         <>
+            <NavBar userId={userId}/>
             <div className="Head">
 
             </div>
@@ -54,7 +56,9 @@ function WritePost() {
                     <button id="post_submit_button" onClick={(e) => {
                         e.preventDefault();
                         PostService.createPost(post).then(res => {
-                            navigate('/postview/' + res.data);
+                            navigate('/postview/' + res.data, {
+                                state: post.userId
+                            });
                         });
                     }}> 게시하기 </button>
                 </div>

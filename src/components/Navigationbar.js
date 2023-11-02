@@ -2,13 +2,15 @@ import {Navbar} from 'react-bootstrap';
 import styles from './Navigationbar.module.css'
 import {forwardRef, useEffect, useRef, useState} from "react";
 import modal from "bootstrap/js/src/modal";
+import {useNavigate} from "react-router-dom";
 
-function MainNav() {
+function MainNav(props) {
     // navModalOpen이 true 이면 모달창 열림
     const [navModalOpen, setNavModalOpen] = useState(false);
-
+    const navigate = useNavigate();
     // navModal 영역 밖 클릭 시 모달창 닫기
     const modalEl = useRef();
+    const userId = props.userId;
 
     // useEffect(()=>{
     //     console.log("modalEl.current: ", modalEl.current);
@@ -24,6 +26,10 @@ function MainNav() {
     //     };
     // }, [navModalOpen]);
 
+    const handleBlogNameClick = () => {
+        navigate(`../../myblogpage/${userId}`);
+    };
+
     return (
         <>
             <div className={styles.navigation}>
@@ -34,8 +40,12 @@ function MainNav() {
                         setNavModalOpen(true);
                     }}
                 />
-                <input type={"button"} className={styles[`nav-logo`]}/>
-                <div className={styles[`user-name`]}>hyun_dev</div>
+                <input type={"button"}
+                       className={styles[`nav-logo`]}
+                />
+                <button className={styles[`user-name`]}
+                        onClick={handleBlogNameClick}
+                >hyun_dev</button>
             </div>
             <div ref={modalEl}>
                 {

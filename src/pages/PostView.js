@@ -1,10 +1,11 @@
 import "./PostView.css";
 import Button from 'react-bootstrap/Button';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostService from '../service/PostService';
-import { useParams } from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'; // 마크다운
-import remarkGfm from 'remark-gfm'; // 마크다운
+import remarkGfm from 'remark-gfm';
+import NavBar from "../components/Navigationbar"; // 마크다운
 
 
 
@@ -17,6 +18,10 @@ function PostView() {
     let state = {
         posts: []
     }
+    const location = useLocation();
+    const userId = location.state;
+    console.log("userId는?" + userId);
+
     useEffect(() => {
         PostService.getOnePost(postId).then(res => {
             console.log(res);
@@ -31,6 +36,7 @@ function PostView() {
 
     return (
         <>
+            <NavBar userId={userId}/>
             <div className='Head' />
 
             <div className='Mains'>

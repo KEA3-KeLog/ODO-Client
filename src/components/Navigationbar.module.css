@@ -22,6 +22,8 @@
     font-size: 20px;
     font-weight: 600;
     margin: 6px 0 0 10px;
+    border: none;
+    background: none;
 }
 
 .nav-modal {
