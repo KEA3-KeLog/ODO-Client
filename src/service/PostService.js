@@ -14,6 +14,7 @@ class PostService {
     getOnePost(postId) {
         return axios.get(POST_API_BASE_URL + "/" + postId);
     }
+
 }
 
 export default new PostService();

@@ -62,7 +62,7 @@ function WritePost() {
                         });
                     }}> 게시하기 </button>
                 </div>
-
+                    
             </div>
         </>
 
