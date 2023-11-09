@@ -6,7 +6,8 @@ import {useLocation, useParams} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'; // 마크다운
 import remarkGfm from 'remark-gfm';
 import NavBar from "../components/Navigationbar"; // 마크다운
-
+import { Viewer } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 
 
 function PostView() {
@@ -61,7 +62,8 @@ function PostView() {
                     <div className="Post_contents">
                         <div className="row"><br/><br/><br/>
                             {/* 마크다운 */}
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown>
+                            {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown> */}
+                            <Viewer initialValue={contents || ''} />
                             {/* 마크다운 */}
                         </div>
                     </div>
