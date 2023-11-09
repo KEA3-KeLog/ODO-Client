@@ -5,8 +5,8 @@ const POST_API_BASE_URL = "http://localhost:8080/api/image";
 class ImageService {
 
     
-  createImage(image) {
-    return axios.post(POST_API_BASE_URL, image);
+  uploadImage(formData) {
+    return axios.post(POST_API_BASE_URL, formData);
   }
   
   getImage(imageId) {
