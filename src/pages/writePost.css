@@ -1,12 +1,4 @@
-.Head {
-    padding: 40px;
-}
 
-.toolbar {
-    width: 70%;
-    margin-left : 100px;
-    box-Shadow: 0px 4px 4px gray;
-}
 .bottom {
     width: 100%;
     bottom: 0px;
@@ -41,13 +33,8 @@
 
 }
 #content_txt {
-    padding-left: 15px;
-    width: 91%;
-    resize: none;
-    border: none;
-    height: 580px;
-    font-size: 20px;
-
+    padding-left: 90px;
+    padding-right: 90px;
 }
 
 #title_txt:focus { outline : none; }

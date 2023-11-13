@@ -12,6 +12,9 @@ class ImageService {
   getImage(imageId) {
     return axios.get(POST_API_BASE_URL + "/" + imageId);
 }
+  getThumbnail(postKey) {
+    return axios.get(POST_API_BASE_URL + "/thumbnail/" + postKey);
+  }
 }
 
 

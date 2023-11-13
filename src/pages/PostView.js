@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'; // 마크다운
 import remarkGfm from 'remark-gfm';
 import NavBar from "../components/Navigationbar"; // 마크다운
 import { Viewer } from '@toast-ui/react-editor';
+
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 
 
@@ -21,7 +22,6 @@ function PostView() {
     }
     const location = useLocation();
     const userId = location.state;
-    console.log("userId는?" + userId);
 
     useEffect(() => {
         PostService.getOnePost(postId).then(res => {
@@ -30,7 +30,6 @@ function PostView() {
             setTitle(res.data.title);
             setContents(res.data.contents);
             setSummary(res.data.summary);
-            
         });
     });
 
@@ -39,7 +38,6 @@ function PostView() {
         <>
             <NavBar userId={userId}/>
             <div className='Head' />
-
             <div className='Mains'>
                 <div id='Mains-left'>
                 </div>
@@ -62,7 +60,7 @@ function PostView() {
                     <div className="Post_contents">
                         <div className="row"><br/><br/><br/>
                             {/* 마크다운 */}
-                            {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown> */}
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown>
                             <Viewer initialValue={contents || ''} />
                             {/* 마크다운 */}
                         </div>

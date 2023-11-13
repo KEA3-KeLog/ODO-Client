@@ -1,10 +1,7 @@
 import "./writePost.css";
-import toolbar from "../img/toolbar.png";
-import Button from "react-bootstrap/Button";
 import React, { useState, useEffec, useRef } from "react";
 import PostService from "../service/PostService";
 import { useNavigate, useParams } from "react-router-dom";
-import MarkdownEditor from "./MarkdownEditor";
 import NavBar from "../components/Navigationbar";
 import ImageService from "../service/ImageService";
 import { Editor } from "@toast-ui/react-editor";
@@ -19,28 +16,30 @@ function WritePost() {
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [contents, setContents] = useState("");
+  //   const [postId, setPostId] = useState(parseInt(Date.now().toString().slice(-9)) * 10000 + Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000);
+  const [postKey, setPostKey] = useState(
+    Math.floor(Math.random() * (2147483647 - 0 + 1)) + 0
+  );
+
   const editorRef = useRef();
   const userId = useParams().userId;
 
   const handleContentChange = (newContent) => {
     setContents(newContent); // 마크다운 컨텐트 업데이트
   };
-
+  const onChange = () => {
+    setContents(editorRef.current.getInstance().getMarkdown());
+  };
   let post = {
+    postKey: postKey,
     tag: tag,
     title: title,
     contents: contents,
     userId: userId,
   };
-  const onChange = () => {
-    setContents(editorRef.current.getInstance().getMarkdown());
-  };
-
   return (
     <>
       <NavBar userId={userId} />
-      <div className="Head"></div>
-      <img className="toolbar" src={toolbar} />
       <div className="Write">
         <div>
           <input
@@ -62,29 +61,31 @@ function WritePost() {
             onChange={(e) => setTag(e.target.value)}
           />
         </div>
-        <div data-color-mode="light">
-          <Editor
-            initialValue="hello react editor world!"
-            previewStyle="vertical"
-            height="900px"
-            initialEditType="markdown"
-            useCommandShortcut={false}
-            plugins={[colorSyntax]}
-            language="ko-KR"
-            ref={editorRef}
-            onChange={onChange}
-            hooks={{
-              addImageBlobHook: async (blob, callback) => {
-                const formData = new FormData();
-                formData.append("file", blob);
-                console.log(blob);
-                const img = await ImageService.uploadImage(formData);
-                const url = img.data;
-                callback("http://localhost:8080/api/image/" + url, url);
-              },
-            }}
-          />
-        </div>
+      </div>
+      <div id="content_txt" data-color-mode="light">
+        <Editor
+          initialValue=" "
+          previewStyle="vertical"
+          height="680px"
+          initialEditType="markdown"
+          useCommandShortcut={false}
+          plugins={[colorSyntax]}
+          language="ko-KR"
+          ref={editorRef}
+          onChange={onChange}
+          hooks={{
+            addImageBlobHook: async (blob, callback) => {
+              const formData = new FormData();
+              formData.append("file", blob);
+              formData.append("postKey", postKey);
+              console.log(blob);
+              console.log(postKey);
+              const img = await ImageService.uploadImage(formData);
+              const url = img.data;
+              callback("http://localhost:8080/api/image/" + url, url);
+            },
+          }}
+        />
       </div>
       <div className="bottom">
         <div className="post_save">
