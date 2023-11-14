@@ -58,29 +58,24 @@ function MyBlogPage() {
 
   let length = state.posts.length;
   var postArr = [];
-  var imageArr = [];
   for (var i = 0; i < 8; i++) {
     postArr[i] = Object(state.posts[length - 1 - i]);
-    imageArr[i] = postArr[i].fileNewName;
-    postArr[i] = postArr[i].post;
-    console.log(postArr[i]);
-    console.log(imageArr[i]);
   }
-  
-//   useEffect(() => {
-//     for (var i = 0; i < 8; i++) {
-//         ImageService.getThumbnail(postArr[i].postKey)
-//         .then((res) => {
-//           let url = "http://localhost:8080/api/image/" + res.data;
-//           setThumbnail([...thumbnail, url]);
-//           console.log(thumbnail[i]);
-//         })
-//         .catch((error) => {
-//           console.error("오류 발생: ", error);
-//           // 오류 처리 로직
-//         });
-//     }
-// }, []);
+
+  //   useEffect(() => {
+  //     for (var i = 0; i < 8; i++) {
+  //         ImageService.getThumbnail(postArr[i].postKey)
+  //         .then((res) => {
+  //           let url = "http://localhost:8080/api/image/" + res.data;
+  //           setThumbnail([...thumbnail, url]);
+  //           console.log(thumbnail[i]);
+  //         })
+  //         .catch((error) => {
+  //           console.error("오류 발생: ", error);
+  //           // 오류 처리 로직
+  //         });
+  //     }
+  // }, []);
 
   // volume value
   const [volume, setVolume] = useState(10);
@@ -311,14 +306,14 @@ function MyBlogPage() {
                     style={{ paddingTop: "55.1921%" }}
                   >
                     <img
-                      src={"http://localhost:8080/api/image/16995801622491829.png"
+                      src={"http://localhost:8080/api/image/"+postArr[0]["fileNewName"]
                     }
                     />
                   </div>
                 </div>
                 <div className="PostCardBlockContents">
                   <div className="PostCardBlockTag">
-                    <span>{postArr[0].tag}</span>
+                    <span>{postArr[0]["tag"]}</span>
                   </div>
                   <div className="PostCardBlockContents_Link">
                     <h4 className="PostCardBlockContents_Title">
@@ -350,7 +345,7 @@ function MyBlogPage() {
                   >
                     <img
                       src={
-                        "http://localhost:8080/api/image/16995801622491829.png"
+                        "http://localhost:8080/api/image/"+postArr[1]["fileNewName"]
                       }
                     />
                   </div>
@@ -387,7 +382,11 @@ function MyBlogPage() {
                     className="PostCardBlockImage_Link"
                     style={{ paddingTop: "55.1921%" }}
                   >
-                    {/* <img src={thumbnail[2]} /> */}
+                    <img
+                      src={
+                        "http://localhost:8080/api/image/"+postArr[2]["fileNewName"]
+                      }
+                    />
                   </div>
                 </div>
                 <div className="PostCardBlockContents">
@@ -422,7 +421,11 @@ function MyBlogPage() {
                     className="PostCardBlockImage_Link"
                     style={{ paddingTop: "55.1921%" }}
                   >
-                    <img src={require("../image/Rectangle 31.png")} />
+                    <img
+                      src={
+                        "http://localhost:8080/api/image/"+postArr[3]["fileNewName"]
+                      }
+                    />
                   </div>
                 </div>
                 <div className="PostCardBlockContents">
@@ -457,7 +460,11 @@ function MyBlogPage() {
                     className="PostCardBlockImage_Link"
                     style={{ paddingTop: "55.1921%" }}
                   >
-                    <img src={require("../image/Rectangle 31.png")} />
+                    <img
+                      src={
+                        "http://localhost:8080/api/image/"+postArr[4]["fileNewName"]
+                      }
+                    />
                   </div>
                 </div>
                 <div className="PostCardBlockContents">
@@ -492,7 +499,11 @@ function MyBlogPage() {
                     className="PostCardBlockImage_Link"
                     style={{ paddingTop: "55.1921%" }}
                   >
-                    <img src={require("../image/Rectangle 31.png")} />
+                    <img
+                      src={
+                        "http://localhost:8080/api/image/"+postArr[5]["fileNewName"]
+                      }
+                    />
                   </div>
                 </div>
                 <div className="PostCardBlockContents">
@@ -527,7 +538,11 @@ function MyBlogPage() {
                     className="PostCardBlockImage_Link"
                     style={{ paddingTop: "55.1921%" }}
                   >
-                    <img src={require("../image/Rectangle 31.png")} />
+                    <img
+                      src={
+                        "http://localhost:8080/api/image/"+postArr[6]["fileNewName"]
+                      }
+                    />
                   </div>
                 </div>
                 <div className="PostCardBlockContents">
@@ -562,7 +577,11 @@ function MyBlogPage() {
                     className="PostCardBlockImage_Link"
                     style={{ paddingTop: "55.1921%" }}
                   >
-                    <img src={require("../image/Rectangle 31.png")} />
+                    <img
+                      src={
+                        "http://localhost:8080/api/image/"+postArr[7]["fileNewName"]
+                      }
+                    />
                   </div>
                 </div>
                 <div className="PostCardBlockContents">
