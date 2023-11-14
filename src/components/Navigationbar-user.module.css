@@ -1,0 +1,144 @@
+.navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 5% 4px 5%;
+}
+
+.common {
+    display: flex;
+    flex-direction: row;
+}
+
+.hamburger-menu {
+    background: url("../assets/icon_hamburger-menu.svg") no-repeat;
+    width: 40px;
+    height: 40px;
+    border: none;
+}
+
+.nav-logo {
+    background: url("../assets/nav-logo.svg") no-repeat;
+    width: 40px;
+    margin-left: 20px;
+    border: none;
+}
+
+.user-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 6px 0 0 10px;
+    border: none;
+    background: none;
+}
+
+.user-menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-menu button {
+    display: flex;
+    padding: 3px 10px;
+    border: none;
+    background: none;
+    align-items: center;
+}
+
+.user-menu button:hover {
+    cursor: pointer;
+}
+
+.user-menu button:hover div {
+    color: black;
+}
+
+.user-menu button img,
+.user-menu button div {
+    font-weight: bold;
+    color: #7D7D7D;
+}
+
+.user-menu button img {
+    padding-right: 5px;
+}
+
+/*---------- modal 관련 CSS --------------*/
+
+.nav-modal {
+    position: fixed;
+    top: 0%;
+    padding: 60px 20px 20px 5%;
+    background-color: lemonchiffon;
+    width: 350px;
+    height: 100vh;
+    z-index: 1;
+}
+
+.tag {
+    padding: 10px;
+    margin: 5px;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.tagList{
+    color: #000;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border: none;
+}
+
+ul {
+    list-style: none; /* 기본 목록 점 스타일 제거 */
+    padding: 0; /* 목록의 내부 패딩 제거 */
+}
+
+ul li {
+    text-align: left; /* 텍스트를 왼쪽 정렬 */
+    display: flex; /* 내부 요소를 가로로 배치하기 위해 Flexbox 사용 */
+    align-items: center; /* 내부 요소를 세로 중앙 정렬 */
+
+    color: #000;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    cursor: pointer;
+}
+
+ul li p {
+    color: #8E8E8E;
+
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.link {
+    padding: 30px 10px 10px 10px;
+    margin: 5px;
+    text-align: left;
+    justify-content: flex-start;
+}
+
+.linkList{
+    color: #000;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border: none;
+}
+
+.link ul li {
+    margin: 20px 0 20px 0;
+}

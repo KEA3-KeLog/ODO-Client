@@ -41,7 +41,7 @@ function SideProfile(props) {
                 <div className={styles[`box-horizontal`]}/>
                 <div className={styles[`section-router`]}>
                     <button onClick={()=>{
-                        navigate(`./myblogpage/${props.id}`);
+                        navigate(`./mypage/${props.id}`);
                     }}>마이페이지</button>
                     <button onClick={()=>{
                         navigate(`./myblogpage/${props.id}`);
