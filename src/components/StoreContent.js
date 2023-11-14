@@ -1,6 +1,6 @@
 import styles from "./StoreContent.module.css"
 
-function ShopContent(){
+function StoreContent(){
     return (
         <div className={styles.content}>
             <div className={styles.frame}>
@@ -14,7 +14,7 @@ function ShopContent(){
                     <div className={styles[`item-price`]}>2,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -32,7 +32,7 @@ function ShopContent(){
                     <div className={styles[`item-price`]}>3,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -50,7 +50,7 @@ function ShopContent(){
                     <div className={styles[`item-price`]}>3,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -68,7 +68,7 @@ function ShopContent(){
                     <div className={styles[`item-price`]}>3,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -86,7 +86,7 @@ function ShopContent(){
                     <div className={styles[`item-price`]}>2,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -104,7 +104,7 @@ function ShopContent(){
                     <div className={styles[`item-price`]}>400
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -122,7 +122,7 @@ function ShopContent(){
                     <div className={styles[`item-price`]}>3,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -140,7 +140,7 @@ function ShopContent(){
                     <div className={styles[`item-price`]}>10,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -153,4 +153,4 @@ function ShopContent(){
     );
 }
 
-export default ShopContent;
+export default StoreContent;

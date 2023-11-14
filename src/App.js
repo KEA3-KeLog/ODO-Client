@@ -12,7 +12,7 @@ import SignIn2 from "./pages/SignIn-2";
 import SideProfile from "./components/SideProfile";
 import LoginRedirectPage from "./components/LoginRedirectPage";
 import Mtest from './pages/Mtest';
-
+import MyPage from "./pages/MyPage";
 
 function App() {
     return (
@@ -29,6 +29,7 @@ function App() {
                 <Route path={'/sideprofile'} element={<SideProfile/>}/>
                 <Route path={'/oauth/redirected/:sns'} element={<LoginRedirectPage />}></Route>
                 <Route path='/mtest' element={<Mtest />}></Route>
+                <Route path='/mypage/:userId' element={<MyPage />} />
             </Routes>
         </div>
     );
