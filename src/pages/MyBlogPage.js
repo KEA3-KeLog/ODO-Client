@@ -1,5 +1,6 @@
 import "./MyBlogPage.css";
 import NavBar from "../components/Navigationbar";
+import NavBarUser from "../components/Navigationbar-user"
 import ResizedComponent from "../components/ResizedComponent";
 import PostService from "../service/PostService";
 import styled from "styled-components";

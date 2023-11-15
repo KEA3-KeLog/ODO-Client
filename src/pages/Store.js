@@ -123,7 +123,7 @@ function Store() {
                     <div className={styles[`item-price`]}>2,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -141,7 +141,7 @@ function Store() {
                     <div className={styles[`item-price`]}>3,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -159,7 +159,7 @@ function Store() {
                     <div className={styles[`item-price`]}>3,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -177,7 +177,7 @@ function Store() {
                     <div className={styles[`item-price`]}>3,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -195,7 +195,7 @@ function Store() {
                     <div className={styles[`item-price`]}>2,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -213,7 +213,7 @@ function Store() {
                     <div className={styles[`item-price`]}>400
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -231,7 +231,7 @@ function Store() {
                     <div className={styles[`item-price`]}>3,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
@@ -249,7 +249,7 @@ function Store() {
                     <div className={styles[`item-price`]}>10,000
                         <img className={styles[`icon-item-price`]}
                              alt={""}
-                             src={require("../assets/icon_point.svg").default}
+                             src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
                     <div className={styles[`item-btn`]}>
