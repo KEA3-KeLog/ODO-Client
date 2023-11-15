@@ -9,23 +9,27 @@ import StoreContent from "../components/StoreContent";
 
 function MyPage() {
     const userId = useParams().userId;
-    // 팔로우 목록 0 / 인벤토리 1 / 프로필 편집 2
+    // 상점 0 / 인벤토리 1 / 팔로우 목록 2 / 프로필 편집 3
     const [tab, setTab] = useState(1);
 
-    const handleFollowListClick = () => {
+    const handleStoreClick = () => {
         setTab(0);
     }
 
     const handleInventoryClick = () => {
         setTab(1);
     }
-    const handleProfileEditClick = () => {
+
+    const handleFollowListClick = () => {
         setTab(2);
     }
 
-    const handleStoreClick = () => {
+
+    const handleProfileEditClick = () => {
         setTab(3);
     }
+
+
 
     return (
         <>
@@ -39,11 +43,11 @@ function MyPage() {
                 </div>
                 <button
                     className={styles[`tab-item`]}
-                    onClick={handleFollowListClick}>
+                    onClick={handleStoreClick}>
                     <img className={styles[`tab-icon`]}
-                         src={require('../assets/icon_hamburger-menu2.svg').default}
+                         src={require('../assets/icon_shopstore_gray.svg').default}
                     />
-                    <div>팔로우 목록</div>
+                    <div>상점</div>
                 </button>
                 <button
                     className={styles[`tab-item`]}
@@ -55,20 +59,21 @@ function MyPage() {
                 </button>
                 <button
                     className={styles[`tab-item`]}
+                    onClick={handleFollowListClick}>
+                    <img className={styles[`tab-icon`]}
+                         src={require('../assets/icon_hamburger-menu2.svg').default}
+                    />
+                    <div>팔로우 목록</div>
+                </button>
+                <button
+                    className={styles[`tab-item`]}
                     onClick={handleProfileEditClick}>
                     <img className={styles[`tab-icon`]}
                          src={require('../assets/icon_edit.svg').default}
                     />
                     <div>프로필 편집</div>
                 </button>
-                <button
-                    className={styles[`tab-item`]}
-                    onClick={handleStoreClick}>
-                    <img className={styles[`tab-icon`]}
-                         src={require('../assets/icon_shopstore_gray.svg').default}
-                    />
-                    <div>상점</div>
-                </button>
+
             </div>
             <hr/>
             <TabContent tab={tab} userId={userId}/>
@@ -78,10 +83,10 @@ function MyPage() {
 
 function TabContent(props) {
     return [
-        <FollowList />,
+        <StoreContent />,
         <Inventory userId={props.userId}/>,
+        <FollowList />,
         <ProfileEdit />,
-        <StoreContent />
     ][props.tab]
 }
 

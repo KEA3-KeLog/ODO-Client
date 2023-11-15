@@ -14,10 +14,6 @@ function NavigationbarUser(props) {
         navigate(`../../myblogpage/${userId}`);
     };
 
-    const handleStoreClick =  () => {
-        navigate(`../../store`)
-    };
-
     const handleMyPageClick = () => {
         navigate(`../../mypage/${userId}`)
     }
@@ -48,12 +44,12 @@ function NavigationbarUser(props) {
                             />
                             <div>1,150</div>
                     </button>
-                    <button onClick={handleStoreClick}>
-                        <img
-                            src={require("../assets/icon_shopstore_gray.svg").default}
-                        />
-                        <div>상점</div>
-                    </button>
+                    {/*<button onClick={handleStoreClick}>*/}
+                    {/*    <img*/}
+                    {/*        src={require("../assets/icon_shopstore_gray.svg").default}*/}
+                    {/*    />*/}
+                    {/*    <div>상점</div>*/}
+                    {/*</button>*/}
                     <button onClick={handleMyPageClick}>
                         <img
                             src={require("../assets/icon_home.svg").default}

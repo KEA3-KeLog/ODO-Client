@@ -1,3 +1,70 @@
+.screen {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.banner {
+    background-color: #ebebeb;
+    height: 110px;
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+}
+
+.banner .text-wrapper {
+    color: #000000;
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 40px 0 0 10%;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.banner .icon-shop-store {
+    height: 27px;
+    margin: 48px 0 0 10px;
+    width: 35px;
+}
+
+.show-point {
+    display: flex;
+    flex-direction: row;
+    margin: 40px 0 0 14%;
+    width: 100%;
+}
+
+.screen .show-point-text {
+    color: #000000;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    display: flex;
+    justify-content: space-between;
+    width: 68px;
+}
+
+.screen .icon-point {
+    padding-top: 3px;
+}
+
+.screen .text-wrapper-16 {
+    color: #000000;
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    margin-left: 12px;
+}
+
 .content {
     display: flex;
     flex-direction: column;

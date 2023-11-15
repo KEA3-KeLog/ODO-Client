@@ -6,7 +6,6 @@ import MyBlogPage from './pages/MyBlogPage';
 import Login from './pages/Login';
 import WritePost from './pages/writePost'
 import PostView from './pages/PostView'
-import Store from './pages/Store';
 import SignIn1 from './pages/SignIn-1'
 import SignIn2 from "./pages/SignIn-2";
 import SideProfile from "./components/SideProfile";
@@ -23,7 +22,6 @@ function App() {
                 <Route path='/writepost/:userId' element={<WritePost/>}/>
                 <Route path='/postview/:postId' element={<PostView/>}/>
                 <Route path='/login' element={<Login/>}/>
-                <Route path='/store' element={<Store/>}/>
                 <Route path={'/signin1'} element={<SignIn1/>}/>
                 <Route path={'/signin2'} element={<SignIn2/>}/>
                 <Route path={'/sideprofile'} element={<SideProfile/>}/>
