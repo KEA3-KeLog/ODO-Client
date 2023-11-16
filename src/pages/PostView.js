@@ -61,6 +61,7 @@ function PostView() {
                         <div className="row"><br/><br/><br/>
                             {/* 마크다운 */}
                             <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown>
+                            
                             <Viewer initialValue={contents || ''} />
                             {/* 마크다운 */}
                         </div>

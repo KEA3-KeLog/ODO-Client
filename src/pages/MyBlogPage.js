@@ -59,23 +59,49 @@ function MyBlogPage() {
   let length = state.posts.length;
   var postArr = [];
   for (var i = 0; i < 8; i++) {
+    if(state.posts[length - 1 - i] !== undefined){
     postArr[i] = Object(state.posts[length - 1 - i]);
+    }
   }
-
-  //   useEffect(() => {
-  //     for (var i = 0; i < 8; i++) {
-  //         ImageService.getThumbnail(postArr[i].postKey)
-  //         .then((res) => {
-  //           let url = "http://localhost:8080/api/image/" + res.data;
-  //           setThumbnail([...thumbnail, url]);
-  //           console.log(thumbnail[i]);
-  //         })
-  //         .catch((error) => {
-  //           console.error("오류 발생: ", error);
-  //           // 오류 처리 로직
-  //         });
-  //     }
-  // }, []);
+  const postList = postArr.map((v) => (
+  <div
+    className="PostCardBlock"
+    onClick={() => {
+      navigate("/postview/" + v.postId, {
+        state: userId,
+      });
+    }}
+  >
+    <div className="PostCardBlockImage">
+      <div
+        className="PostCardBlockImage_Link"
+        style={{ paddingTop: "55.1921%" }}
+      >
+        <img
+          src={"http://localhost:8080/api/image/" + v.fileNewName
+          }
+        />
+      </div>
+    </div>
+    <div className="PostCardBlockContents">
+      <div className="PostCardBlockTag">
+        <span>{v.tag}</span>
+      </div>
+      <div className="PostCardBlockContents_Link">
+        <h4 className="PostCardBlockContents_Title">
+          {v.title}
+        </h4>
+        <div>
+          <p className="PostCardBlockContents_subtitle">
+            {v.summary}
+          </p>
+        </div>
+      </div>
+      <div className="PostCardBlockDate">
+        <span>2023-10-01</span>
+      </div>
+    </div>
+  </div>))
 
   // volume value
   const [volume, setVolume] = useState(10);
@@ -292,317 +318,7 @@ function MyBlogPage() {
             </div>
             <br></br>
             <div className="PostCard">
-              <div
-                className="PostCardBlock"
-                onClick={() => {
-                  navigate("/postview/" + postArr[0]["postId"], {
-                    state: userId,
-                  });
-                }}
-              >
-                <div className="PostCardBlockImage">
-                  <div
-                    className="PostCardBlockImage_Link"
-                    style={{ paddingTop: "55.1921%" }}
-                  >
-                    <img
-                      src={"http://localhost:8080/api/image/"+postArr[0]["fileNewName"]
-                    }
-                    />
-                  </div>
-                </div>
-                <div className="PostCardBlockContents">
-                  <div className="PostCardBlockTag">
-                    <span>{postArr[0]["tag"]}</span>
-                  </div>
-                  <div className="PostCardBlockContents_Link">
-                    <h4 className="PostCardBlockContents_Title">
-                      {postArr[0]["title"]}
-                    </h4>
-                    <div>
-                      <p className="PostCardBlockContents_subtitle">
-                        {postArr[0]["summary"]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="PostCardBlockDate">
-                    <span>2023-10-01</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="PostCardBlock"
-                onClick={() => {
-                  navigate("/postview/" + postArr[1]["postId"], {
-                    state: userId,
-                  });
-                }}
-              >
-                <div className="PostCardBlockImage">
-                  <div
-                    className="PostCardBlockImage_Link"
-                    style={{ paddingTop: "55.1921%" }}
-                  >
-                    <img
-                      src={
-                        "http://localhost:8080/api/image/"+postArr[1]["fileNewName"]
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="PostCardBlockContents">
-                  <div className="PostCardBlockTag">
-                    <span>{postArr[1]["tag"]}</span>
-                  </div>
-                  <div className="PostCardBlockContents_Link">
-                    <h4 className="PostCardBlockContents_Title">
-                      {postArr[1]["title"]}
-                    </h4>
-                    <div>
-                      <p className="PostCardBlockContents_subtitle">
-                        {postArr[1]["summary"]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="PostCardBlockDate">
-                    <span>2023-10-01</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="PostCardBlock"
-                onClick={() => {
-                  navigate("/postview/" + postArr[2]["postId"], {
-                    state: userId,
-                  });
-                }}
-              >
-                <div className="PostCardBlockImage">
-                  <div
-                    className="PostCardBlockImage_Link"
-                    style={{ paddingTop: "55.1921%" }}
-                  >
-                    <img
-                      src={
-                        "http://localhost:8080/api/image/"+postArr[2]["fileNewName"]
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="PostCardBlockContents">
-                  <div className="PostCardBlockTag">
-                    <span>{postArr[2]["tag"]}</span>
-                  </div>
-                  <div className="PostCardBlockContents_Link">
-                    <h4 className="PostCardBlockContents_Title">
-                      {postArr[2]["title"]}
-                    </h4>
-                    <div>
-                      <p className="PostCardBlockContents_subtitle">
-                        {postArr[2]["summary"]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="PostCardBlockDate">
-                    <span>2023-10-01</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="PostCardBlock"
-                onClick={() => {
-                  navigate("/postview/" + postArr[3]["postId"], {
-                    state: userId,
-                  });
-                }}
-              >
-                <div className="PostCardBlockImage">
-                  <div
-                    className="PostCardBlockImage_Link"
-                    style={{ paddingTop: "55.1921%" }}
-                  >
-                    <img
-                      src={
-                        "http://localhost:8080/api/image/"+postArr[3]["fileNewName"]
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="PostCardBlockContents">
-                  <div className="PostCardBlockTag">
-                    <span>{postArr[3]["tag"]}</span>
-                  </div>
-                  <div className="PostCardBlockContents_Link">
-                    <h4 className="PostCardBlockContents_Title">
-                      {postArr[3]["title"]}
-                    </h4>
-                    <div>
-                      <p className="PostCardBlockContents_subtitle">
-                        {postArr[3]["summary"]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="PostCardBlockDate">
-                    <span>2023-10-01</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="PostCardBlock"
-                onClick={() => {
-                  navigate("/postview/" + postArr[4]["postId"], {
-                    state: userId,
-                  });
-                }}
-              >
-                <div className="PostCardBlockImage">
-                  <div
-                    className="PostCardBlockImage_Link"
-                    style={{ paddingTop: "55.1921%" }}
-                  >
-                    <img
-                      src={
-                        "http://localhost:8080/api/image/"+postArr[4]["fileNewName"]
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="PostCardBlockContents">
-                  <div className="PostCardBlockTag">
-                    <span>{postArr[4]["tag"]}</span>
-                  </div>
-                  <div className="PostCardBlockContents_Link">
-                    <h4 className="PostCardBlockContents_Title">
-                      {postArr[4]["title"]}
-                    </h4>
-                    <div>
-                      <p className="PostCardBlockContents_subtitle">
-                        {postArr[4]["summary"]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="PostCardBlockDate">
-                    <span>2023-10-01</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="PostCardBlock"
-                onClick={() => {
-                  navigate("/postview/" + postArr[5]["postId"], {
-                    state: userId,
-                  });
-                }}
-              >
-                <div className="PostCardBlockImage">
-                  <div
-                    className="PostCardBlockImage_Link"
-                    style={{ paddingTop: "55.1921%" }}
-                  >
-                    <img
-                      src={
-                        "http://localhost:8080/api/image/"+postArr[5]["fileNewName"]
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="PostCardBlockContents">
-                  <div className="PostCardBlockTag">
-                    <span>{postArr[5]["tag"]}</span>
-                  </div>
-                  <div className="PostCardBlockContents_Link">
-                    <h4 className="PostCardBlockContents_Title">
-                      {postArr[5]["title"]}
-                    </h4>
-                    <div>
-                      <p className="PostCardBlockContents_subtitle">
-                        {postArr[5]["summary"]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="PostCardBlockDate">
-                    <span>2023-10-01</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="PostCardBlock"
-                onClick={() => {
-                  navigate("/postview/" + postArr[6]["postId"], {
-                    state: userId,
-                  });
-                }}
-              >
-                <div className="PostCardBlockImage">
-                  <div
-                    className="PostCardBlockImage_Link"
-                    style={{ paddingTop: "55.1921%" }}
-                  >
-                    <img
-                      src={
-                        "http://localhost:8080/api/image/"+postArr[6]["fileNewName"]
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="PostCardBlockContents">
-                  <div className="PostCardBlockTag">
-                    <span>{postArr[6]["tag"]}</span>
-                  </div>
-                  <div className="PostCardBlockContents_Link">
-                    <h4 className="PostCardBlockContents_Title">
-                      {postArr[6]["title"]}
-                    </h4>
-                    <div>
-                      <p className="PostCardBlockContents_subtitle">
-                        {postArr[6]["summary"]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="PostCardBlockDate">
-                    <span>2023-10-01</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="PostCardBlock"
-                onClick={() => {
-                  navigate("/postview/" + postArr[7]["postId"], {
-                    state: userId,
-                  });
-                }}
-              >
-                <div className="PostCardBlockImage">
-                  <div
-                    className="PostCardBlockImage_Link"
-                    style={{ paddingTop: "55.1921%" }}
-                  >
-                    <img
-                      src={
-                        "http://localhost:8080/api/image/"+postArr[7]["fileNewName"]
-                      }
-                    />
-                  </div>
-                </div>
-                <div className="PostCardBlockContents">
-                  <div className="PostCardBlockTag">
-                    <span>{postArr[7]["tag"]}</span>
-                  </div>
-                  <div className="PostCardBlockContents_Link">
-                    <h4 className="PostCardBlockContents_Title">
-                      {postArr[7]["title"]}
-                    </h4>
-                    <div>
-                      <p className="PostCardBlockContents_subtitle">
-                        {postArr[7]["summary"]}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="PostCardBlockDate">
-                    <span>2023-10-01</span>
-                  </div>
-                </div>
-              </div>
+              {postList}
             </div>
           </div>
           <div className="works">
