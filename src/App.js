@@ -11,6 +11,7 @@ import SignIn2 from "./pages/SignIn-2";
 import SideProfile from "./components/SideProfile";
 import LoginRedirectPage from "./components/LoginRedirectPage";
 import MyPage from "./pages/MyPage";
+import EditPost from './pages/EditPost';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path='/myblogpage/:userId' element={<MyBlogPage />}/>
                 <Route path='/writepost/:userId' element={<WritePost/>}/>
                 <Route path='/postview/:postId' element={<PostView/>}/>
+                <Route path='/editpost/:postId' element={<EditPost/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path={'/signin1'} element={<SignIn1/>}/>
                 <Route path={'/signin2'} element={<SignIn2/>}/>
