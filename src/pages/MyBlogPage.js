@@ -1,5 +1,6 @@
 import "./MyBlogPage.css";
 import NavBar from "../components/Navigationbar";
+import NavBarUser from "../components/Navigationbar-user"
 import ResizedComponent from "../components/ResizedComponent";
 import PostService from "../service/PostService";
 import styled from "styled-components";
@@ -7,38 +8,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./MainPage.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import ImageService from "../service/ImageService";
-
-const SelectBoxWrapper = styled.div`
-  display: flex;
-`;
-
-// Icon에 사용할 Icon SVG 컴포넌트 생성
-const IconSVG = styled.svg`
-  margin-left: -28px;
-  margin-top: 10px;
-  align-self: center;
-  width: 24px;
-`;
-
-export const Select = styled.select`
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  min-width: 0;
-  display: block;
-  width: 100%;
-  line-height: inherit;
-  border: 1px;
-  border-radius: 4px;
-  background-color: white;
-  margin: 10px 0 0 0;
-  box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
-
-  &:hover {
-    background-color: #c0c0c0;
-    transition: 0.5s;
-  }
-`;
 
 function MyBlogPage() {
   const userId = useParams().userId;
@@ -108,46 +77,6 @@ function MyBlogPage() {
   // display: block 일때 보이고 display: none 일때 안 보입니다.
   const [volumeLowIcon, setVolumeLowIcon] = useState(false);
 
-  const OPTIONS = [
-    { value: "Title", name: "제목" },
-    { value: "Contents", name: "내용" },
-  ];
-
-  const SelectBox = (props) => {
-    const handleChange = (e) => {
-      // event handler
-      console.log(e.target.value);
-    };
-    return (
-      <SelectBoxWrapper>
-        <Select onChange={handleChange}>
-          {props.options.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-              defaultValue={props.defaultValue === option.value}
-            >
-              {option.name}
-            </option>
-          ))}
-        </Select>
-        <IconSVG
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M10 14L16 6H4L10 14Z"
-            fill="#1A1A1A"
-          />
-        </IconSVG>
-      </SelectBoxWrapper>
-    );
-  };
 
   // 글 작성 버튼을 클릭해서 /writepost/:userId 로 갑니다
   const handleWritePostButtonClick = () => {
@@ -156,7 +85,7 @@ function MyBlogPage() {
 
   return (
     <>
-      <NavBar userId={userId} />
+      <NavBarUser userId={userId} />
       <div className="container">
         <ion-icon name="chevron-down-outline"></ion-icon>
         <div className="child first">

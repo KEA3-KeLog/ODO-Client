@@ -1,10 +1,8 @@
-import {Navbar} from 'react-bootstrap';
 import styles from './Navigationbar.module.css'
 import {forwardRef, useEffect, useRef, useState} from "react";
-import modal from "bootstrap/js/src/modal";
 import {useNavigate} from "react-router-dom";
 
-function MainNav(props) {
+function Navigationbar(props) {
     // navModalOpen이 true 이면 모달창 열림
     const [navModalOpen, setNavModalOpen] = useState(false);
     const navigate = useNavigate();
@@ -81,4 +79,4 @@ const NavModal = () => {
     );
 }
 
-export default MainNav;
+export default Navigationbar;
