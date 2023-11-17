@@ -16,10 +16,6 @@ function NavigationbarUser(props) {
             if (isModalOpen && !modalRef.current.contains(e.target)) {
                 setIsModalOpen(false);
             }
-            // 모달 밖 영역 클릭 시
-            if (!modalRef.current.contains(e.target)){
-                console.log("!current열림");
-            }
         };
         window.addEventListener("click", handleClickOutside);
         return()=>{
