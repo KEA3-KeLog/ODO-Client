@@ -3,12 +3,29 @@ import {forwardRef, useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 function NavigationbarUser(props) {
-    // navModalOpen이 true 이면 모달창 열림
-    const [navModalOpen, setNavModalOpen] = useState(false);
     const navigate = useNavigate();
-    // navModal 영역 밖 클릭 시 모달창 닫기
-    const modalEl = useRef();
     const userId = props.userId;
+
+    // isModalOpen이 true 이면 모달창 열림
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const modalRef = useRef();
+
+    useEffect(()=>{
+        // Modal 영역 밖 클릭 시 모달창 닫기
+        const handleClickOutside=(e)=>{
+            if (isModalOpen && !modalRef.current.contains(e.target)) {
+                setIsModalOpen(false);
+            }
+            // 모달 밖 영역 클릭 시
+            if (!modalRef.current.contains(e.target)){
+                console.log("!current열림");
+            }
+        };
+        window.addEventListener("click", handleClickOutside);
+        return()=>{
+            window.removeEventListener("click", handleClickOutside);
+        };
+    }, [isModalOpen]);
 
     const handleBlogNameClick = () => {
         navigate(`../../myblogpage/${userId}`);
@@ -22,11 +39,12 @@ function NavigationbarUser(props) {
         <>
             <div className={styles.navigation}>
                 <div className={styles.common}>
-                    <input
-                        type={"button"}
+                    <button
                         className={styles[`hamburger-menu`]}
-                        onClick={() => {
-                            setNavModalOpen(true);
+                        onClick={(e) => {
+                            // 이벤트 버블링 방지
+                            e.stopPropagation();
+                            setIsModalOpen(true);
                         }}
                     />
                     <input type={"button"}
@@ -44,12 +62,6 @@ function NavigationbarUser(props) {
                             />
                             <div>1,150</div>
                     </button>
-                    {/*<button onClick={handleStoreClick}>*/}
-                    {/*    <img*/}
-                    {/*        src={require("../assets/icon_shopstore_gray.svg").default}*/}
-                    {/*    />*/}
-                    {/*    <div>상점</div>*/}
-                    {/*</button>*/}
                     <button onClick={handleMyPageClick}>
                         <img
                             src={require("../assets/icon_home.svg").default}
@@ -58,9 +70,9 @@ function NavigationbarUser(props) {
                     </button>
                 </div>
             </div>
-            <div ref={modalEl}>
+            <div ref={modalRef}>
                 {
-                    navModalOpen && <NavModal/>
+                    isModalOpen && (<Modal />)
                 }
             </div>
         </>
@@ -68,7 +80,7 @@ function NavigationbarUser(props) {
 }
 
 
-const NavModal = () => {
+const Modal = () => {
     return (
         <div className={styles[`nav-modal`]}>
             <div className={styles.tag}>

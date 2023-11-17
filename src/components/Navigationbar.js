@@ -3,26 +3,29 @@ import {forwardRef, useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 function Navigationbar(props) {
-    // navModalOpen이 true 이면 모달창 열림
-    const [navModalOpen, setNavModalOpen] = useState(false);
     const navigate = useNavigate();
-    // navModal 영역 밖 클릭 시 모달창 닫기
-    const modalEl = useRef();
     const userId = props.userId;
 
-    // useEffect(()=>{
-    //     console.log("modalEl.current: ", modalEl.current);
-    //     const handleClickOutside=(e)=>{
-    //         if (navModalOpen && !modalEl.current.contains(e.target)) {
-    //             console.log("먀");
-    //             setNavModalOpen(false);
-    //         }
-    //     }
-    //     window.addEventListener("click", handleClickOutside);
-    //     return()=>{
-    //         window.removeEventListener("click", handleClickOutside);
-    //     };
-    // }, [navModalOpen]);
+    // isModalOpen이 true 이면 모달창 열림
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    // Modal 영역 밖 클릭 시 모달창 닫힘
+    const modalRef = useRef();
+
+    useEffect(()=>{
+        const handleClickOutside=(e)=>{
+            if (isModalOpen && !modalRef.current.contains(e.target)) {
+                setIsModalOpen(false);
+            }
+            // 모달 밖 영역 클릭 시
+            if (!modalRef.current.contains(e.target)){
+                console.log("!current열림");
+            }
+        };
+        window.addEventListener("click", handleClickOutside);
+        return()=>{
+            window.removeEventListener("click", handleClickOutside);
+        };
+    }, [isModalOpen]);
 
     const handleBlogNameClick = () => {
         navigate(`../../myblogpage/${userId}`);
@@ -31,11 +34,12 @@ function Navigationbar(props) {
     return (
         <>
             <div className={styles.navigation}>
-                <input
-                    type={"button"}
+                <button
                     className={styles[`hamburger-menu`]}
-                    onClick={() => {
-                        setNavModalOpen(true);
+                    onClick={(e) => {
+                        // 이벤트 버블링 방지
+                        e.stopPropagation();
+                        setIsModalOpen(true);
                     }}
                 />
                 <input type={"button"}
@@ -45,18 +49,16 @@ function Navigationbar(props) {
                         onClick={handleBlogNameClick}
                 >hyun_dev</button>
             </div>
-            <div ref={modalEl}>
+            <div ref={modalRef}>
                 {
-                    navModalOpen && <NavModal/>
+                    isModalOpen && (<Modal />)
                 }
             </div>
         </>
     );
 }
 
-
-
-const NavModal = () => {
+const Modal = () => {
     return (
         <div className={styles[`nav-modal`]}>
             <div className={styles.tag}>
