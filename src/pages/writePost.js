@@ -14,7 +14,12 @@ import "@toast-ui/editor/dist/i18n/ko-kr";
 function WritePost() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
+  //변경
   const [tag, setTag] = useState("");
+  const [tagList, setTagList] = useState([]); // 변경: 태그 배열
+
+  
+
   const [contents, setContents] = useState("");
   //   const [postId, setPostId] = useState(parseInt(Date.now().toString().slice(-9)) * 10000 + Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000);
   const [postKey, setPostKey] = useState(
@@ -30,9 +35,28 @@ function WritePost() {
   const onChange = () => {
     setContents(editorRef.current.getInstance().getMarkdown());
   };
+
+
+  const handleTagChange = (e) => {
+    if (e.key === "Enter" && e.target.value.trim() !== "") {
+      setTagList((prevTags) => [...prevTags, e.target.value.trim()]);
+      setTag(""); // 입력 후 초기화
+    }
+  };
+
+  const handleRemoveTag = (index) => {
+    setTagList((prevTags) => prevTags.filter((_, i) => i !== index));
+  };
+  
+
+
+  
+
+
   let post = {
     postKey: postKey,
     tag: tag,
+    tagList: tagList,
     title: title,
     contents: contents,
     userId: userId,
@@ -51,7 +75,7 @@ function WritePost() {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <div>
+        {/* <div>
           <input
             type="text"
             id="tag_txt"
@@ -60,6 +84,25 @@ function WritePost() {
             value={tag}
             onChange={(e) => setTag(e.target.value)}
           />
+        </div> */}
+        <div>
+          <input
+            type="text"
+            id="tag_txt"
+            placeholder="태그를 입력하시고 엔터를 누르세요"
+            name="tag"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+            onKeyPress={handleTagChange}
+          />
+          <div className="tag-list">
+            {tagList.map((tag, index) => (
+              <span key={index} className="tag">
+                {tag}
+                <button onClick={() => handleRemoveTag(index)}>X</button>
+              </span>
+            ))}
+          </div>
         </div>
       </div>
       <div id="content_txt" data-color-mode="light">

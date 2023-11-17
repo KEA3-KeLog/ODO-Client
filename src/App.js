@@ -9,8 +9,8 @@ import PostView from './pages/PostView'
 import SignIn1 from './pages/SignIn-1'
 import SignIn2 from "./pages/SignIn-2";
 import LoginRedirectPage from "./components/LoginRedirectPage";
-import Mtest from './pages/Mtest';
 import MyPage from "./pages/MyPage";
+import EditPost from './pages/EditPost';
 
 function App() {
     return (
@@ -20,11 +20,11 @@ function App() {
                 <Route path='/myblogpage/:userId' element={<MyBlogPage />}/>
                 <Route path='/writepost/:userId' element={<WritePost/>}/>
                 <Route path='/postview/:postId' element={<PostView/>}/>
+                <Route path='/editpost/:postId' element={<EditPost/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path={'/signin1'} element={<SignIn1/>}/>
                 <Route path={'/signin2'} element={<SignIn2/>}/>
                 <Route path={'/oauth/redirected/:sns'} element={<LoginRedirectPage />}></Route>
-                <Route path='/mtest' element={<Mtest />}></Route>
                 <Route path='/mypage/:userId' element={<MyPage />} />
             </Routes>
         </div>
