@@ -1,5 +1,5 @@
 import NavBar from './Navigationbar';
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import ResizedComponent from "./ResizedComponent";
 import styles from "./StoreContent.module.css"
 import axios from "axios";
@@ -9,13 +9,32 @@ function StoreContent() {
     const userjwt = 1; //회원 정보는 받아야함
     const [userPoint, setUserPoint] = useState("-");
 
+    // 상세설명 모달이 열렸는지 닫혔는지 state
+    const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+    // Modal 영역 밖 클릭 시 모달창 닫힘
+    const detailModalRef = useRef();
+
     //아래 방식으로 페이지에 접속하자마자 API를 호출해야함
     useEffect(() => {
         //localstorage에 저장되어있는 JWT 토큰에서 회원 정보를 가지고온다.
         //const userId = localStorage.getItem('userId');
         //API 호출부분에 유저 정보를 전달
         userpointAPI(userjwt);
-    }, []);
+
+        // 상세설명 모달 영역 밖 클릭 시
+        const handleClickOutside=(e)=>{
+            console.log("isModalOpen", isDetailModalOpen);
+            console.log("modalRef.current", detailModalRef.current);
+            if (isDetailModalOpen && !detailModalRef.current.contains(e.target)) {
+                setIsDetailModalOpen(false);
+                console.log("modalRef.current", detailModalRef.current);
+            }
+        };
+        window.addEventListener("click", handleClickOutside);
+        return()=>{
+            window.removeEventListener("click", handleClickOutside);
+        };
+    }, [isDetailModalOpen]);
 
     const userpointAPI = async (userId) => {
         try {
@@ -116,7 +135,14 @@ function StoreContent() {
                                 />
                             </div>
                             <div className={styles[`item-btn`]}>
-                                <button className={styles[`item-btn-1`]}>상세설명</button>
+                                <button
+                                    className={styles[`item-btn-1`]}
+                                    onClick={(e)=>{
+                                        e.stopPropagation();
+                                        setIsDetailModalOpen(true);
+                                        console.log("클릭 이벤트");
+                                    }}
+                                >상세설명</button>
                                 <button className={styles[`item-btn-2`]}
                                         onClick={() => handlePurchase(1, "방문 인사말 보이스", 2000)}>구매하기
                                 </button>
@@ -136,7 +162,13 @@ function StoreContent() {
                                 />
                             </div>
                             <div className={styles[`item-btn`]}>
-                                <button className={styles[`item-btn-1`]}>상세설명</button>
+                                <button
+                                    className={styles[`item-btn-1`]}
+                                    onClick={(e)=>{
+                                        e.stopPropagation();
+                                        setIsDetailModalOpen(true);
+                                    }}
+                                >상세설명</button>
                                 <button className={styles[`item-btn-2`]}
                                         onClick={() => handlePurchase(2, "가수 아이유의 AI 보이스", 3000)}>구매하기
                                 </button>
@@ -266,8 +298,22 @@ function StoreContent() {
                 </div>
                 {/* =============================================================== */}
             </div>
+            <div ref={detailModalRef}>
+                {
+                    isDetailModalOpen && <DetailModal />
+                }
+            </div>
         </>
     );
+}
+
+// 상세설명 창이 열리는 모달 입니다.
+const DetailModal=()=>{
+    return(
+        <div className={styles[`detail-modal`]}>
+            상세설명!!!!!!!!
+        </div>
+    )
 }
 
 export default StoreContent;

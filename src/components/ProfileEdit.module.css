@@ -1,0 +1,95 @@
+.common {
+    flex: 1;
+    margin: 50px 14% 0 14%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.first {
+    flex: 1.5;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}
+
+.second {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.element {
+    margin-bottom: 30px;
+}
+
+.element-title {
+    display: flex;
+    font-weight: initial;
+    padding-left: 3px;
+    font-size: 20px;
+}
+
+.element-rule {
+    color: #898989;
+    font-size: 12px;
+    padding: 6px 0 0 6px;
+    font-weight: 500;
+}
+
+.input-text {
+    width: 530px; /* 버튼 넓이를 50%로 설정하여 두 버튼의 넓이를 같게 합니다 */
+    margin: 10px 10px 0 0; /* 버튼 사이의 간격을 설정 (원하는 크기로 수정) */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ABABAB;
+    background: #F6F6F6;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: initial;
+}
+
+.input-text-big {
+    width: 530px; /* 버튼 넓이를 50%로 설정하여 두 버튼의 넓이를 같게 합니다 */
+    height: 120px;
+    margin: 10px 10px 0 0; /* 버튼 사이의 간격을 설정 (원하는 크기로 수정) */
+    padding: 10px;
+    text-align: start;
+    border-radius: 8px;
+    border: 1px solid #ABABAB;
+    background: #F6F6F6;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: initial;
+}
+
+.link-box {
+    display: flex;
+}
+
+.link-icon {
+    align-self: center;
+    padding: 10px 10px 0 0;
+    width: 20px;
+    height: 20px;
+}
+
+.link-input-text {
+    width: 500px; /* 버튼 넓이를 50%로 설정하여 두 버튼의 넓이를 같게 합니다 */
+    margin: 10px 10px 0 0; /* 버튼 사이의 간격을 설정 (원하는 크기로 수정) */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ABABAB;
+    background: #F6F6F6;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: initial;
+}
+
+.mic-icon {
+    width: 20px;
+    padding-right: 6px;
+}

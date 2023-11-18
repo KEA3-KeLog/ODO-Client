@@ -1,0 +1,11 @@
+.common {
+    flex: 1;
+    margin: 50px 14% 0 14%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    border-bottom: #7D7D7D 1px solid;
+}

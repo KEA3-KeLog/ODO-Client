@@ -1,6 +1,8 @@
 import styles from './Inventory.module.css';
 import styled, {css} from "styled-components";
+import {useState} from "react";
 
+// 아이템 사용중 or 사용 중 아님을 나타내는 버튼 css 입니다.
 const ItemStatus = styled.div`
   width: 60px;
   height: 17px;
