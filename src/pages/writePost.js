@@ -1,5 +1,5 @@
 import "./writePost.css";
-import React, { useState, useEffec, useRef } from "react";
+import React, { useState, useRef } from "react";
 import PostService from "../service/PostService";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/Navigationbar";

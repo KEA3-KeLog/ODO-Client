@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect } from 'react';
 import PostService from '../service/PostService';
 import { useLocation, useParams } from "react-router-dom";
-import {useHistory, useLocation, useParams} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'; // 마크다운
 import remarkGfm from 'remark-gfm';
 import NavBar from "../components/Navigationbar"; // 마크다운
@@ -106,10 +105,6 @@ function PostView() {
                         <div className="row">
                             <h1 id="title">{title}</h1>
                             <text id="thin">by <text id="bold">hyun_dev</text> · 2023.09.27</text><br /><br />
-                            <button id="tag"> {tag} </button><br /><br /><br />
-                            <h1 id = "title">{title}</h1>
-                            <text id ="thin">by <text id ="bold">hyun_dev</text> · 2023.09.27</text><br/><br/>
-                            <button id="tag"> {tag} </button><br/><br/><br/>
                             {tags.map((tag, index) => (
                                 <button key={index} id="tag">{tag}</button>
                             ))}
