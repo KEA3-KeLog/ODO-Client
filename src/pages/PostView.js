@@ -2,7 +2,6 @@ import "./PostView.css";
 import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect } from 'react';
 import PostService from '../service/PostService';
-import {useHistory, useLocation, useParams} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'; // 마크다운
 import remarkGfm from 'remark-gfm';
 import NavBar from "../components/Navigationbar"; // 마크다운

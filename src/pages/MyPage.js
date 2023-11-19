@@ -24,7 +24,6 @@ function MyPage() {
         setTab(2);
     }
 
-
     const handleProfileEditClick = () => {
         setTab(3);
     }
