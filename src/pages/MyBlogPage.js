@@ -5,7 +5,6 @@ import ResizedComponent from "../components/ResizedComponent";
 import PostService from "../service/PostService";
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
-import styles from "./MainPage.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import ImageService from "../service/ImageService";
 
