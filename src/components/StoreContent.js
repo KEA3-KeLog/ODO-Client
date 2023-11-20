@@ -3,6 +3,7 @@ import React, {useEffect, useRef, useState} from "react";
 import ResizedComponent from "./ResizedComponent";
 import styles from "./StoreContent.module.css"
 import axios from "axios";
+import styled from "styled-components";
 
 
 function StoreContent() {
@@ -23,11 +24,8 @@ function StoreContent() {
 
         // 상세설명 모달 영역 밖 클릭 시
         const handleClickOutside=(e)=>{
-            console.log("isModalOpen", isDetailModalOpen);
-            console.log("modalRef.current", detailModalRef.current);
             if (isDetailModalOpen && !detailModalRef.current.contains(e.target)) {
                 setIsDetailModalOpen(false);
-                console.log("modalRef.current", detailModalRef.current);
             }
         };
         window.addEventListener("click", handleClickOutside);
@@ -311,7 +309,21 @@ function StoreContent() {
 const DetailModal=()=>{
     return(
         <div className={styles[`detail-modal`]}>
-            상세설명!!!!!!!!
+
+                <div className={styles[`item-image-container`]}>
+                    <img className={styles[`item-image`]}
+                         src={require("../assets/store-item-1.svg").default}
+                    />
+                </div>
+                <div className={styles[`item-title`]}>방문 인사말 보이스</div>
+                <div className={styles[`item-docs`]}>
+                    상세설명: <br/>
+                    사용하면 블로그 방문자를 맞이하는 인사말을 자동 재생할 수 있습니다.
+                    자신이 설정한 인사말의 문구를 선택한 보이스로 재생하게 됩니다.
+                    기본 보이스는 자신의 목소리로, 방문 인사말 보이스를 사용한 순간 프로필에서 음량 조절 버튼이 보이게 되며
+                    블로그 방문자에게 인사말 문구가 자동재생됩니다.
+                </div>
+
         </div>
     )
 }

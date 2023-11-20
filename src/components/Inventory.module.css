@@ -65,6 +65,7 @@
 .item-title {
     font-weight: bold;
     font-size: 16px;
+    padding: 10px 0 10px 0;
 }
 
 .item-status {
@@ -74,4 +75,5 @@
 .item-docs {
     width: 350px;
     text-align: center;
+    padding: 10px 0 10px 0;
 }

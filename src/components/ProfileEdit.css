@@ -1,0 +1,68 @@
+/*파일 업로드 관련 css */
+
+.inputFile {
+    display: flex;
+    flex-direction: column;
+    width: 280px; /* 버튼 넓이를 50%로 설정하여 두 버튼의 넓이를 같게 합니다 */
+    height: 120px;
+    margin: 10px 10px 0 0; /* 버튼 사이의 간격을 설정 (원하는 크기로 수정) */
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px dashed #ABABAB;
+    background: #F6F6F6;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: initial;
+    align-items: center;
+    vertical-align: center;
+    justify-content: center;
+}
+
+.inputFile:hover {
+    border-color: #111;
+}
+
+.inputFile.active {
+    background-color: rgb(119, 119, 119);
+    border-color: #111;
+}
+
+.uploadFile {
+    display: none;
+}
+
+.uploadFileButton {
+    background-color: black;
+    color: white;
+    width: 140px;
+    padding: 10px 0;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.uploadFileSub {
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.preview_info {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.preview_info .info_key {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.preview_info .info_value {
+    font-size: 14px;
+    padding-left: 14px;
+}

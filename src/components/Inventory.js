@@ -79,21 +79,27 @@ function Inventory(props) {
                     </button>
                 </div>
                 {/*해당 아이템 설명*/}
-                <div className={styles[`container`]}>
-                    <div className={styles[`item-image-container`]}>
-                        <img className={styles[`item-image`]}
-                             src={require("../assets/store-item-1.svg").default}
-                        />
-                    </div>
-                    <div className={styles[`item-title`]}>방문 인사말 보이스</div>
-                    <div>1개 보유</div>
-                    <div className={styles[`item-docs`]}>
-                        사용하면 블로그 방문자를 맞이하는 인사말을 자동 재생할 수 있습니다.
-                        자신이 설정한 인사말의 문구를 선택한 보이스로 재생하게 됩니다.
-                        기본 보이스는 자신의 목소리로, 방문 인사말 보이스를 사용한 순간 프로필에서 음량 조절 버튼이 보이게 되며
-                        블로그 방문자에게 인사말 문구가 자동재생됩니다.
-                    </div>
-                </div>
+                <ItemDetail />
+            </div>
+        </div>
+    )
+}
+
+const ItemDetail=()=>{
+    return (
+        <div className={styles[`container`]}>
+            <div className={styles[`item-image-container`]}>
+                <img className={styles[`item-image`]}
+                     src={require("../assets/store-item-1.svg").default}
+                />
+            </div>
+            <div className={styles[`item-title`]}>방문 인사말 보이스</div>
+            <div>1개 보유</div>
+            <div className={styles[`item-docs`]}>
+                사용하면 블로그 방문자를 맞이하는 인사말을 자동 재생할 수 있습니다.
+                자신이 설정한 인사말의 문구를 선택한 보이스로 재생하게 됩니다.
+                기본 보이스는 자신의 목소리로, 방문 인사말 보이스를 사용한 순간 프로필에서 음량 조절 버튼이 보이게 되며
+                블로그 방문자에게 인사말 문구가 자동재생됩니다.
             </div>
         </div>
     )

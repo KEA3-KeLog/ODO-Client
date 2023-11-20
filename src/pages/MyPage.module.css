@@ -13,20 +13,6 @@
     align-self: center;
 }
 
-.tab-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    border: none;
-    margin: 0 10px;
-    padding: 6px 10px;
-    border-radius: 14px;
-    height: 36px;
-    text-align: center;
-    background: none;
-    font-size: 16px;
-}
-
 .tab-icon {
     align-self: center;
     padding-right: 6px;
@@ -36,10 +22,10 @@
     align-self: center;
 }
 
-.tab-item:hover {
-    background-color: #dadada;
-    cursor: pointer;
-}
+/*.tab-item:hover {*/
+/*    background-color: #dadada;*/
+/*    cursor: pointer;*/
+/*}*/
 
 hr {
     margin-top: 10px;
