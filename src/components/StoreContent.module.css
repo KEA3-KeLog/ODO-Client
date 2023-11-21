@@ -137,9 +137,44 @@
     position: fixed;
     top: 30%;
     left: 34%;
-    padding: 60px 20px 20px 5%;
-    background-color: lemonchiffon;
+    padding: 60px;
+    background-color: #eeeeee;
     width: 350px;
     height: 350px;
     z-index: 1;
+    box-shadow: 1px 1px 1px 1px grey;
+}
+
+.item-image-container {
+    display: flex;
+    border: none;
+    border-radius: 16px;
+    padding: 6px 12px;
+}
+
+.item-image {
+    max-width: 70px;
+    height: 70px;
+}
+
+.item-status-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0 0 20px;
+}
+
+.item-title {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 0 10px 0;
+}
+
+.item-status {
+
+}
+
+.item-docs {
+    width: 350px;
+    text-align: center;
+    padding: 10px 0 10px 0;
 }

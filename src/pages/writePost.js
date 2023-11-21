@@ -1,5 +1,5 @@
 import "./writePost.css";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback} from "react";
 import PostService from "../service/PostService";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/Navigationbar";
@@ -39,7 +39,10 @@ function WritePost() {
 
   const handleTagChange = (e) => {
     if (e.key === "Enter" && e.target.value.trim() !== "") {
-      setTagList((prevTags) => [...prevTags, e.target.value.trim()]);
+      // 중복된 태그 확인
+      if (!tagList.includes(e.target.value.trim())) {
+        setTagList((prevTags) => [...prevTags, e.target.value.trim()]);
+      }
       setTag(""); // 입력 후 초기화
     }
   };
@@ -49,6 +52,29 @@ function WritePost() {
   };
   
 
+
+
+  const onKeyUp = useCallback(
+    (e) => {
+      if (typeof window !== "undefined") {
+        if (e.keyCode === 13 && e.target.value.trim() !== "") {
+          // 중복된 태그 확인
+          if (!tagList.includes("#" + e.target.value.trim())) {
+            setTagList((prevTags) => [...prevTags, "#" + e.target.value.trim()]);
+          }
+          setTag(""); // Clear the input after adding a tag
+        }
+      }
+    },
+    [tag, tagList]
+  );
+
+
+
+
+console.log(tag);
+console.log(tagList);
+  
 
   
 
@@ -85,7 +111,7 @@ function WritePost() {
             onChange={(e) => setTag(e.target.value)}
           />
         </div> */}
-        <div>
+        {/* <div>
           <input
             type="text"
             id="tag_txt"
@@ -103,7 +129,80 @@ function WritePost() {
               </span>
             ))}
           </div>
+        </div> */}
+
+
+        {/* <div className="tag-input-container">
+      <div className="tag-input-wrapper">
+        {tagList.map((tag, index) => (
+          <div key={index} className="tag">
+            {tag}
+            <button onClick={() => handleRemoveTag(index)}>X</button>
+          </div>
+        ))}
+        <input
+          type="text"
+          placeholder="태그를 입력하세요"
+          id="tag_txt"
+          name="tag"
+          value={tag}
+          onChange={(e) => setTag(e.target.value)}
+          onKeyUp={handleTagChange}
+        />
+      </div>
+    </div> */}
+
+    
+
+    <div className="tag-input-container">
+          <div className="tag-input-wrapper">
+            {tagList.map((tag, index) => (
+              <div key={index} className="tag_post" onClick={() => handleRemoveTag(index)}>
+                {tag}
+                {/* <button onClick={() => handleRemoveTag(index)}>X</button> */}
+              </div>
+            ))}
+            <input
+              type="text"
+              placeholder="태그를 입력하세요"
+              id="tag_txt"
+              name="tag"
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+              onKeyUp={onKeyUp}
+            />
+          </div>
         </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
       <div id="content_txt" data-color-mode="light">
         <Editor
