@@ -31,7 +31,6 @@ class Comment extends Component {
 
         // CommentService를 통해 댓글 목록을 가져옵니다.
         CommentService.getComments(postId).then(res => {
-            console.log(res.data);
             this.setState({
                 comments: res.data,
             });

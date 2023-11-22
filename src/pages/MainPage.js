@@ -3,12 +3,10 @@ import Header from "../components/Header";
 import {useInView} from "react-intersection-observer";
 import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-
 function MainPage() {
     const {ref, inView} = useInView({
         threshold: 0.5
     });
-
     // 로그인 여부를 판별해야 합니다.
     const location = useLocation();
     const id = location.state;

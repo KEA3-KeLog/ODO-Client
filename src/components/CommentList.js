@@ -1,4 +1,6 @@
-import React from 'react';
+
+import UserService from "../service/UserService";
+import React, { useEffect, useState } from 'react';
 import styles from "./Comment.module.css"; // 모듈 스타일을 import
 
 const formatDateTime = (dateTimeString) => {
@@ -16,12 +18,32 @@ const formatDateTime = (dateTimeString) => {
     const formattedDateTime = new Intl.DateTimeFormat('ko-KR', options).format(new Date(dateTimeString));
     return formattedDateTime;
 };
-
 const CommentList = ({ list }) => {
-    if (!list || !Array.isArray(list)) {
-        // list가 정의되지 않았거나 배열이 아닌 경우에 대한 처리
-        return <div>댓글이 없습니다.</div>;
-    }
+    const [userNicknames, setUserNicknames] = useState({});
+
+    useEffect(() => {
+        const fetchUserNicknames = async () => {
+            if (list && Array.isArray(list)) {
+                const userIds = list.map(comment => comment.userId);
+                const userNicknameData = await Promise.all(
+                    userIds.map(userId => UserService.getUser(userId))
+                );
+
+                const nicknameMap = {};
+                userNicknameData.forEach((resource, index) => {
+                    const userId = list[index].userId; // list에 있는 userId 사용
+                    const nickname = resource.data.blog_nickname;
+                    nicknameMap[userId] = nickname;
+                });
+
+                setUserNicknames(nicknameMap);
+            }
+        };
+
+        fetchUserNicknames();
+    }, [list]);
+
+    // 나머지 코드는 이전과 동일
 
     return (
         <div>
@@ -30,7 +52,7 @@ const CommentList = ({ list }) => {
                 {list.map((comment, index) => (
                     <li key={index} className={styles.commentItem}>
                         <div className={styles.commentId}>
-                            <strong>{comment.userId}</strong>
+                            <strong>{userNicknames[comment.userId]}</strong>
                         </div>
                         <div className={styles.commentContents}>
                             {comment.contents}
@@ -44,5 +66,4 @@ const CommentList = ({ list }) => {
         </div>
     );
 };
-
 export default CommentList;

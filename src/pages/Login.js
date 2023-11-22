@@ -7,41 +7,93 @@ import kakaoLogo from '../img/kakao.jpg';
 import googleLogo from '../img/google.jpg';
 import { useState, useEffect } from 'react';
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
+// function Login() {
+//      const { login } = useUser();
+//     let navigate = useNavigate()
+
+//     const handleKakaoButtonClick = () => {
+//         window.location.href = 'http://localhost:8080/oauth/kakao';
+//     };
+
+//     const handleNaverButtonClick = () => {
+//         window.location.href = 'http://localhost:8080/oauth/naver';
+//     };
+
+//     const handleGoogleButtonClick = () => {
+//         window.location.href = 'http://localhost:8080/oauth/google';
+//     };
+
+//     //let [fade, setFade] = useState('');
+
+//     /*useEffect(() => {
+//         setTimeout(() => { setFade('end') }, 500);
+//     }, [fade])
+
+//     const onLbjNotion01ImageClick = useCallback(() => {
+//         window.open(
+//             "https://chestnut-pest-92d.notion.site/KAKAO-Enterprise-Academy-0b351038ba694fffaf895e81ae9f9a97?pvs=4"
+//         );
+//     }, []);
+
+//     const onFigmaLogoIcon1472891ImageClick = useCallback(() => {
+//         window.open("https://www.figma.com/files/team/1283970495007828691");
+//     }, []);
+
+//     const onImageClick = useCallback(() => {
+//         window.open("https://github.com/KEA3-KeLog");
+//     }, []);*/
 function Login() {
-    let navigate = useNavigate()
 
-    const handleKakaoButtonClick = () => {
-        window.location.href = 'http://localhost:8080/oauth/kakao';
+    const navigate = useNavigate();
+    const handleOAuthButtonClick = async (oauthType) => {
+        try {
+            // 여기에 스프링 부트 서버의 URL을 넣어주세요.
+            const serverURL = 'http://localhost:8080';
+
+            // 클릭한 OAuth 버튼에 따라서 OAuth 로그인 URL 생성
+            const oauthURL = `${serverURL}/oauth/${oauthType.toLowerCase()}`;
+
+            // OAuth 로그인 URL로 이동
+            window.location.href = oauthURL;
+        } catch (error) {
+            console.error('Error while handling OAuth button click:', error);
+        }
     };
 
-    const handleNaverButtonClick = () => {
-        window.location.href = 'http://localhost:8080/oauth/naver';
-    };
+    // 컴포넌트가 로드되면서 서버에서 데이터를 가져옴
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // 여기에 스프링 부트 서버의 URL을 넣어주세요.
+                const serverURL = 'http://localhost:8080';
 
-    const handleGoogleButtonClick = () => {
-        window.location.href = 'http://localhost:8080/oauth/google';
-    };
+                // 현재 페이지 URL에서 코드 파라미터를 추출
+                const code = new URLSearchParams(window.location.search).get('code');
 
-    //let [fade, setFade] = useState('');
+                if (code) {
+                    // 코드가 존재하면 백엔드에 해당 코드를 전달하여 로그인 처리
+                    const response = await axios.get(`${serverURL}/oauth/callback?code=${code}`, {
+                        withCredentials: true, // withCredentials 옵션 추가
+                    });
 
-    /*useEffect(() => {
-        setTimeout(() => { setFade('end') }, 500);
-    }, [fade])
+                    // 서버에서 받은 데이터를 출력 (여기에서는 로그인 정보를 콘솔에 출력)
+                    console.log(response.data);
 
-    const onLbjNotion01ImageClick = useCallback(() => {
-        window.open(
-            "https://chestnut-pest-92d.notion.site/KAKAO-Enterprise-Academy-0b351038ba694fffaf895e81ae9f9a97?pvs=4"
-        );
-    }, []);
+                    // 받은 데이터를 어딘가에 저장하고 필요한 작업 수행
+                    // 예시: localStorage에 저장
+                    localStorage.setItem('myId', response.data);
+                    
+                    // 로그인 후 홈페이지로 이동
+                    navigate('/');
+                }
+            } catch (error) {
+                console.error('Error while fetching data:', error);
+            }
+        };
 
-    const onFigmaLogoIcon1472891ImageClick = useCallback(() => {
-        window.open("https://www.figma.com/files/team/1283970495007828691");
-    }, []);
-
-    const onImageClick = useCallback(() => {
-        window.open("https://github.com/KEA3-KeLog");
-    }, []);*/
-
+        fetchData();
+    }, []); // useEffect의 두 번째 매개변수로 빈 배열을 전달하면 컴포넌트가 마운트될 때 한 번만 실행됩니다.
     return (
         <>
             <div className={"odoLogo"}>
@@ -51,37 +103,31 @@ function Login() {
                 />
             </div>
             <div style={{ paddingTop: 50 }}>
-                <Button
+                <button
                     className="naverLogin"
-                    onClick={handleNaverButtonClick}>
-                    <img className="naverLogo"
-                        src={naverLogo} />
-                    <text className="naverText">네이버 로그인</text>
-                    {/* <div style={{ paddingTop: 17, paddingLeft: 130, paddingBottom: 13, paddingRight: 160 }}>
-                        <text className="naverText">네이버 로그인</text>
-                    </div> */}
-
-                </Button>
+                    onClick={() => handleOAuthButtonClick('Naver')}
+                >
+                    <img className="naverLogo" src={naverLogo} alt="Naver Logo" />
+                    <span className="naverText">네이버 로그인</span>
+                </button>
             </div>
             <div style={{ paddingTop: 10 }}>
-                {/*버튼을 클릭했을 때 http://localhost:8080/oauth/kakao 로 리디렉트*/}
-                {/*그럼 백앤드에서 카카오 인증 서버에 oauth code 를 가져오기 위한 URL 로 리디렉트*/}
-                <Button
+                <button
                     className="kakaoLogin"
-                    onClick={handleKakaoButtonClick}
-                ><img className="kakaoLogo"
-                    src={kakaoLogo} />
-                    <text className="kakaoText">카카오 로그인</text>
-                </Button>
+                    onClick={() => handleOAuthButtonClick('Kakao')}
+                >
+                    <img className="kakaoLogo" src={kakaoLogo} alt="Kakao Logo" />
+                    <span className="kakaoText">카카오 로그인</span>
+                </button>
             </div>
             <div style={{ paddingTop: 10 }}>
-                <Button
+                <button
                     className="googleLogin"
-                    onClick={handleGoogleButtonClick}
-                ><img className="googleLogo"
-                    src={googleLogo} />
-                    <text className="googleText">구글 로그인</text>
-                </Button>
+                    onClick={() => handleOAuthButtonClick('Google')}
+                >
+                    <img className="googleLogo" src={googleLogo} alt="Google Logo" />
+                    <span className="googleText">구글 로그인</span>
+                </button>
             </div>
             <div style={{ paddingTop: 50 }}>
                 <Button type="button"

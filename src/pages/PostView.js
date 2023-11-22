@@ -8,9 +8,6 @@ import remarkGfm from 'remark-gfm';
 import NavBar from "../components/Navigationbar"; // 마크다운
 import { Viewer } from '@toast-ui/react-editor';
 import Comment from "../components/Comment";
-import CommentForm from "../components/CommentForm";
-import CommentList from "../components/CommentList";
-import CommentService from "../service/CommentService";
 
 import { useNavigate } from "react-router-dom";
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
@@ -22,12 +19,9 @@ function PostView() {
     const [tag, setTag] = useState("");
     const [contents, setContents] = useState("");
     const [summary, setSummary] = useState("");
-
     //추가
     const [tags, setTags] = useState([]); 
-
     const navigate = useNavigate();
-
     let state = {
         posts: []
     }
@@ -43,7 +37,7 @@ function PostView() {
             setContents(res.data.contents);
             setSummary(res.data.summary);
         });
-    });
+    }, []);
 
     const handleUpdate = () => {
         const updatedPost = {
