@@ -2,8 +2,11 @@ import styles from "./ProfileEdit.module.css";
 import "./ProfileEdit.css";
 import React, {useState} from "react";
 import styled, {css} from "styled-components";
+import VoiceFileService from "../service/VoiceFileService";
 
-function ProfileEdit() {
+function ProfileEdit(props) {
+    const userId = props.userId;
+
     const [userBlogName, setUserBlogName] = useState("");
     const testString = "testString";
 
@@ -19,28 +22,54 @@ function ProfileEdit() {
     const handleDragStart = () => setActive(true);
     const handleDragEnd = () => {
         setActive(false);
-        console.log("dragend");
     }
 
     const handleDragOver = (e) => {
         e.preventDefault();
     };
 
-    const handleDrop = (e) => {
+    const handleDrop = async(e) => {
+        // 파일 드래그 앤 드롭
         e.preventDefault();
         setActive(false);
 
         const file = e.dataTransfer.files[0];
-        console.log("handleDrop", file);
+        const formData = new FormData();
+        formData.append("uploadVoiceFile", file);
+        console.log("2. userId는:", userId);
+        formData.append("userId", userId);
+
+        // FormData의 key 확인
+        for (let key of formData.keys()) {
+            console.log(key);
+        }
+
+// FormData의 value 확인
+        for (let value of formData.values()) {
+            console.log(value);
+        }
+
+
+        const voiceFile = await VoiceFileService.uploadVoiceFile(formData);
+
         setFileInfo(file);
     };
 
-    const handleUpload = ({target}) => {
+    const handleUpload = async({target}) => {
+        // 직접 파일 선택
         const file = target.files[0];
-        console.log("handleUpload", file);
-        setFileInfo(file);  // 코드 추가
+        const formData = new FormData();
+        formData.append("uploadVoiceFile", file);
+        console.log("1. userId는:", userId);
+        formData.append("userId", userId);
+
+        const voiceFile = await VoiceFileService.uploadVoiceFile(formData);
+
+        // 업로드 된 파일의 정보를 저장하기 위함
+        setFileInfo(file);
     };
 
+    // 업로드한 파일 정보(이름, 크기, 타입)를 저장합니다.
     const setFileInfo = (file) => {
         const {name, size: byteSize, type} = file;
         const size = (byteSize / (1024 * 1024)).toFixed(2) + 'mb';

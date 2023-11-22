@@ -122,7 +122,7 @@ function TabContent(props) {
         <StoreContent />,
         <Inventory userId={props.userId}/>,
         <FollowList />,
-        <ProfileEdit />,
+        <ProfileEdit userId={props.userId}/>,
     ][props.tab]
 }
 

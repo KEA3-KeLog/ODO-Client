@@ -2,8 +2,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import styles from './Header.module.css';
 import {useNavigate} from "react-router-dom";
 import SideProfile from "./SideProfile";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import SideProfileUser from "./SideProfile-user";
+import {defaultUrlTransform} from "react-markdown";
 
 function Header(props) {
     let navigate = useNavigate();
@@ -25,27 +26,26 @@ function Header(props) {
                             width="180px"
                         />
                     </Navbar.Brand>
-                    <input
-                        type={"button"}
+                    <button
                         className={styles[`icon-profile-button`]}
                         onClick={() => {
-                            // 로그인 안 된 상태에서 클릭했을 때 로그인하세요! 모달이 뜹니다
+                            // 로그인 안 된 상태
                             if (sideProfile===0 && !props.sideProfileUser) {
-                                console.log(sideProfile);
-                                console.log(props.sideProfileUser);
-                                console.log("로그인 안 된 상태에서 클릭했을 때 로그인하세요! 모달이 뜹니다")
                                 setSideProfile(1);
                             }
-                            // 로그인 된 상태에서 클릭했을 때 유저 프로필 모달이 뜹니다.
+                            // 로그인 된 상태 -> 유저 프로필 모달
                             else if (sideProfile===0 && props.sideProfileUser) {
-                                console.log(sideProfile);
-                                console.log(props.sideProfileUser)
-                                console.log("로그인 된 상태에서 클릭했을 때 유저 프로필 모달이 뜹니다.")
                                 setSideProfile(2);
+                                // changeProfileImage();
                             } else {
                                 setSideProfile(0);
                         }}}
-                    />
+                    >
+                        <img id={"profileImg"}
+                            alt={""}
+                            src={require("../assets/icon_profile.svg").default}
+                        />
+                    </button>
                 </div>
                 <div className={styles[`header-navigate`]}>
                     <a
@@ -80,4 +80,10 @@ function ShowSideProfile(props) {
     } else {
         return <SideProfileUser id={props.id}/>
     }
+}
+
+function changeProfileImage() {
+    let profileImg = document.getElementById("profileImg");
+    profileImg.src = require("../assets/author_profile.svg").default;
+
 }
