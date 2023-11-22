@@ -34,6 +34,7 @@ function ProfileEdit(props) {
         setActive(false);
 
         const file = e.dataTransfer.files[0];
+
         const formData = new FormData();
         formData.append("uploadVoiceFile", file);
         console.log("2. userId는:", userId);
