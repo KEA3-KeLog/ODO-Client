@@ -18,6 +18,11 @@ function SideProfile(props) {
         });
     }, []);
 
+    const logout = () => {
+        localStorage.clear();
+        navigate('/Login');
+    }
+
     return (
         <div className={styles[`section-side-profile`]}>
             <div className={styles[`profile-box-polygon`]} />
@@ -49,9 +54,7 @@ function SideProfile(props) {
                     <button onClick={()=>{
                         navigate('./login');
                     }}>알림</button>
-                    <button onClick={()=>{
-                        navigate('./login');
-                    }}>로그아웃</button>
+                    <button onClick={logout}>로그아웃</button>
                 </div>
             </div>
         </div>

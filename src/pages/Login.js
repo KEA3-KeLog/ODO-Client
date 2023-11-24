@@ -62,38 +62,37 @@ function Login() {
     };
 
     // 컴포넌트가 로드되면서 서버에서 데이터를 가져옴
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // 여기에 스프링 부트 서버의 URL을 넣어주세요.
-                const serverURL = 'http://localhost:8080';
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             // 여기에 스프링 부트 서버의 URL을 넣어주세요.
+    //             const serverURL = 'http://localhost:8080';
 
-                // 현재 페이지 URL에서 코드 파라미터를 추출
-                const code = new URLSearchParams(window.location.search).get('code');
+    //             // 현재 페이지 URL에서 코드 파라미터를 추출
+    //             const code = new URLSearchParams(window.location.search).get('code');
 
-                if (code) {
-                    // 코드가 존재하면 백엔드에 해당 코드를 전달하여 로그인 처리
-                    const response = await axios.get(`${serverURL}/oauth/callback?code=${code}`, {
-                        withCredentials: true, // withCredentials 옵션 추가
-                    });
+    //             // if (code) {
+    //             //     // 코드가 존재하면 백엔드에 해당 코드를 전달하여 로그인 처리
+    //             //     const response = await axios.get(`${serverURL}/oauth/callback?code=${code}`, {
+    //             //         withCredentials: true, // withCredentials 옵션 추가
+    //             //     });
 
-                    // 서버에서 받은 데이터를 출력 (여기에서는 로그인 정보를 콘솔에 출력)
-                    console.log(response.data);
+    //             //     // 서버에서 받은 데이터를 출력 (여기에서는 로그인 정보를 콘솔에 출력)
+    //             //     console.log(response.data);
 
-                    // 받은 데이터를 어딘가에 저장하고 필요한 작업 수행
-                    // 예시: localStorage에 저장
-                    localStorage.setItem('myId', response.data);
-                    
-                    // 로그인 후 홈페이지로 이동
-                    navigate('/');
-                }
-            } catch (error) {
-                console.error('Error while fetching data:', error);
-            }
-        };
+    //             //     // 받은 데이터를 어딘가에 저장하고 필요한 작업 수행
+    //             //     // 예시: localStorage에 저장
+    //             //     localStorage.setItem('myId', response.data);
 
-        fetchData();
-    }, []); // useEffect의 두 번째 매개변수로 빈 배열을 전달하면 컴포넌트가 마운트될 때 한 번만 실행됩니다.
+    //             //     navigate('/');
+    //             // }
+    //         } catch (error) {
+    //             console.error('Error while fetching data:', error);
+    //         }
+    //     };
+
+    //     fetchData();
+    // }, []); // useEffect의 두 번째 매개변수로 빈 배열을 전달하면 컴포넌트가 마운트될 때 한 번만 실행됩니다.
     return (
         <>
             <div className={"odoLogo"}>
