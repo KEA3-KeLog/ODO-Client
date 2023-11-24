@@ -199,10 +199,6 @@ console.log(tagList);
 
 
 
-
-
-
-
       </div>
       <div id="content_txt" data-color-mode="light">
         <Editor
@@ -221,7 +217,6 @@ console.log(tagList);
               formData.append("file", blob);
               formData.append("postKey", postKey);
               console.log(blob);
-              console.log(postKey);
               const img = await ImageService.uploadImage(formData);
               const url = img.data;
               callback("http://localhost:8080/api/image/" + url, url);

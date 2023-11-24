@@ -3,6 +3,9 @@ import axios from 'axios';
 const POST_API_BASE_URL = "http://localhost:8080/api/post";
 
 class PostService {
+    getAllPost() {
+        return axios.get(POST_API_BASE_URL);
+    }
     getPosts(userId) {
        return axios.get(POST_API_BASE_URL + "s/" + userId);
     }

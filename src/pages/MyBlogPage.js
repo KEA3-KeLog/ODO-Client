@@ -17,10 +17,9 @@ function MyBlogPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    PostService.getPosts(userId).then(function (res) {
+    PostService.getAllPost().then(function (res) {
       setState({ posts: res.data });
     });
-
   }, []);
 
 

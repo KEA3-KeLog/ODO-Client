@@ -2,14 +2,16 @@ import styles from './MyPage.module.css';
 import NavBarUser from '../components/Navigationbar-user';
 import Inventory from "../components/Inventory";
 import ProfileEdit from "../components/ProfileEdit";
-import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import FollowList from "../components/FollowList";
 import StoreContent from "../components/StoreContent";
 import styled from "styled-components";
 
 function MyPage() {
     const userId = useParams().userId;
+
+
     // 상점 0 / 인벤토리 1 / 팔로우 목록 2 / 프로필 편집 3
     const [tab, setTab] = useState(1);
 
@@ -39,7 +41,7 @@ function MyPage() {
         setCurrentTab(e.currentTarget.id);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         // 현재 방문 중인 tab 의 버튼 디자인 변경
         if (currentTab) {
             let current = document.getElementById(currentTab);
@@ -57,62 +59,62 @@ function MyPage() {
 
     return (
         <>
-            <NavBarUser userId={userId}/>
+            <NavBarUser userId={userId} />
             <div className={styles[`tab`]}>
                 <div className={styles[`tab-name`]}>
                     <img className={styles[`tab-icon`]}
-                         src={require('../assets/icon_home.svg').default}
+                        src={require('../assets/icon_home.svg').default}
                     />
                     <div>마이페이지</div>
                 </div>
                 <TabButton
-                    id = "store"
-                    onClick={(e)=> {
+                    id="store"
+                    onClick={(e) => {
                         handleStoreClick();
                         getClick(e);
                     }}>
                     <img className={styles[`tab-icon`]}
-                         src={require('../assets/icon_shopstore_gray.svg').default}
+                        src={require('../assets/icon_shopstore_gray.svg').default}
                     />
                     <div>상점</div>
                 </TabButton>
                 <TabButton
-                    id = "inventory"
-                    onClick={(e)=> {
+                    id="inventory"
+                    onClick={(e) => {
                         handleInventoryClick();
                         getClick(e);
                     }}>
                     <img className={styles[`tab-icon`]}
-                         src={require('../assets/icon_inventory_black.svg').default}
+                        src={require('../assets/icon_inventory_black.svg').default}
                     />
                     <div>인벤토리</div>
                 </TabButton>
                 <TabButton
-                    id = "follow-list"
-                    onClick={(e)=> {
+                    id="follow-list"
+                    onClick={(e) => {
                         handleFollowListClick();
                         getClick(e);
                     }}>
                     <img className={styles[`tab-icon`]}
-                         src={require('../assets/icon_hamburger-menu2.svg').default}
+                        src={require('../assets/icon_hamburger-menu2.svg').default}
                     />
                     <div>팔로우 목록</div>
                 </TabButton>
                 <TabButton
-                    id = "profile-edit"
-                    onClick={(e)=> {
+                    id="profile-edit"
+                    onClick={(e) => {
                         handleProfileEditClick();
                         getClick(e);
                     }}>
                     <img className={styles[`tab-icon`]}
-                         src={require('../assets/icon_edit.svg').default}
+                        src={require('../assets/icon_edit.svg').default}
                     />
                     <div>프로필 편집</div>
                 </TabButton>
 
             </div>
-            <hr/>
-            <TabContent tab={tab} userId={userId}/>
+            <hr />
+            <TabContent tab={tab} userId={userId} />
         </>
     )
 }
@@ -120,9 +122,9 @@ function MyPage() {
 function TabContent(props) {
     return [
         <StoreContent />,
-        <Inventory userId={props.userId}/>,
+        <Inventory userId={props.userId} />,
         <FollowList />,
-        <ProfileEdit userId={props.userId}/>,
+        <ProfileEdit userId={props.userId} />,
     ][props.tab]
 }
 
