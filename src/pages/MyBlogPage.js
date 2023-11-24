@@ -6,7 +6,7 @@ import PostService from "../service/PostService";
 import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ImageService from "../service/ImageService";
+
 
 function MyBlogPage() {
   const userId = useParams().userId;
@@ -16,59 +16,59 @@ function MyBlogPage() {
 
   const navigate = useNavigate();
 
+
   useEffect(() => {
-    PostService.getAllPost().then(function (res) {
+    PostService.getPosts(userId).then(function (res) {
       setState({ posts: res.data });
     });
   }, []);
 
-
   let length = state.posts.length;
   var postArr = [];
   for (var i = 0; i < 8; i++) {
-    if(state.posts[length - 1 - i] !== undefined){
-    postArr[i] = Object(state.posts[length - 1 - i]);
+    if (state.posts[length - 1 - i] !== undefined) {
+      postArr[i] = Object(state.posts[length - 1 - i]);
     }
   }
   const postList = postArr.map((v) => (
-  <div
-    className="PostCardBlock"
-    onClick={() => {
-      navigate("/postview/" + v.postId, {
-        state: userId,
-      });
-    }}
-  >
-    <div className="PostCardBlockImage">
-      <div
-        className="PostCardBlockImage_Link"
-        style={{ paddingTop: "55.1921%" }}
-      >
-        <img
-          src={"http://localhost:8080/api/image/" + v.fileNewName
-          }
-        />
-      </div>
-    </div>
-    <div className="PostCardBlockContents">
-      <div className="PostCardBlockTag">
-        <span>{v.tag}</span>
-      </div>
-      <div className="PostCardBlockContents_Link">
-        <h4 className="PostCardBlockContents_Title">
-          {v.title}
-        </h4>
-        <div>
-          <p className="PostCardBlockContents_subtitle">
-            {v.summary}
-          </p>
+    <div
+      className="PostCardBlock"
+      onClick={() => {
+        navigate("/postview/" + v.postId, {
+          state: userId,
+        });
+      }}
+    >
+      <div className="PostCardBlockImage">
+        <div
+          className="PostCardBlockImage_Link"
+          style={{ paddingTop: "55.1921%" }}
+        >
+          <img
+            src={"http://localhost:8080/api/image/" + v.fileNewName
+            }
+          />
         </div>
       </div>
-      <div className="PostCardBlockDate">
-        <span>2023-10-01</span>
+      <div className="PostCardBlockContents">
+        <div className="PostCardBlockTag">
+          <span>{v.tag}</span>
+        </div>
+        <div className="PostCardBlockContents_Link">
+          <h4 className="PostCardBlockContents_Title">
+            {v.title}
+          </h4>
+          <div>
+            <p className="PostCardBlockContents_subtitle">
+              {v.summary}
+            </p>
+          </div>
+        </div>
+        <div className="PostCardBlockDate">
+          <span>2023-10-01</span>
+        </div>
       </div>
-    </div>
-  </div>))
+    </div>))
 
   // volume value
   const [volume, setVolume] = useState(10);

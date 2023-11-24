@@ -1,20 +1,22 @@
-import styles from "./MainPage.module.css"
+import styles from "./MainPage.module.css";
 import Header from "../components/Header";
 import { useInView } from "react-intersection-observer";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import PostService from "../service/PostService";
+import UserService from "../service/UserService"; // Import the UserService
+
 function MainPage() {
+    const MAX_SUMMARY_LENGTH = 100;
     const { ref, inView } = useInView({
         threshold: 0.5
     });
-    // 로그인 여부를 판별해야 합니다.
+
     const location = useLocation();
     const id = location.state;
     const [login, setLogin] = useState(false);
-    // console.log("현재 user의 id는?" + id);
 
     useEffect(() => {
-        // 회원가입 후 메인페이지로 돌아올때 login값을 true 로 바꾸어 header의 프로필 사진 부분을 변경하도록 합니다.
         if (id != null) {
             setLogin(true);
         }
@@ -25,32 +27,44 @@ function MainPage() {
     });
 
     const navigate = useNavigate();
+
     useEffect(() => {
-        PostService.getPosts(userId).then(function (res) {
+        PostService.getAllPost().then(function (res) {
             setState({ posts: res.data });
         });
     }, []);
 
-    let length = state.posts.length;
-    var upToDate = [];
-    for (var i = 0; i < 4; i++) {
-        if (state.posts[length - 1 - i] !== undefined) {
-            upToDate[i] = Object(state.posts[length - 1 - i]);
-        }
-    }
-    const upToDateList = upToDate.map((v) => (
+    useEffect(() => {
+        // Fetch user information and update the state
+        const fetchUserInfo = async () => {
+            const updatedPosts = await Promise.all(
+                state.posts.map(async (post) => {
+                    const userRes = await UserService.getUser(post.userId);
+                    const username = userRes.data.blog_nickname;
+                    return { ...post, username };
+                })
+            );
+            setState({ posts: updatedPosts });
+        };
+
+        fetchUserInfo();
+    }, [state.posts]);
+
+    const upToDateList = state.posts.map((v) => (
         <div className={styles[`post-view-1-item`]} onClick={() => {
             navigate("/postview/" + v.postId, {
-                state: userId,
+                state: v.userId,
             });
         }}>
             <img
-                alt={"post image"}
-                src={require('../assets/Rectangle 31.png')}
+                src={"http://localhost:8080/api/image/" + v.fileNewName}
             />
             <div className={styles[`post-view-1-content`]}>
-                <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
+                <span className={styles[`post-view-1-title`]}>{v.title}</span>
+                <p className={styles[`post-view-1-text`]}>{v.summary.length > MAX_SUMMARY_LENGTH
+                        ? v.summary.slice(0, MAX_SUMMARY_LENGTH) + "..."
+                        : v.summary
+                    }</p>
                 <p className={styles[`post-view-1-date`]}>2023-10-01</p>
                 <div className={styles[`post-view-1-footer`]}>
                     <div className={styles[`post-view-1-profile`]}>
@@ -59,12 +73,13 @@ function MainPage() {
                             src={require("../assets/author_profile.svg").default}
                         />
                         <p className={styles[`post-view-1-author-name`]}>by <span
-                            style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
+                            style={{ color: "black", fontWeight: "650" }}>{v.username}</span></p>
                     </div>
                     <div className={styles[`post-view-1-like`]}>🖤 12</div>
                 </div>
             </div>
-        </div>))
+        </div>
+    ));
 
     return (
         <>
@@ -337,46 +352,7 @@ function MainPage() {
                     <span className={styles[`move-to-posts-icon`]} />
                 </button>
                 <div className={styles[`section-post-view-1`]}>
-                    <div className={styles[`post-view-1-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 31.png')}
-                        />
-                        <div className={styles[`post-view-1-content`]}>
-                            <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
-                            <p className={styles[`post-view-1-text`]}>디버깅 중 마주친 문제는 Stack Overflow 검색을 통해 도움을 받을 수 있다.</p>
-                            <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                            <div className={styles[`post-view-1-footer`]}>
-                                <div className={styles[`post-view-1-profile`]}>
-                                    <img
-                                        alt={""}
-                                        src={require("../assets/author_profile.svg").default}
-                                    />
-                                    <p className={styles[`post-view-1-author-name`]}>by <span
-                                        style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
-                                </div>
-                                <div className={styles[`post-view-1-like`]}>🖤 12</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles[`post-view-1-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 31.png')}
-                        />
-                    </div>
-                    <div className={styles[`post-view-1-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 31.png')}
-                        />
-                    </div>
-                    <div className={styles[`post-view-1-item`]}>
-                        <img
-                            alt={"post image"}
-                            src={require('../assets/Rectangle 31.png')}
-                        />
-                    </div>
+                    {upToDateList}
                 </div>
             </div>
         </>
