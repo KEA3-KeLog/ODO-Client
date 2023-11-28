@@ -24,6 +24,7 @@ const LoginRedirectPage = () => {
             console.log(response.data.memberId);
 
             localStorage.setItem("userData",JSON.stringify(response.data));
+            //localStorage.getItem(memberId);
 
             if (response.data.blogName=== null) {
                 navigate("/signin1", {

@@ -34,21 +34,21 @@ function MainPage() {
         });
     }, []);
 
-    useEffect(() => {
-        // Fetch user information and update the state
-        const fetchUserInfo = async () => {
-            const updatedPosts = await Promise.all(
-                state.posts.map(async (post) => {
-                    const userRes = await UserService.getUser(post.userId);
-                    const username = userRes.data.blog_nickname;
-                    return { ...post, username };
-                })
-            );
-            setState({ posts: updatedPosts });
-        };
+    // useEffect(() => {
+    //     // Fetch user information and update the state
+    //     const fetchUserInfo = async () => {
+    //         const updatedPosts = await Promise.all(
+    //             state.posts.map(async (post) => {
+    //                 const userRes = await UserService.getUser(post.userId);
+    //                 const username = userRes.data.blog_nickname;
+    //                 return { ...post, username };
+    //             })
+    //         );
+    //         setState({ posts: updatedPosts });
+    //     };
 
-        fetchUserInfo();
-    }, [state.posts]);
+    //     fetchUserInfo();
+    // }, [state.posts]);
 
     const upToDateList = state.posts.map((v) => (
         <div className={styles[`post-view-1-item`]} onClick={() => {

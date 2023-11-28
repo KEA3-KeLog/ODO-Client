@@ -1,6 +1,8 @@
 import styles from './Inventory.module.css';
 import styled, {css} from "styled-components";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import StoreService from '../service/StoreService';
+import InvenService from '../service/InvenService';
 
 // 아이템 사용중 or 사용 중 아님을 나타내는 버튼 css 입니다.
 const ItemStatus = styled.div`
@@ -26,7 +28,35 @@ const ItemStatus = styled.div`
 `;
 
 function Inventory(props) {
-    const userId = props.userId;
+    const localUserData = JSON.parse(localStorage.getItem('userData'));
+    const userId = localUserData.memberId;
+    const [userPoint, setuserPoint] = useState("");
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        getpoint(userId);
+        getInven(userId);
+        console.log(items.itemName);
+    },[])
+
+    const getpoint = async(userId) => {
+        try {
+            const response = await StoreService.getPoint(userId); // Update the URL accordingly
+            setuserPoint(response.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            setuserPoint("-");
+        }
+    }
+
+    const getInven = async(userId) => {
+        try{
+            const response = await InvenService.getItems(userId);
+            setItems(response.data);
+        }catch(error){
+            console.error('Error fetching user data:', error);
+        }
+    }
 
     return (
         <div className={styles[`common`]}>
@@ -37,13 +67,19 @@ function Inventory(props) {
                         src={require("../assets/icon_point_black.svg").default}
                     />
                 </div>
-                <div className={styles[`point`]}>{userId}</div>
+                <div className={styles[`point`]}>{userPoint}</div>
             </div>
+
             <div className={styles[`container-area`]}>
                 {/*보유 아이템 리스트*/}
                 <div className={styles[`container`]}>
+                    {items.map((item, index) => (
+                        <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
+                            <div><strong>Name:</strong> {item.itemName}</div>
+                        </div>
+                    ))}
                     {/*첫번째 아이템*/}
-                    <button className={styles[`item`]}>
+                    {/* <button className={styles[`item`]}>
                         <div className={styles[`item-image-container`]}>
                             <img className={styles[`item-image`]}
                                  src={require("../assets/store-item-1.svg").default}
@@ -55,9 +91,9 @@ function Inventory(props) {
                                 <ItemStatus on={"true"}>사용중</ItemStatus>
                             </div>
                         </div>
-                    </button>
+                    </button> */}
                     {/*두번째 아이템*/}
-                    <button className={styles[`item`]}>
+                    {/* <button className={styles[`item`]}>
                         <div className={styles[`item-image-container`]}>
                             <img className={styles[`item-image`]}
                                  src={require("../assets/store-item-2.svg").default}
@@ -69,18 +105,19 @@ function Inventory(props) {
                                 <ItemStatus>장착하기</ItemStatus>
                             </div>
                         </div>
-                    </button>
-                    <button className={styles[`item`]}>
+                    </button> */}
+                    {/* <button className={styles[`item`]}>
                         <div className={styles[`item-image-container`]}>
                             <img className={styles[`item-image`]}
                                  src={require("../assets/store-item-3.svg").default}
                             />
                         </div>
-                    </button>
+                    </button> */}
                 </div>
                 {/*해당 아이템 설명*/}
                 <ItemDetail />
             </div>
+            
         </div>
     )
 }
