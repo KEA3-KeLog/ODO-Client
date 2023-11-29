@@ -102,7 +102,7 @@ function Inventory(props) {
                                 <div className={styles[`item-status-container`]}>
                                     <div className={styles[`item-title`]}>{item.itemName}</div>
                                     <div className={styles[`item-status`]}>
-                                        <ItemStatus on={"true"}>사용중</ItemStatus>
+                                        <ItemStatus on={"false"}>사용중</ItemStatus>
                                     </div>
                                 </div>
                             </button>
