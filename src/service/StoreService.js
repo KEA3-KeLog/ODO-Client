@@ -11,6 +11,7 @@ const UPDATE_ITEM_LOG =  "http://localhost:8080/store/api/itemlog/";
 const INVENTORY_CHECKING = "http://localhost:8080/store/api/invencheck/";
 
 class StoreService {
+    
     getPoint(userId) {
         return axios.get(USER_POINT_API_BASE_URL + userId);
     }
