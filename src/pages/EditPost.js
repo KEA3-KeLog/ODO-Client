@@ -1,7 +1,7 @@
 import "./writePost.css";
 import toolbar from "../img/toolbar.png";
 import Button from "react-bootstrap/Button";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import PostService from "../service/PostService";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Viewer } from '@toast-ui/react-editor';
@@ -22,10 +22,11 @@ function EditPost() {
   
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
+  //변경
   const [tag, setTag] = useState("");
-  //추가
-  const [tags, setTags] = useState([]); 
+  const [tagList, setTagList] = useState([]); // 변경: 태그 배열
   const [contents, setContents] = useState("");
+
   const editorRef = useRef();
   // const userId = useParams().userId;
   const userId = initialState.userId;
@@ -49,7 +50,6 @@ function EditPost() {
   //   setNotification(foundNotification);
   // }, []); // componentDidMount에서 실행
   
-  
   const test = `# markdown`;
 
   const handleContentChange = (newContent) => {
@@ -60,12 +60,27 @@ function EditPost() {
   useEffect(() => {
     if (initialState) {
         // setTag(initialState.tag || "");
-        setTags(initialState.tagList || []);
+        setTagList(initialState.tagList || []);
         setTitle(initialState.title || "");
         setContents(initialState.contents || "");
     }
 }, [initialState]);
 
+
+const onKeyUp = useCallback(
+  (e) => {
+    if (typeof window !== "undefined") {
+      if (e.keyCode === 13 && e.target.value.trim() !== "") {
+        // 중복된 태그 확인
+        if (!tagList.includes("#" + e.target.value.trim())) {
+          setTagList((prevTags) => [...prevTags, "#" + e.target.value.trim()]);
+        }
+        setTag(""); // Clear the input after adding a tag
+      }
+    }
+  },
+  [tag, tagList]
+);
 
 
 
@@ -76,25 +91,25 @@ function EditPost() {
 
   const handleTagChange = (e) => {
     if (e.key === "Enter" && e.target.value.trim() !== "") {
-      setTags((prevTags) => [...prevTags, e.target.value.trim()]);
-      e.target.value = ""; // Clear input after adding tag
+      // 중복된 태그 확인
+      if (!tagList.includes(e.target.value.trim())) {
+        setTagList((prevTags) => [...prevTags, e.target.value.trim()]);
+      }
+      setTag(""); // 입력 후 초기화
     }
   };
 
   const handleRemoveTag = (index) => {
-    setTags((prevTags) => prevTags.filter((_, i) => i !== index));
+    setTagList((prevTags) => prevTags.filter((_, i) => i !== index));
   };
-
+  
+  console.log(userId);
+  console.log(tagList);
  
-  console.log("userId는?" + userId);
-  console.log("tag?" + tag);
-  console.log("title?" + title);
-  console.log("content?" + contents);
-  console.log("postid?" + postId);
 
 
   let post = {
-    tagList: tags,
+    tagList: tagList,
     title: title,
     contents: contents,
     userId: userId,
@@ -104,8 +119,8 @@ function EditPost() {
 return (
   <>
     <NavBar userId={userId} />
-    <div className="Head"></div>
-    <img className="toolbar" src={toolbar} />
+    
+    
     <div className="Write">
       <div>
         <input
@@ -117,6 +132,7 @@ return (
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
+
       {/* <div>
         <input
           type="text"
@@ -128,14 +144,35 @@ return (
         />
       </div>
        */}
-       <div className="tag-list">
+       {/* <div className="tag-list">
             {tags.map((tag, index) => (
               <span key={index} className="tag">
                 {tag}
                 <button onClick={() => handleRemoveTag(index)}>X</button>
               </span>
             ))}
+          </div> */}
+
+
+          <div className="tag-input-container">
+          <div className="tag-input-wrapper">
+            {tagList.map((tag, index) => (
+              <div key={index} className="tag_post" onClick={() => handleRemoveTag(index)}>
+                {tag}
+                {/* <button onClick={() => handleRemoveTag(index)}>X</button> */}
+              </div>
+            ))}
+            <input
+              type="text"
+              placeholder="태그를 입력하세요"
+              id="tag_txt"
+              name="tag"
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+              onKeyUp={onKeyUp}
+            />
           </div>
+        </div>
        
 
 
