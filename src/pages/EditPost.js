@@ -32,24 +32,6 @@ function EditPost() {
   const userId = initialState.userId;
   const postId = initialState.postId;
   
-  
-  // const [notification, setNotification] = useState(null);
-
-  // // Show notification
-  // const showNotification = () => {
-  //   if (notification) {
-  //     notification.classList.add('show');
-  //     setTimeout(() => {
-  //       notification.classList.remove('show');
-  //     }, 2000);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const foundNotification = document.getElementById('notification-container');
-  //   setNotification(foundNotification);
-  // }, []); // componentDidMount에서 실행
-  
   const test = `# markdown`;
 
   const handleContentChange = (newContent) => {
@@ -102,9 +84,40 @@ const onKeyUp = useCallback(
   const handleRemoveTag = (index) => {
     setTagList((prevTags) => prevTags.filter((_, i) => i !== index));
   };
+
+
+
+  const handleAddImage = async (blob, callback) => {
+    const formData = new FormData();
+    formData.append("file", blob);
+    formData.append("postKey", postId); // postId 사용
   
-  console.log(userId);
-  console.log(tagList);
+    try {
+      // 이미지를 업로드하고 서버에 저장
+      const img = await ImageService.updateImage(formData);
+      const url = img.data;
+  
+      // 이미지 URL을 에디터에 추가
+      callback("http://localhost:8080/api/image/" + url, url);
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
+    }
+  };
+
+  const handleDeleteImage = async () => {
+    try {
+      // 이미지 삭제 API 호출
+      await ImageService.deleteImage(postId);
+  
+      // 삭제 성공 시 에디터의 이미지 삭제
+      // 여기에서 구현은 에디터의 이미지를 삭제하는 방식에 따라 다를 수 있습니다.
+      // 해당 방식을 알려주시면 더 구체적인 도움을 드릴 수 있습니다.
+  
+      console.log("이미지 삭제 성공");
+    } catch (error) {
+      console.error("이미지 삭제 실패:", error);
+    }
+  };
  
 
 
@@ -174,14 +187,6 @@ return (
           </div>
         </div>
        
-
-
-
-
-
-
-
-
       <div data-color-mode="light">
       <Editor
             initialValue={initialState.contents}
@@ -193,16 +198,9 @@ return (
             language="ko-KR"
             ref={editorRef}
             onChange={onChange}
-          hooks={{
-            addImageBlobHook: async (blob, callback) => {
-              const formData = new FormData();
-              formData.append("file", blob);
-              console.log(blob);
-              const img = await ImageService.uploadImage(formData);
-              const url = img.data;
-              callback("http://localhost:8080/api/image/" + url, url);
-            },
-          }}
+            hooks={{
+              addImageBlobHook: handleAddImage,
+            }}
         />
       </div>
     </div>
@@ -227,6 +225,29 @@ return (
           {" "}
           게시하기{" "}
         </button>
+
+
+
+        <button
+  id="post_submit_button"
+  onClick={async (e) => {
+    e.preventDefault();
+    // 기존 이미지 삭제
+    await handleDeleteImage();
+
+    // 게시글 업데이트
+    PostService.updatePost(postId, post).then((res) => {
+      navigate(`/myblogpage/${userId}`);
+    });
+  }}
+>
+  {" "}
+  게시rld하기{" "}
+</button>
+
+
+
+
       </div>
     </div>
   </>

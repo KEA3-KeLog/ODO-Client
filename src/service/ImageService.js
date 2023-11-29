@@ -15,7 +15,12 @@ class ImageService {
   getThumbnail(postKey) {
     return axios.get(POST_API_BASE_URL + "/thumbnail/" + postKey);
   }
+
+  updateImage(formData) {
+    return axios.post(POST_API_BASE_URL + "/update", formData);
+  }
+  deleteImage(postKey) {
+    return axios.post(POST_API_BASE_URL + "/delete", { postKey: postKey });
+  }
 }
-
-
 export default new ImageService();
