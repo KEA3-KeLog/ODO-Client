@@ -17,6 +17,7 @@ function NavigationbarUser(props) {
                 setIsModalOpen(false);
             }
         };
+
         window.addEventListener("click", handleClickOutside);
         return()=>{
             window.removeEventListener("click", handleClickOutside);
@@ -29,6 +30,10 @@ function NavigationbarUser(props) {
 
     const handleMyPageClick = () => {
         navigate(`../../mypage/${userId}`)
+    }
+
+    const handleBlogLogoClick = () => {
+        navigate(`../../`, {state: userId});
     }
 
     return (
@@ -45,6 +50,7 @@ function NavigationbarUser(props) {
                     />
                     <input type={"button"}
                            className={styles[`nav-logo`]}
+                           onClick={handleBlogLogoClick}
                     />
                     <button className={styles[`user-name`]}
                             onClick={handleBlogNameClick}
@@ -68,7 +74,7 @@ function NavigationbarUser(props) {
             </div>
             <div ref={modalRef}>
                 {
-                    isModalOpen && (<Modal />)
+                    isModalOpen && (<Modal open={isModalOpen}/>)
                 }
             </div>
         </>
@@ -76,9 +82,9 @@ function NavigationbarUser(props) {
 }
 
 
-const Modal = () => {
+const Modal = ({open}) => {
     return (
-        <div className={styles[`nav-modal`]}>
+        <div className={styles.navModal}>
             <div className={styles.tag}>
                 <div className={styles.tagList}>태그목록</div>
                 <ul>

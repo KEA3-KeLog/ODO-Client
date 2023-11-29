@@ -29,7 +29,7 @@
   },
   "proxy": "http://localhost:8080",
   "scripts": {
-    "start": "GENERATE_SOURCEMAP=false react-scripts start",
+    "start": "react-scripts start",
     "winstart": "set \"GENERATE_SOURCEMAP=false\" && react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
