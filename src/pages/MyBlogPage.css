@@ -317,11 +317,26 @@ ul li p {
     display: flex;
     flex-direction: column;
 }
+
 .PostCardBlockImage{
     display: block;
     text-decoration: none;
     cursor: pointer;
 }
+
+.PostCardBlock .PostCardBlockImage {
+    transition: all 0.4s linear;
+}
+
+.PostCardBlock:hover {
+    box-shadow: 0 6px 19px 0 rgba(0,0,0, .3);
+}
+
+.PostCardBlock:hover .PostCardBlockImage {
+    transform: scaleX(1.08);
+    height: 110px;
+}
+
 .PostCardBlockImage_Link{
     width: 100%;
     position: relative;

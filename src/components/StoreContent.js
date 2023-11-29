@@ -3,7 +3,7 @@ import styles from "./StoreContent.module.css"
 import axios from "axios";
 import StoreService from "../service/StoreService";
 import UserService from "../service/UserService";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 function StoreContent() {
@@ -14,7 +14,11 @@ function StoreContent() {
 
     const [userPoint, setUserPoint] = useState("-");
 
-    const [userItem,setUserItem] = useState([]);
+    const [userItem, setUserItem] = useState([]);
+
+    const [storeItems, setStoreItems] = useState([]);
+
+    const [itemDetail, setItemDetail] = useState();
 
     // 상세설명 모달이 열렸는지 닫혔는지 state
     const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
@@ -28,18 +32,28 @@ function StoreContent() {
         //API 호출부분에 유저 정보를 전달
         userpointAPI(userId);
         checkInven(userId);
+        getItems();
 
         // 상세설명 모달 영역 밖 클릭 시
-        const handleClickOutside=(e)=>{
+        const handleClickOutside = (e) => {
             if (isDetailModalOpen && !detailModalRef.current.contains(e.target)) {
                 setIsDetailModalOpen(false);
             }
         };
         window.addEventListener("click", handleClickOutside);
-        return()=>{
+        return () => {
             window.removeEventListener("click", handleClickOutside);
         };
     }, [isDetailModalOpen]);
+
+    const getItems = async() => {
+        try {
+            const response = await StoreService.getAllItems();
+            setStoreItems(response.data);
+        } catch (error) {
+            console.log('Error fetching store data: ', error);
+        }
+    }
 
     const userpointAPI = async (userId) => {
         try {
@@ -53,7 +67,7 @@ function StoreContent() {
 
     const updatePoint = async (userId, Point) => {
         try {
-            await StoreService.updatePoint(userId,Point);
+            await StoreService.updatePoint(userId, Point);
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
@@ -69,26 +83,26 @@ function StoreContent() {
 
     const updateinven = async (userId, itemId) => {
         try {
-            await StoreService.updateInven(userId,itemId);
+            await StoreService.updateInven(userId, itemId);
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
     }
 
-    const checkInven = async(userId) => {
-        try{
+    const checkInven = async (userId) => {
+        try {
             const response = await StoreService.InvenCheck(userId);
             setUserItem(response.data);
-        }catch{
+        } catch {
             console.log("Cant Inven Check");
         }
     }
 
     const handlePurchase = (itemNum, productName, price) => {
         const Point = userPoint - price
-        if(userItem.includes(itemNum)){
+        if (userItem.includes(itemNum)) {
             alert("이미 인벤토리에 있습니다!")
-        }else{
+        } else {
             // 가격과 사용자 포인트 비교
             if (userPoint >= price) {
                 // 알림 창 띄우기
@@ -141,186 +155,49 @@ function StoreContent() {
 
                 <div className={styles.content}>
                     <div className={styles.frame}>
-                        <div className={styles.item}>
-                            <img className={styles[`item-image`]}
-                                 alt="Image"
-                                 src={require("../assets/store-item-1.svg").default}
-                                 width={"64px"}
-                            />
-                            <div className={styles[`item-text`]}>방문 인사말 보이스</div>
-                            <div className={styles[`item-price`]}>2,000
-                                <img className={styles[`icon-item-price`]}
-                                     alt={""}
-                                     src={require("../assets/icon_point_black.svg").default}
-                                />
+                        {/*상점 아이템 리스트*/}
+                        {console.log("storeItems: ", storeItems)}
+                        {storeItems.map((item, index) => (
+                            <div
+                                key={index}
+                            >
+                                <div className={styles.item}>
+                                    <img className={styles[`item-image`]}
+                                         alt="Image"
+                                         src={require(`../assets/store-item-${item.itemId}.svg`)}
+                                         width={"64px"}
+                                    />
+                                    <div className={styles[`item-text`]}>{item.itemName}</div>
+                                    <div className={styles[`item-price`]}>{Math.floor(item.itemPrice)}
+                                        <img className={styles[`icon-item-price`]}
+                                             alt={""}
+                                             src={require("../assets/icon_point_black.svg").default}
+                                        />
+                                    </div>
+                                    <div className={styles[`item-btn`]}>
+                                        <button
+                                            className={styles[`item-btn-1`]}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setIsDetailModalOpen(true);
+                                                setItemDetail(item);
+                                            }}
+                                        >상세설명
+                                        </button>
+                                        <button className={styles[`item-btn-2`]}
+                                                onClick={() => handlePurchase(item.itemId, item.itemName, item.itemPrice)}>구매하기
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div className={styles[`item-btn`]}>
-                                <button
-                                    className={styles[`item-btn-1`]}
-                                    onClick={(e)=>{
-                                        e.stopPropagation();
-                                        setIsDetailModalOpen(true);
-                                        console.log("클릭 이벤트");
-                                    }}
-                                >상세설명</button>
-                                <button className={styles[`item-btn-2`]}
-                                        onClick={() => handlePurchase(1, "방문 인사말 보이스", 2000)}>구매하기
-                                </button>
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <img className={styles[`item-image`]}
-                                 alt="Image"
-                                 src={require("../assets/store-item-2.svg").default}
-                                 width={"64px"}
-                            />
-                            <div className={styles[`item-text`]}>가수 아이유의 AI 보이스</div>
-                            <div className={styles[`item-price`]}>3,000
-                                <img className={styles[`icon-item-price`]}
-                                     alt={""}
-                                     src={require("../assets/icon_point_black.svg").default}
-                                />
-                            </div>
-                            <div className={styles[`item-btn`]}>
-                                <button
-                                    className={styles[`item-btn-1`]}
-                                    onClick={(e)=>{
-                                        e.stopPropagation();
-                                        setIsDetailModalOpen(true);
-                                    }}
-                                >상세설명</button>
-                                <button className={styles[`item-btn-2`]}
-                                        onClick={() => handlePurchase(2, "가수 아이유의 AI 보이스", 3000)}>구매하기
-                                </button>
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <img className={styles[`item-image`]}
-                                 alt="Image"
-                                 src={require("../assets/store-item-3.svg").default}
-                                 width={"64px"}
-                            />
-                            <div className={styles[`item-text`]}>배우 나나의 AI 보이스</div>
-                            <div className={styles[`item-price`]}>3,000
-                                <img className={styles[`icon-item-price`]}
-                                     alt={""}
-                                     src={require("../assets/icon_point_black.svg").default}
-                                />
-                            </div>
-                            <div className={styles[`item-btn`]}>
-                                <button className={styles[`item-btn-1`]}>상세설명</button>
-                                <button className={styles[`item-btn-2`]}
-                                        onClick={() => handlePurchase(3, "배우 나나의 AI 보이스", 3000)}>구매하기
-                                </button>
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <img className={styles[`item-image`]}
-                                 alt="Image"
-                                 src={require("../assets/store-item-4.svg").default}
-                                 width={"64px"}
-                            />
-                            <div className={styles[`item-text`]}>배우 성시경의 AI 보이스</div>
-                            <div className={styles[`item-price`]}>3,000
-                                <img className={styles[`icon-item-price`]}
-                                     alt={""}
-                                     src={require("../assets/icon_point_black.svg").default}
-                                />
-                            </div>
-                            <div className={styles[`item-btn`]}>
-                                <button className={styles[`item-btn-1`]}>상세설명</button>
-                                <button className={styles[`item-btn-2`]}
-                                        onClick={() => handlePurchase(4, "배우 성시경의 AI 보이스", 3000)}>구매하기
-                                </button>
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <img className={styles[`item-image`]}
-                                 alt="Image"
-                                 src={require("../assets/store-item-5.svg").default}
-                                 width={"64px"}
-                            />
-                            <div className={styles[`item-text`]}>스트릭 프리즈</div>
-                            <div className={styles[`item-price`]}>2,000
-                                <img className={styles[`icon-item-price`]}
-                                     alt={""}
-                                     src={require("../assets/icon_point_black.svg").default}
-                                />
-                            </div>
-                            <div className={styles[`item-btn`]}>
-                                <button className={styles[`item-btn-1`]}>상세설명</button>
-                                <button className={styles[`item-btn-2`]}
-                                        onClick={() => handlePurchase(5, "스트릭 프리즈", 2000)}>구매하기
-                                </button>
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <img className={styles[`item-image`]}
-                                 alt="Image"
-                                 src={require("../assets/store-item-6.svg").default}
-                                 width={"64px"}
-                            />
-                            <div className={styles[`item-text`]}>스트릭 그래프 염색칩 X 5</div>
-                            <div className={styles[`item-price`]}>400
-                                <img className={styles[`icon-item-price`]}
-                                     alt={""}
-                                     src={require("../assets/icon_point_black.svg").default}
-                                />
-                            </div>
-                            <div className={styles[`item-btn`]}>
-                                <button className={styles[`item-btn-1`]}>상세설명</button>
-                                <button className={styles[`item-btn-2`]}
-                                        onClick={() => handlePurchase(6, "스트릭 그래프 염색칩 X 5", 400)}>구매하기
-                                </button>
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <img className={styles[`item-image`]}
-                                 alt="Image"
-                                 src={require("../assets/store-item-6.svg").default}
-                                 width={"64px"}
-                            />
-                            <div className={styles[`item-text`]}>스트릭 그래프 염색칩 X 40</div>
-                            <div className={styles[`item-price`]}>3,000
-                                <img className={styles[`icon-item-price`]}
-                                     alt={""}
-                                     src={require("../assets/icon_point_black.svg").default}
-                                />
-                            </div>
-                            <div className={styles[`item-btn`]}>
-                                <button className={styles[`item-btn-1`]}>상세설명</button>
-                                <button className={styles[`item-btn-2`]}
-                                        onClick={() => handlePurchase(7, "스트릭 그래프 염색칩 X 40", 3000)}>구매하기
-                                </button>
-                            </div>
-                        </div>
-                        <div className={styles.item}>
-                            <img className={styles[`item-image`]}
-                                 alt="Image"
-                                 src={require("../assets/store-item-7.svg").default}
-                                 width={"64px"}
-                            />
-                            <div className={styles[`item-text`]}>「도심의 야경」프로필 배경</div>
-                            <div className={styles[`item-price`]}>10,000
-                                <img className={styles[`icon-item-price`]}
-                                     alt={""}
-                                     src={require("../assets/icon_point_black.svg").default}
-                                />
-                            </div>
-                            <div className={styles[`item-btn`]}>
-                                <button className={styles[`item-btn-1`]}>상세설명</button>
-                                <button className={styles[`item-btn-2`]}
-                                        onClick={() => handlePurchase(1, "", 10000)}>구매하기
-                                </button>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
-                {/* =============================================================== */}
             </div>
+
             <div ref={detailModalRef}>
                 {
-                    isDetailModalOpen && <DetailModal />
+                    isDetailModalOpen && <DetailModal item={itemDetail}/>
                 }
             </div>
         </>
@@ -328,23 +205,19 @@ function StoreContent() {
 }
 
 // 상세설명 창이 열리는 모달 입니다.
-const DetailModal=()=>{
-    return(
+const DetailModal = ({item}) => {
+    return (
         <div className={styles[`detail-modal`]}>
-
-                <div className={styles[`item-image-container`]}>
-                    <img className={styles[`item-image`]}
-                         src={require("../assets/store-item-1.svg").default}
-                    />
-                </div>
-                <div className={styles[`item-title`]}>방문 인사말 보이스</div>
-                <div className={styles[`item-docs`]}>
-                    상세설명: <br/>
-                    사용하면 블로그 방문자를 맞이하는 인사말을 자동 재생할 수 있습니다.
-                    자신이 설정한 인사말의 문구를 선택한 보이스로 재생하게 됩니다.
-                    기본 보이스는 자신의 목소리로, 방문 인사말 보이스를 사용한 순간 프로필에서 음량 조절 버튼이 보이게 되며
-                    블로그 방문자에게 인사말 문구가 자동재생됩니다.
-                </div>
+            <div className={styles[`item-image-container`]}>
+                <img className={styles[`item-image`]}
+                     src={require(`../assets/store-item-${item.itemId}.svg`)}
+                />
+            </div>
+            <div className={styles[`item-title`]}>{item.itemName}</div>
+            <div className={styles[`item-docs`]}>
+                상세설명: <br/>
+                {item.itemInfo}
+            </div>
 
         </div>
     )

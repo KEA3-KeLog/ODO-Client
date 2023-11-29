@@ -10,6 +10,8 @@ const UPDATE_ITEM_LOG =  "http://localhost:8080/store/api/itemlog/";
 
 const INVENTORY_CHECKING = "http://localhost:8080/store/api/invencheck/";
 
+const GET_ALL_ITEMS = "http://localhost:8080/store/api/getAllItems";
+
 class StoreService {
     
     getPoint(userId) {
@@ -30,6 +32,10 @@ class StoreService {
 
     InvenCheck(userId){
         return axios.get(INVENTORY_CHECKING + userId)
+    }
+
+    getAllItems(){
+        return axios.get(GET_ALL_ITEMS);
     }
 }
 
