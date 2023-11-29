@@ -228,22 +228,7 @@ return (
 
 
 
-        <button
-  id="post_submit_button"
-  onClick={async (e) => {
-    e.preventDefault();
-    // 기존 이미지 삭제
-    await handleDeleteImage();
-
-    // 게시글 업데이트
-    PostService.updatePost(postId, post).then((res) => {
-      navigate(`/myblogpage/${userId}`);
-    });
-  }}
->
-  {" "}
-  게시rld하기{" "}
-</button>
+        
 
 
 

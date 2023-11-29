@@ -7,8 +7,21 @@ import styled from "styled-components";
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 
+import 'react-calendar/dist/Calendar.css';
+import Calendar from 'react-calendar';  // Import react-calendar
+
+import ReactCalendarHeatmap from 'react-calendar-heatmap';
+import 'react-calendar-heatmap/dist/styles.css';
+
+import yellowImage from '../image/1.png';
+import whiteImage from '../image/2.png';
+import greenImage from '../image/3.png';
+
+import axios from 'axios';
 
 function MyBlogPage() {
+    const [dateCounts, setDateCounts] = useState({});
+
     const userId = useParams().userId;
     const [state, setState] = useState({
         posts: [],
@@ -22,6 +35,21 @@ function MyBlogPage() {
             setState({posts: res.data});
         });
     }, []);
+
+
+
+    useEffect(() => {
+        // 서버에서 날짜별 포스트 개수를 가져오는 API 호출
+        axios.get('http://localhost:8080/api/post/countByDate')
+          .then(response => {
+            setDateCounts(response.data);
+          })
+          .catch(error => {
+            console.error('Error fetching post counts:', error);
+          });
+      }, []); // 빈 배열은 한 번만 호출하도록 설정
+
+
 
     let length = state.posts.length;
     var postArr = [];
@@ -258,10 +286,168 @@ function MyBlogPage() {
                             <span className="workTitle">2023 블로그 기여도</span>
                         </div>
                         <div>
-                            <img
-                                src={require("../image/Rectangle 65.png")}
-                                className="workimage"
-                            />
+                            
+                        <ReactCalendarHeatmap
+              startDate={new Date('2022-12-31')}
+              endDate={new Date('2023-12-30')}
+              values={Array.isArray(dateCounts) ? dateCounts : []}
+              
+              classForValue={(value) => {
+                if (!value) {
+                  return 'color-empty';
+                }
+                return `color-scale-${value.count}`;
+              }}
+              showWeekdayLabels
+            />
+            </div>
+
+{/* Calendar */}
+<div>
+{/* 포스팅 개수 */}
+{/* <Calendar
+  tileContent={({ date, view }) => {
+    const formattedDate = date.toISOString().split('T')[0];
+
+    // 서버에서 받은 날짜를 UTC 기준으로 처리하는 함수
+    const convertToUTC = (dateString) => {
+      const localDate = new Date(dateString);
+      const utcDate = new Date(localDate.toUTCString());
+      return new Date(utcDate.setHours(0, 0, 0, 0));
+    };
+
+    // dateCounts가 배열인지 확인
+    if (Array.isArray(dateCounts)) {
+      // 서버에서 받은 날짜 데이터를 UTC 기준으로 처리
+      const dateCountsAsDate = dateCounts.map(item => ({ ...item, date: convertToUTC(item.date) }));
+
+      // find 메서드 사용
+      const dateCount = dateCountsAsDate.find((item) => item.date.toISOString().split('T')[0] === formattedDate);
+
+      return dateCount && view === 'month' ? <p>{dateCount.count} </p> : null;
+    } else {
+      // dateCounts가 배열이 아닌 경우, 처리할 내용 추가
+      return null;
+    }
+  }}
+/> */}
+{/* 포스팅 색깔 */}
+{/* <Calendar
+  tileContent={({ date, view }) => {
+    const formattedDate = date.toISOString().split('T')[0];
+
+    // 서버에서 받은 날짜를 UTC 기준으로 처리하는 함수
+    const convertToUTC = (dateString) => {
+      const localDate = new Date(dateString);
+      const utcDate = new Date(localDate.toUTCString());
+      return new Date(utcDate.setHours(0, 0, 0, 0));
+    };
+
+    // dateCounts가 배열인지 확인
+    if (Array.isArray(dateCounts)) {
+      // 서버에서 받은 날짜 데이터를 UTC 기준으로 처리
+      const dateCountsAsDate = dateCounts.map(item => ({ ...item, date: convertToUTC(item.date) }));
+
+      // find 메서드 사용
+      const dateCount = dateCountsAsDate.find((item) => item.date.toISOString().split('T')[0] === formattedDate);
+
+      // 포스팅 개수에 따라 색깔을 결정하는 함수
+      const getColor = (count) => {
+        if (count >= 5) {
+          return 'yellow'; // 포스팅이 5개 이상인 경우 녹색
+        } else if (count > 0) {
+          return 'orange'; // 포스팅이 1개 이상인 경우 노랑
+        } else {
+          return 'white'; // 포스팅이 없는 경우 흰색
+        }
+      };
+
+      // getColor 함수를 사용하여 색깔 결정
+      const color = dateCount ? getColor(dateCount.count) : 'white';
+
+      return (
+        // <div style={{ backgroundColor: color, borderRadius: '50%', height: '100%', width: '100%' }} />
+        <div style={{ backgroundColor: color, borderRadius: '0%', height: '100%', width: '100%' }} />
+      );
+    } else {
+      // dateCounts가 배열이 아닌 경우, 처리할 내용 추가
+      return null;
+    }
+  }}
+/> */}
+
+
+<div style={{ display: 'flex' }}>
+{/* 포스팅 사진 */}
+<div style={{ flex: '70%' }}>
+<Calendar
+  tileContent={({ date, view }) => {
+    const formattedDate = date.toISOString().split('T')[0];
+
+    // 서버에서 받은 날짜를 UTC 기준으로 처리하는 함수
+    const convertToUTC = (dateString) => {
+      const localDate = new Date(dateString);
+      const utcDate = new Date(localDate.toUTCString());
+      return new Date(utcDate.setHours(0, 0, 0, 0));
+    };
+
+    // dateCounts가 배열인지 확인
+    if (Array.isArray(dateCounts)) {
+      // 서버에서 받은 날짜 데이터를 UTC 기준으로 처리
+      const dateCountsAsDate = dateCounts.map(item => ({ ...item, date: convertToUTC(item.date) }));
+
+      // find 메서드 사용
+      const dateCount = dateCountsAsDate.find((item) => item.date.toISOString().split('T')[0] === formattedDate);
+
+      // 포스팅 개수에 따라 이미지를 결정하는 함수
+      const getImage = (count) => {
+        if (count >= 3) {
+          return `url(${greenImage})`; // 포스팅이 3개 이상인 경우 녹색 이미지
+        } else if (count > 0) {
+          return `url(${yellowImage})`; // 포스팅이 1개 이상인 경우 노랑 이미지
+        } else {
+          return `url(${whiteImage})`;; // 포스팅이 없는 경우 흰색 이미지
+        }
+      };
+
+      // getImage 함수를 사용하여 이미지 결정
+      const backgroundImage = dateCount ? getImage(dateCount.count) : `url(${whiteImage})`;
+
+      return (
+        <div
+          style={{
+            backgroundImage: backgroundImage,
+            backgroundSize: 'cover',
+            borderRadius: '0%',
+            height: '100%',
+            width: '100%',
+          }}
+        />
+      );
+    } else {
+      // dateCounts가 배열이 아닌 경우, 처리할 내용 추가
+      return null;
+    }
+  }}
+/>
+
+
+    </div>
+{/* Calendar */}
+
+
+
+<div style={{ flex: '100%' }}>
+    <img
+      src={require("../image/123.png")}
+      className="postnotice"
+      alt="Post Notice"
+      style={{ maxWidth: '100%', height: '50%' }}
+    />
+  </div>
+            </div>
+                        
+
                         </div>
                     </div>
                 </div>
