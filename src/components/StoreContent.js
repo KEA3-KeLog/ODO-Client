@@ -18,6 +18,8 @@ function StoreContent() {
 
     const [storeItems, setStoreItems] = useState([]);
 
+    const [itemDetail, setItemDetail] = useState();
+
     // 상세설명 모달이 열렸는지 닫혔는지 state
     const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
     // Modal 영역 밖 클릭 시 모달창 닫힘
@@ -166,7 +168,7 @@ function StoreContent() {
                                          width={"64px"}
                                     />
                                     <div className={styles[`item-text`]}>{item.itemName}</div>
-                                    <div className={styles[`item-price`]}>2,000
+                                    <div className={styles[`item-price`]}>{Math.floor(item.itemPrice)}
                                         <img className={styles[`icon-item-price`]}
                                              alt={""}
                                              src={require("../assets/icon_point_black.svg").default}
@@ -178,12 +180,12 @@ function StoreContent() {
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 setIsDetailModalOpen(true);
-                                                console.log("클릭 이벤트");
+                                                setItemDetail(item);
                                             }}
                                         >상세설명
                                         </button>
                                         <button className={styles[`item-btn-2`]}
-                                                onClick={() => handlePurchase(1, "방문 인사말 보이스", 2000)}>구매하기
+                                                onClick={() => handlePurchase(item.itemId, item.itemName, item.itemPrice)}>구매하기
                                         </button>
                                     </div>
                                 </div>
@@ -191,11 +193,11 @@ function StoreContent() {
                         ))}
                     </div>
                 </div>
-                {/* =============================================================== */}
             </div>
+
             <div ref={detailModalRef}>
                 {
-                    isDetailModalOpen && <DetailModal/>
+                    isDetailModalOpen && <DetailModal item={itemDetail}/>
                 }
             </div>
         </>
@@ -203,21 +205,18 @@ function StoreContent() {
 }
 
 // 상세설명 창이 열리는 모달 입니다.
-const DetailModal = () => {
+const DetailModal = ({item}) => {
     return (
         <div className={styles[`detail-modal`]}>
             <div className={styles[`item-image-container`]}>
                 <img className={styles[`item-image`]}
-                     src={require("../assets/store-item-1.svg").default}
+                     src={require(`../assets/store-item-${item.itemId}.svg`)}
                 />
             </div>
-            <div className={styles[`item-title`]}>방문 인사말 보이스</div>
+            <div className={styles[`item-title`]}>{item.itemName}</div>
             <div className={styles[`item-docs`]}>
                 상세설명: <br/>
-                사용하면 블로그 방문자를 맞이하는 인사말을 자동 재생할 수 있습니다.
-                자신이 설정한 인사말의 문구를 선택한 보이스로 재생하게 됩니다.
-                기본 보이스는 자신의 목소리로, 방문 인사말 보이스를 사용한 순간 프로필에서 음량 조절 버튼이 보이게 되며
-                블로그 방문자에게 인사말 문구가 자동재생됩니다.
+                {item.itemInfo}
             </div>
 
         </div>
