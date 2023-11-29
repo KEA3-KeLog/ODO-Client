@@ -92,7 +92,7 @@ function StoreContent() {
             // 가격과 사용자 포인트 비교
             if (userPoint >= price) {
                 // 알림 창 띄우기
-                const isConfirmed = window.confirm(`"${productName}" 상품을 ${price} 포인트에 구매하시겠습니까?`);
+                
 
                 if (isConfirmed) {
                     // "확인" 버튼 클릭 시

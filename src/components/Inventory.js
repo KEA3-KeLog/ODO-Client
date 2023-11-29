@@ -58,6 +58,18 @@ function Inventory(props) {
         }
     }
 
+    function getItemImage (itemId){
+        // itemId와 매칭되는 이미지 파일 이름을 구한다. (예: store-item-1.svg)
+        if(itemId == '1'){return <img className={styles[`item-image`]} src={require(`../assets/store-item-1.svg`).default} />;} 
+        if(itemId == '2'){return <img className={styles[`item-image`]} src={require(`../assets/store-item-2.svg`).default} />;} 
+        if(itemId == '3'){return <img className={styles[`item-image`]} src={require(`../assets/store-item-3.svg`).default} />;} 
+        if(itemId == '4'){return <img className={styles[`item-image`]} src={require(`../assets/store-item-4.svg`).default} />;} 
+        if(itemId == '5'){return <img className={styles[`item-image`]} src={require(`../assets/store-item-5.svg`).default} />;} 
+        if(itemId == '6'){return <img className={styles[`item-image`]} src={require(`../assets/store-item-6.svg`).default} />;} 
+        if(itemId == '7'){return <img className={styles[`item-image`]} src={require(`../assets/store-item-7.svg`).default} />;} 
+          // 이미지를 렌더링한다.
+      };
+
     return (
         <div className={styles[`common`]}>
             <div className={styles[`point-area`]}>
@@ -74,8 +86,26 @@ function Inventory(props) {
                 {/*보유 아이템 리스트*/}
                 <div className={styles[`container`]}>
                     {items.map((item, index) => (
-                        <div key={index} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
+                        <div key={index}>
                             <div><strong>Name:</strong> {item.itemName}</div>
+                            
+                            <button className={styles[`item`]}>
+                                <div className={styles[`item-image-container`]}>
+                                    {/* <img className={styles[`item-image`]}
+                                        src={require(`../assets/store-item-${item.itemId}.svg`).default}
+                                    />
+                                    {/* <img className={styles[`item-image`]}
+                                        src={require(`../assets/store-item-1.svg`).default}
+                                    /> */}
+                                    {getItemImage(item.itemId)}
+                                </div>
+                                <div className={styles[`item-status-container`]}>
+                                    <div className={styles[`item-title`]}>{item.itemName}</div>
+                                    <div className={styles[`item-status`]}>
+                                        <ItemStatus on={"true"}>사용중</ItemStatus>
+                                    </div>
+                                </div>
+                            </button>
                         </div>
                     ))}
                     {/*첫번째 아이템*/}
