@@ -33,21 +33,21 @@ function MainPage() {
         });
     }, []);
 
-    useEffect(() => {
-        // Fetch user information and update the state
-        const fetchUserInfo = async () => {
-            const updatedPosts = await Promise.all(
-                state.posts.map(async (post) => {
-                    const userRes = await UserService.getUser(post.userId);
-                    const username = userRes.data.blog_nickname;
-                    return { ...post, username };
-                })
-            );
-            setState({ posts: updatedPosts });
-        };
+    // useEffect(() => {
+    //     // Fetch user information and update the state
+    //     const fetchUserInfo = async () => {
+    //         const updatedPosts = await Promise.all(
+    //             state.posts.map(async (post) => {
+    //                 const userRes = await UserService.getUser(post.userId);
+    //                 const username = userRes.data.blog_nickname;
+    //                 return { ...post, username };
+    //             })
+    //         );
+    //         setState({ posts: updatedPosts });
+    //     };
 
-        fetchUserInfo();
-    }, [state.posts]);
+    //     fetchUserInfo();
+    // }, [state.posts]);
     const MAX_SUMMARY_LENGTH = 100;
     const MAX_DISPLAY_ITEMS = 4;
 

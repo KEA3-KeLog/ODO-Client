@@ -50,6 +50,24 @@ function WritePost() {
   const handleRemoveTag = (index) => {
     setTagList((prevTags) => prevTags.filter((_, i) => i !== index));
   };
+
+
+  const handleAddImage = async (blob, callback) => {
+    const formData = new FormData();
+    formData.append("file", blob);
+    formData.append("postKey", postKey);
+  
+    try {
+      // 이미지를 업로드하고 서버에 저장
+      const img = await ImageService.uploadImage(formData);
+      const url = img.data;
+  
+      // 이미지 URL을 에디터에 추가
+      callback("http://localhost:8080/api/image/" + url, url);
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
+    }
+  };
   
 
 
@@ -212,15 +230,7 @@ console.log(tagList);
           ref={editorRef}
           onChange={onChange}
           hooks={{
-            addImageBlobHook: async (blob, callback) => {
-              const formData = new FormData();
-              formData.append("file", blob);
-              formData.append("postKey", postKey);
-              console.log(blob);
-              const img = await ImageService.uploadImage(formData);
-              const url = img.data;
-              callback("http://localhost:8080/api/image/" + url, url);
-            },
+            addImageBlobHook: handleAddImage,
           }}
         />
       </div>

@@ -33,10 +33,12 @@
     border-radius: 40px;
     border: solid 1px #d7d7d7;
     cursor: pointer;
-    background-color: #d7d7d7;
-    font-size: 15px;
-    color: #000000;
+    background: #c0c0c046;
+    color: #0095ff;
+    font-size: 1rem;
+    font-weight: bold;
 }
+
 
 #title {
     margin-bottom: 50px;

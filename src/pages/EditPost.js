@@ -1,7 +1,7 @@
 import "./writePost.css";
 import toolbar from "../img/toolbar.png";
 import Button from "react-bootstrap/Button";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import PostService from "../service/PostService";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Viewer } from '@toast-ui/react-editor';
@@ -22,33 +22,15 @@ function EditPost() {
   
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
+  //변경
   const [tag, setTag] = useState("");
-  //추가
-  const [tags, setTags] = useState([]); 
+  const [tagList, setTagList] = useState([]); // 변경: 태그 배열
   const [contents, setContents] = useState("");
+
   const editorRef = useRef();
   // const userId = useParams().userId;
   const userId = initialState.userId;
   const postId = initialState.postId;
-  
-  
-  // const [notification, setNotification] = useState(null);
-
-  // // Show notification
-  // const showNotification = () => {
-  //   if (notification) {
-  //     notification.classList.add('show');
-  //     setTimeout(() => {
-  //       notification.classList.remove('show');
-  //     }, 2000);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const foundNotification = document.getElementById('notification-container');
-  //   setNotification(foundNotification);
-  // }, []); // componentDidMount에서 실행
-  
   
   const test = `# markdown`;
 
@@ -60,12 +42,27 @@ function EditPost() {
   useEffect(() => {
     if (initialState) {
         // setTag(initialState.tag || "");
-        setTags(initialState.tagList || []);
+        setTagList(initialState.tagList || []);
         setTitle(initialState.title || "");
         setContents(initialState.contents || "");
     }
 }, [initialState]);
 
+
+const onKeyUp = useCallback(
+  (e) => {
+    if (typeof window !== "undefined") {
+      if (e.keyCode === 13 && e.target.value.trim() !== "") {
+        // 중복된 태그 확인
+        if (!tagList.includes("#" + e.target.value.trim())) {
+          setTagList((prevTags) => [...prevTags, "#" + e.target.value.trim()]);
+        }
+        setTag(""); // Clear the input after adding a tag
+      }
+    }
+  },
+  [tag, tagList]
+);
 
 
 
@@ -76,25 +73,56 @@ function EditPost() {
 
   const handleTagChange = (e) => {
     if (e.key === "Enter" && e.target.value.trim() !== "") {
-      setTags((prevTags) => [...prevTags, e.target.value.trim()]);
-      e.target.value = ""; // Clear input after adding tag
+      // 중복된 태그 확인
+      if (!tagList.includes(e.target.value.trim())) {
+        setTagList((prevTags) => [...prevTags, e.target.value.trim()]);
+      }
+      setTag(""); // 입력 후 초기화
     }
   };
 
   const handleRemoveTag = (index) => {
-    setTags((prevTags) => prevTags.filter((_, i) => i !== index));
+    setTagList((prevTags) => prevTags.filter((_, i) => i !== index));
   };
 
+
+
+  const handleAddImage = async (blob, callback) => {
+    const formData = new FormData();
+    formData.append("file", blob);
+    formData.append("postKey", postId); // postId 사용
+  
+    try {
+      // 이미지를 업로드하고 서버에 저장
+      const img = await ImageService.updateImage(formData);
+      const url = img.data;
+  
+      // 이미지 URL을 에디터에 추가
+      callback("http://localhost:8080/api/image/" + url, url);
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
+    }
+  };
+
+  const handleDeleteImage = async () => {
+    try {
+      // 이미지 삭제 API 호출
+      await ImageService.deleteImage(postId);
+  
+      // 삭제 성공 시 에디터의 이미지 삭제
+      // 여기에서 구현은 에디터의 이미지를 삭제하는 방식에 따라 다를 수 있습니다.
+      // 해당 방식을 알려주시면 더 구체적인 도움을 드릴 수 있습니다.
+  
+      console.log("이미지 삭제 성공");
+    } catch (error) {
+      console.error("이미지 삭제 실패:", error);
+    }
+  };
  
-  console.log("userId는?" + userId);
-  console.log("tag?" + tag);
-  console.log("title?" + title);
-  console.log("content?" + contents);
-  console.log("postid?" + postId);
 
 
   let post = {
-    tagList: tags,
+    tagList: tagList,
     title: title,
     contents: contents,
     userId: userId,
@@ -104,8 +132,8 @@ function EditPost() {
 return (
   <>
     <NavBar userId={userId} />
-    <div className="Head"></div>
-    <img className="toolbar" src={toolbar} />
+    
+    
     <div className="Write">
       <div>
         <input
@@ -117,6 +145,7 @@ return (
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
+
       {/* <div>
         <input
           type="text"
@@ -128,23 +157,36 @@ return (
         />
       </div>
        */}
-       <div className="tag-list">
+       {/* <div className="tag-list">
             {tags.map((tag, index) => (
               <span key={index} className="tag">
                 {tag}
                 <button onClick={() => handleRemoveTag(index)}>X</button>
               </span>
             ))}
+          </div> */}
+
+
+          <div className="tag-input-container">
+          <div className="tag-input-wrapper">
+            {tagList.map((tag, index) => (
+              <div key={index} className="tag_post" onClick={() => handleRemoveTag(index)}>
+                {tag}
+                {/* <button onClick={() => handleRemoveTag(index)}>X</button> */}
+              </div>
+            ))}
+            <input
+              type="text"
+              placeholder="태그를 입력하세요"
+              id="tag_txt"
+              name="tag"
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+              onKeyUp={onKeyUp}
+            />
           </div>
+        </div>
        
-
-
-
-
-
-
-
-
       <div data-color-mode="light">
       <Editor
             initialValue={initialState.contents}
@@ -156,16 +198,9 @@ return (
             language="ko-KR"
             ref={editorRef}
             onChange={onChange}
-          hooks={{
-            addImageBlobHook: async (blob, callback) => {
-              const formData = new FormData();
-              formData.append("file", blob);
-              console.log(blob);
-              const img = await ImageService.uploadImage(formData);
-              const url = img.data;
-              callback("http://localhost:8080/api/image/" + url, url);
-            },
-          }}
+            hooks={{
+              addImageBlobHook: handleAddImage,
+            }}
         />
       </div>
     </div>
@@ -190,6 +225,14 @@ return (
           {" "}
           게시하기{" "}
         </button>
+
+
+
+        
+
+
+
+
       </div>
     </div>
   </>

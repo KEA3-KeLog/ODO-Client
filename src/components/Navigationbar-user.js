@@ -10,15 +10,15 @@ function NavigationbarUser(props) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const modalRef = useRef();
 
-    useEffect(()=>{
+    useEffect(() => {
         // Modal 영역 밖 클릭 시 모달창 닫기
-        const handleClickOutside=(e)=>{
+        const handleClickOutside = (e) => {
             if (isModalOpen && !modalRef.current.contains(e.target)) {
                 setIsModalOpen(false);
             }
         };
         window.addEventListener("click", handleClickOutside);
-        return()=>{
+        return () => {
             window.removeEventListener("click", handleClickOutside);
         };
     }, [isModalOpen]);
@@ -31,8 +31,12 @@ function NavigationbarUser(props) {
         navigate(`../../mypage/${userId}`)
     }
 
+    const handleBlogLogoClick = () => {
+        navigate(`../../`, {state: userId});
+    }
+
     return (
-        <>
+        <div>
             <div className={styles.navigation}>
                 <div className={styles.common}>
                     <button
@@ -45,6 +49,7 @@ function NavigationbarUser(props) {
                     />
                     <input type={"button"}
                            className={styles[`nav-logo`]}
+                           onClick={handleBlogLogoClick}
                     />
                     <button className={styles[`user-name`]}
                             onClick={handleBlogNameClick}
@@ -55,8 +60,8 @@ function NavigationbarUser(props) {
                     <button>
                         <img
                             src={require("../assets/icon_point_gray.svg").default}
-                            />
-                            <div>1,150</div>
+                        />
+                        <div>1,150</div>
                     </button>
                     <button onClick={handleMyPageClick}>
                         <img
@@ -66,36 +71,37 @@ function NavigationbarUser(props) {
                     </button>
                 </div>
             </div>
-            <div ref={modalRef}>
+            <div
+                ref={modalRef}>
                 {
-                    isModalOpen && (<Modal />)
+                    isModalOpen && (<Modal/>)
                 }
             </div>
-        </>
+        </div>
     );
 }
 
 
 const Modal = () => {
     return (
-        <div className={styles[`nav-modal`]}>
-            <div className={styles.tag}>
-                <div className={styles.tagList}>태그목록</div>
-                <ul>
-                    <li>전체보기 <p>(50)</p></li>
-                    <li>JavaScript <p>(12)</p></li>
-                    <li>Algorithm <p>(26)</p></li>
-                    <li>SpringBoot <p>(4)</p></li>
-                </ul>
+            <div className={styles.navModal}>
+                <div className={styles.tag}>
+                    <div className={styles.tagList}>태그목록</div>
+                    <ul>
+                        <li>전체보기 <p>(50)</p></li>
+                        <li>JavaScript <p>(12)</p></li>
+                        <li>Algorithm <p>(26)</p></li>
+                        <li>SpringBoot <p>(4)</p></li>
+                    </ul>
+                </div>
+                <div className={styles.link}>
+                    <div className={styles.linkList}>링크</div>
+                    <ul>
+                        <li>현영의 브런치 스토리</li>
+                        <li>현영의 깃허브</li>
+                    </ul>
+                </div>
             </div>
-            <div className={styles.link}>
-                <div className={styles.linkList}>링크</div>
-                <ul>
-                    <li>현영의 브런치 스토리</li>
-                    <li>현영의 깃허브</li>
-                </ul>
-            </div>
-        </div>
     );
 }
 
