@@ -45,8 +45,7 @@ function MyBlogPage() {
           style={{ paddingTop: "55.1921%" }}
         >
           <img
-            src={"http://localhost:8080/api/image/" + v.fileNewName
-            }
+            src={"http://localhost:8080/api/image/" + v.fileNewName}
           />
         </div>
       </div>
