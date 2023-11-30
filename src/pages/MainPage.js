@@ -7,7 +7,6 @@ import PostService from "../service/PostService";
 import UserService from "../service/UserService"; // Import the UserService
 
 function MainPage() {
-    const MAX_SUMMARY_LENGTH = 100;
     const { ref, inView } = useInView({
         threshold: 0.5
     });
@@ -49,22 +48,30 @@ function MainPage() {
 
     //     fetchUserInfo();
     // }, [state.posts]);
+    const MAX_SUMMARY_LENGTH = 100;
+    const MAX_DISPLAY_ITEMS = 4;
 
-    const upToDateList = state.posts.map((v) => (
-        <div className={styles[`post-view-1-item`]} onClick={() => {
+    // Ensure that the list has a maximum length of MAX_DISPLAY_ITEMS
+    const truncatedPosts = state.posts.slice(0, MAX_DISPLAY_ITEMS);
+
+    const upToDateList = truncatedPosts.reverse().map((v) => (
+        <div className={styles[`post-view-1-item`]} key={v.postId} onClick={() => {
             navigate("/postview/" + v.postId, {
                 state: v.userId,
             });
         }}>
             <img
-                src={"http://localhost:8080/api/image/" + v.fileNewName}
+                src={"http://localhost:8080/api/image/" + v.fileNewName
+            }
             />
             <div className={styles[`post-view-1-content`]}>
                 <span className={styles[`post-view-1-title`]}>{v.title}</span>
-                <p className={styles[`post-view-1-text`]}>{v.summary.length > MAX_SUMMARY_LENGTH
+                <p className={styles[`post-view-1-text`]}>
+                    {v.summary.length > MAX_SUMMARY_LENGTH
                         ? v.summary.slice(0, MAX_SUMMARY_LENGTH) + "..."
                         : v.summary
-                    }</p>
+                    }
+                </p>
                 <p className={styles[`post-view-1-date`]}>2023-10-01</p>
                 <div className={styles[`post-view-1-footer`]}>
                     <div className={styles[`post-view-1-profile`]}>
@@ -72,15 +79,15 @@ function MainPage() {
                             alt={""}
                             src={require("../assets/author_profile.svg").default}
                         />
-                        <p className={styles[`post-view-1-author-name`]}>by <span
-                            style={{ color: "black", fontWeight: "650" }}>{v.username}</span></p>
+                        <p className={styles[`post-view-1-author-name`]}>
+                            by <span style={{ color: "black", fontWeight: "650" }}>{v.username}</span>
+                        </p>
                     </div>
                     <div className={styles[`post-view-1-like`]}>🖤 12</div>
                 </div>
             </div>
         </div>
     ));
-
     return (
         <>
             <div className={styles[`section-main-bg`]}>

@@ -43,25 +43,35 @@ class Comment extends Component {
   handleCommentSubmit = async (comment) => {
     const { postId } = this.props;
 
+    // Get userId from localStorage
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const userId = userData ? userData.memberId : null;
+
+    // Check if userId is available
+    if (!userId) {
+        console.error("User ID not available");
+        return;
+    }
+
     // CommentService를 통해 댓글을 생성하고, 댓글 목록을 업데이트합니다.
-    await CommentService.createComment({ postId, contents: comment });
+    await CommentService.createComment({ postId, contents: comment, userId });
 
     // 댓글 등록 후에 댓글 목록을 다시 불러와서 상태를 업데이트합니다.
     this.loadComments();
-  };
+};
 
-    render() {
-        const { comments } = this.state;
+render() {
+    const { comments } = this.state;
 
-        return (
-            <div>
-                {/* CommentForm 컴포넌트에 댓글 등록 핸들러 전달 */}
-                <CommentForm onSubmit={this.handleCommentSubmit} />
-                {/* CommentList 컴포넌트에 댓글 목록 전달 */}
-                <CommentList list={comments} />
-            </div>
-        );
-    }
+    return (
+        <div>
+            {/* CommentForm 컴포넌트에 댓글 등록 핸들러 전달 */}
+            <CommentForm onSubmit={this.handleCommentSubmit} />
+            {/* CommentList 컴포넌트에 댓글 목록 전달 */}
+            <CommentList list={comments} />
+        </div>
+    );
+}
 }
 
 export default Comment;

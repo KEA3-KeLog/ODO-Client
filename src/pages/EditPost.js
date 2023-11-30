@@ -31,7 +31,9 @@ function EditPost() {
   // const userId = useParams().userId;
   const userId = initialState.userId;
   const postId = initialState.postId;
-  
+  const postKey = initialState.postKey;
+  console.log(postKey);
+
   const test = `# markdown`;
 
   const handleContentChange = (newContent) => {
@@ -90,7 +92,7 @@ const onKeyUp = useCallback(
   const handleAddImage = async (blob, callback) => {
     const formData = new FormData();
     formData.append("file", blob);
-    formData.append("postKey", postId);// postId 사용
+    formData.append("postKey", postKey);// postId 사용
     formData.append("title",title); // title 같이 전송해봄
     console.log(formData);
   
@@ -230,22 +232,7 @@ return (
 
 
 
-        <button
-  id="post_submit_button"
-  onClick={async (e) => {
-    e.preventDefault();
-    // 기존 이미지 삭제
-    await handleDeleteImage();
-
-    // 게시글 업데이트
-    PostService.updatePost(postId, post).then((res) => {
-      navigate(`/myblogpage/${userId}`);
-    });
-  }}
->
-  {" "}
-  게시rld하기{" "}
-</button>
+        
 
 
 
