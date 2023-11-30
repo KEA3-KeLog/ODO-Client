@@ -5,7 +5,7 @@ import StoreService from "../service/StoreService";
 
 function NavigationbarUser(props) {
     const navigate = useNavigate();
-    const userId = props.userId;
+    const userId = localStorage.getItem("memberId");
 
     const [userPoint, setUserPoint] = useState("-");
 

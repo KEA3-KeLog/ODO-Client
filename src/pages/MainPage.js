@@ -93,7 +93,7 @@ function MainPage() {
     return (
         <>
             <div className={styles[`section-main-bg`]}>
-                <Header sideProfileUser={login} id={id} />
+                <Header />
             </div>
 
             <div className={styles[`section-content`]}>
