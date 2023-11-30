@@ -139,14 +139,14 @@ function StoreContent() {
     return (
         <>
             <div className={styles.screen}>
-                <div className={styles["show-point"]}>
-                    <div className={styles["show-point-text"]}>보유
-                        <img className={styles["icon-point"]}
-                             alt={""}
-                             src={require("../assets/icon_point_black.svg").default}
+                <div className={styles[`point-area`]}>
+                    <div className={styles[`point-title`]}>
+                        <div>보유</div>
+                        <img
+                            src={require("../assets/icon_point_black.svg").default}
                         />
                     </div>
-                    <div className={styles["text-wrapper-16"]}>{userPoint}</div>
+                    <div className={styles[`point`]}>{userPoint}</div>
                 </div>
 
 
@@ -156,7 +156,6 @@ function StoreContent() {
                 <div className={styles.content}>
                     <div className={styles.frame}>
                         {/*상점 아이템 리스트*/}
-                        {console.log("storeItems: ", storeItems)}
                         {storeItems.map((item, index) => (
                             <div
                                 key={index}

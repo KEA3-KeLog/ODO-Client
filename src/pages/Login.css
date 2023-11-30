@@ -102,29 +102,6 @@
     padding: 15px;
 }
 
-.emailLogin {
-    width: 419px;
-    height: 57px;
-    flex-shrink: 0;
-    border-radius: 4px;
-    border: 1px solid #D1D1D1;
-    background: #FFF;
-    margin: auto;
-    display: block;
-
-}
-
-.emailText {
-    color: #000;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    vertical-align:middle;
-    text-align: center;
-}
-
-
 .signIn {
     width: 230px;
     height: 15px;
