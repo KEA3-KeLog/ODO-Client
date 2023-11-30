@@ -60,10 +60,12 @@ function MainPage() {
                 state: v.userId,
             });
         }}>
-            <img
+            <div className={styles[`img-block`]}>
+            <img className={styles[`post-view-1-image`]}
                 src={"http://localhost:8080/api/image/" + v.fileNewName
             }
             />
+            </div>
             <div className={styles[`post-view-1-content`]}>
                 <span className={styles[`post-view-1-title`]}>{v.title}</span>
                 <p className={styles[`post-view-1-text`]}>
