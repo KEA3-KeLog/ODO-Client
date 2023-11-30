@@ -41,14 +41,18 @@ function StoreContent() {
             }
         };
         window.addEventListener("click", handleClickOutside);
+
         return () => {
             window.removeEventListener("click", handleClickOutside);
         };
+
     }, [isDetailModalOpen]);
 
     const getItems = async() => {
         try {
             const response = await StoreService.getAllItems();
+            console.log(response.data);
+            
             setStoreItems(response.data);
         } catch (error) {
             console.log('Error fetching store data: ', error);
@@ -92,13 +96,16 @@ function StoreContent() {
     const checkInven = async (userId) => {
         try {
             const response = await StoreService.InvenCheck(userId);
+            console.log(response.data);
             setUserItem(response.data);
         } catch {
             console.log("Cant Inven Check");
         }
+        console.log(userItem);
     }
 
     const handlePurchase = (itemNum, productName, price) => {
+        itemNum = parseInt(itemNum,10);
         const Point = userPoint - price
         if (userItem.includes(itemNum)) {
             alert("이미 인벤토리에 있습니다!")
@@ -156,7 +163,6 @@ function StoreContent() {
                 <div className={styles.content}>
                     <div className={styles.frame}>
                         {/*상점 아이템 리스트*/}
-                        {console.log("storeItems: ", storeItems)}
                         {storeItems.map((item, index) => (
                             <div
                                 key={index}

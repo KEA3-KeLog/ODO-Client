@@ -20,11 +20,11 @@ const ItemStatus = styled.div`
   
   // 사용중 일때
   ${(props) =>
-          props.on &&
-          css`
+        props.on &&
+        css`
             color: white;
             background: black;
-          `}
+        `}
 `;
 
 function Inventory(props) {
