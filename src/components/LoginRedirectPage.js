@@ -14,17 +14,13 @@ const LoginRedirectPage = () => {
             // 받아온 code를 서버에 전달합니다.
             // 회원가입 & 로그인
             const response = await axios.get(`http://localhost:8080/oauth/login/${params.sns}?code=${code}`);
-            // 응답 데이터
-            // alert("로그인 성공: " + dataList)
-            // console.log("두번째꺼가 null 인지?" + dataList[1])
-            // console.log("마지막 id 값은??" + dataList[2])
-            console.log(response.data);
-            console.log(response.data.email);
-            console.log(response.data.blogName);
-            console.log(response.data.memberId);
 
-            localStorage.setItem("userData",JSON.stringify(response.data));
-            //localStorage.getItem(memberId);
+            // localStorage.setItem("userData",JSON.stringify(response.data));
+            localStorage.setItem("email", response.data.email);
+            localStorage.setItem("blogName", response.data.blogName);
+            localStorage.setItem("memberId", response.data.memberId);
+            localStorage.setItem("accessToken", response.data.accessToken);
+            //localStorage.getItem("memberId");
 
             if (response.data.blogName=== null) {
                 navigate("/signin1", {

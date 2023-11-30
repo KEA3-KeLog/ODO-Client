@@ -153,15 +153,40 @@
 .post-view-1-item {
     display: flex;
     flex-direction: column;
-    padding-left: 10px;
-    width: 24%;
-    height: auto;
+    margin-left: 10px;
+    width: 230px;
+    height: 420px;
+}
+
+.img-block {
+    overflow: hidden;
+}
+
+.post-view-1-item:hover {
+    box-shadow: 0 6px 19px 0 rgba(0,0,0, .12);
+}
+
+.post-view-1-image {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    height: 230px;
+    width: 230px;
+}
+
+.post-view-1-item .post-view-1-image {
+    transition: all 0.4s linear;
+}
+
+.post-view-1-item:hover .post-view-1-image {
+    transform: scale(1.04);
+    height: 230px;
 }
 
 .post-view-1-content {
     display: flex;
     flex-direction: column;
-    padding: 4px;
+    margin: 4px;
 }
 
 .post-view-1-title {

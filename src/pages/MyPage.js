@@ -58,7 +58,7 @@ function MyPage() {
     }, [currentTab])
 
     return (
-        <>
+        <div className={styles.screen}>
             <NavBarUser userId={userId} />
             <div className={styles[`tab`]}>
                 <div className={styles[`tab-name`]}>
@@ -115,7 +115,7 @@ function MyPage() {
             </div>
             <hr />
             <TabContent tab={tab} userId={userId} />
-        </>
+        </div>
     )
 }
 

@@ -8,6 +8,7 @@
 
 .list-item {
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: row;
     padding-bottom: 10px;
     border-bottom: #7D7D7D 1px solid;

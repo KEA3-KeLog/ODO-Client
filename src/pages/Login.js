@@ -101,7 +101,7 @@ function Login() {
                     width="180px"
                 />
             </div>
-            <div style={{ paddingTop: 50 }}>
+            <div style={{ paddingTop: 80 }}>
                 <button
                     className="naverLogin"
                     onClick={() => handleOAuthButtonClick('Naver')}
@@ -110,7 +110,7 @@ function Login() {
                     <span className="naverText">네이버 로그인</span>
                 </button>
             </div>
-            <div style={{ paddingTop: 10 }}>
+            <div style={{ paddingTop: 20 }}>
                 <button
                     className="kakaoLogin"
                     onClick={() => handleOAuthButtonClick('Kakao')}
@@ -119,7 +119,7 @@ function Login() {
                     <span className="kakaoText">카카오 로그인</span>
                 </button>
             </div>
-            <div style={{ paddingTop: 10 }}>
+            <div style={{ paddingTop: 20 }}>
                 <button
                     className="googleLogin"
                     onClick={() => handleOAuthButtonClick('Google')}
@@ -128,19 +128,12 @@ function Login() {
                     <span className="googleText">구글 로그인</span>
                 </button>
             </div>
-            <div style={{ paddingTop: 50 }}>
-                <Button type="button"
-                    className="emailLogin"
-                >
-                    <text className="emailText">이메일로 로그인</text>
-                </Button>
-            </div>
             <div style={{ paddingTop: 50 }}
                 className="signIn">
                 <text className="normal">아직 회원이 아니신가요?</text>
                 <button className={"bold"}
                     onClick={()=>{
-                        navigate('/signin1')
+                        navigate('/login')
                     }}>회원가입</button>
             </div>
             <div className={"login-footer"}></div>

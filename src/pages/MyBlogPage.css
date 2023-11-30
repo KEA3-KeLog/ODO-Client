@@ -329,12 +329,12 @@ ul li p {
 }
 
 .PostCardBlock:hover {
-    box-shadow: 0 6px 19px 0 rgba(0,0,0, .3);
+    box-shadow: 0 6px 19px 0 rgba(0,0,0, .12);
 }
 
 .PostCardBlock:hover .PostCardBlockImage {
-    transform: scaleX(1.08);
-    height: 110px;
+    transform: scale(1.04);
+    overflow: hidden;
 }
 
 .PostCardBlockImage_Link{

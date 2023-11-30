@@ -4,6 +4,9 @@ import {useEffect, useState} from "react";
 import StoreService from '../service/StoreService';
 import InvenService from '../service/InvenService';
 
+import axios from 'axios';
+
+
 // 아이템 사용중 or 사용 중 아님을 나타내는 버튼 css 입니다.
 const ItemStatus = styled.div`
   width: 60px;
@@ -35,6 +38,10 @@ function Inventory(props) {
     const [itemDetail, setItemDetail] = useState();
     const [modalOpen, setModalOpen] = useState(false);
 
+    const [newDate, setNewDate] = useState('');
+    const [dateCounts, setDateCounts] = useState({});
+    const newEntry = { count: 1 };
+
     useEffect(() => {
         getpoint(userId);
         getInven(userId);
@@ -62,6 +69,45 @@ function Inventory(props) {
         setModalOpen(true);
         setItemDetail(item);
     }
+
+
+    const handleAddNewEntry = () => {
+        // Check if the newDate is not empty
+        if (newDate.trim() !== '') {
+            // Create a new entry with the entered date and a count of 1
+            const entryToAdd = { ...newEntry, date: newDate };
+    
+            // Log the data to be sent in the POST request
+            console.log('Data to be sent in the POST request:', entryToAdd);
+    
+            // Assuming dateCounts is a state variable, update it with the new entry
+            setDateCounts((prevDateCounts) => ({
+                ...prevDateCounts,
+                [newDate]: entryToAdd,
+            }));
+    
+            // Reset the newDate input
+            setNewDate('');
+    
+            // Send a POST request to your server to add the new entry
+            axios.post('http://localhost:8080/api/post/addNewValue', entryToAdd)
+                .then(response => {
+                    // Handle the response if needed
+                    console.log('New entry added successfully(react):', response.data);
+                })
+                .catch(error => {
+                    console.error('Error adding new entry(react):', error);
+                });
+        }
+    };
+
+    
+
+
+    {modalOpen && <ItemDetailModal item={itemDetail} newDate={newDate} setNewDate={setNewDate} handleAddNewEntry={handleAddNewEntry} />}
+    
+
+
 
     return (
         <div className={styles[`common`]}>
@@ -101,14 +147,46 @@ function Inventory(props) {
                     ))}
                 </div>
                 {/*해당 아이템 설명*/}
-                {modalOpen && <ItemDetailModal item={itemDetail}/>}
+                {modalOpen && <ItemDetailModal item={itemDetail} newDate={newDate} setNewDate={setNewDate} handleAddNewEntry={handleAddNewEntry} />}
             </div>
             
         </div>
     )
 }
 
-const ItemDetailModal=({item})=>{
+
+// const ItemDetailModal = ({ item, newDate, setNewDate, handleAddNewEntry }) => {
+//     return (
+//         <div className={styles[`container`]}>
+//             <div className={styles[`item-image-container`]}>
+//                 <img className={styles[`item-image`]}
+//                      src={require(`../assets/store-item-${item.itemId}.svg`)}
+//                 />
+//             </div>
+//             <div className={styles[`item-title`]}>{item.itemName}</div>
+//             <div>1개 보유</div>
+//             <div className={styles[`item-docs`]}>
+//                 {item.itemInfo}
+//             </div>
+
+// {item.itemId === 4 (
+//     <div>
+//             <input
+//         type="date"
+//         value={newDate}
+//         onChange={(e) => setNewDate(e.target.value)}
+//         placeholder="Enter date"
+//       />
+//       <button onClick={handleAddNewEntry}> 사용하기 </button>
+
+//       </div>
+//       )}
+
+//         </div>
+//     );
+// };
+
+const ItemDetailModal = ({ item, newDate, setNewDate, handleAddNewEntry }) => {
     return (
         <div className={styles[`container`]}>
             <div className={styles[`item-image-container`]}>
@@ -121,8 +199,26 @@ const ItemDetailModal=({item})=>{
             <div className={styles[`item-docs`]}>
                 {item.itemInfo}
             </div>
+
+
+            {item.itemId === '5' ? (
+                <div>
+                    <input
+                        type="date"
+                        value={newDate}
+                        onChange={(e) => setNewDate(e.target.value)}
+                        placeholder="Enter date"
+                    />
+                    <button onClick={handleAddNewEntry}> 사용하기 </button>
+                </div>
+            ) : (
+                <div>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
+
+
 
 export default Inventory;
