@@ -9,10 +9,7 @@ import ProfileUpdateService from "../service/ProfileUpdateService";
 
 
 function ProfileEdit() {
-    const localUserData = JSON.parse(localStorage.getItem('userData'));
-    const userId = localUserData.memberId;
-
-
+    const userId = localStorage.getItem("memberId");
 
     const [profileData, setProfileData] = useState(null);
     const [blogName, setUserBlogName] = useState("");

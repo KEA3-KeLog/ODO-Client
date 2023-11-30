@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 function StoreContent() {
     //localStorage로 부터 userId 값을 가져온다.
     const localUserData = JSON.parse(localStorage.getItem('userData'));
-    const userId = localUserData.memberId
+    const userId = localStorage.getItem("memberId");
     const navigate = useNavigate();
 
     const [userPoint, setUserPoint] = useState("-");

@@ -31,8 +31,7 @@ const ItemStatus = styled.div`
 `;
 
 function Inventory(props) {
-    const localUserData = JSON.parse(localStorage.getItem('userData'));
-    const userId = localUserData.memberId;
+    const userId = localStorage.getItem("memberId");
     const [userPoint, setuserPoint] = useState("");
     const [items, setItems] = useState([]);
     const [itemDetail, setItemDetail] = useState();
@@ -129,7 +128,6 @@ function Inventory(props) {
                             key={index}
                             onClick={()=>{clickItemDetail(item)}}
                         >
-                            <div><strong>Name:</strong> {item.itemName}</div>
                             <button className={styles[`item`]}>
                                 <div className={styles[`item-image-container`]}>
                                     <img className={styles[`item-image`]}
