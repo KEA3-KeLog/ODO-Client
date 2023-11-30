@@ -19,6 +19,7 @@ function PostView() {
     const [tag, setTag] = useState("");
     const [contents, setContents] = useState("");
     const [summary, setSummary] = useState("");
+    const [postKey, setPostKey] = useState("");
     //추가
     const [tags, setTags] = useState([]); 
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ function PostView() {
             setTitle(res.data.title);
             setContents(res.data.contents);
             setSummary(res.data.summary);
+            setPostKey(res.data.postKey);
         });
     }, []);
 
@@ -47,6 +49,7 @@ function PostView() {
             userId: userId,
             postId: postId,
             summary: summary,
+            postKey: postKey
         };
     
         // PostService.updatePost를 호출하여 서버에 업데이트 요청을 보냅니다.
