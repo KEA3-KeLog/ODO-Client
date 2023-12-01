@@ -3,7 +3,7 @@ import {forwardRef, useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import StoreService from "../service/StoreService";
 
-function NavigationbarUser(props) {
+function NavigationbarUser() {
     const navigate = useNavigate();
     const userId = localStorage.getItem("memberId");
 

@@ -164,7 +164,7 @@ function MyBlogPage() {
 
     return (
         <>
-            <NavBarUser userId={userId}/>
+            <NavBarUser />
             <div className="container">
                 <ion-icon name="chevron-down-outline"></ion-icon>
                 <div className="child first">

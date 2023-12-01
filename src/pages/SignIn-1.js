@@ -49,6 +49,7 @@ function SignIn1() {
                         state: {
                             email: email,
                             id: id,
+                            userBlogName: userBlogName,
                             userBlogAddress: userBlogAddress
                         }
                     });

@@ -59,7 +59,7 @@ function MyPage() {
 
     return (
         <div className={styles.screen}>
-            <NavBarUser userId={userId} />
+            <NavBarUser />
             <div className={styles[`tab`]}>
                 <div className={styles[`tab-name`]}>
                     <img className={styles[`tab-icon`]}

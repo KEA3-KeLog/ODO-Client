@@ -8,6 +8,9 @@ function SignIn2() {
     const email = location.state.email;
     const id = location.state.id;
     const userBlogAddress = location.state.userBlogAddress;
+    const userBlogName = location.state.userBlogName;
+
+    localStorage.setItem("blogName", userBlogName);
 
     return (
         <>
