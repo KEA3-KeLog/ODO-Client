@@ -1,0 +1,115 @@
+.page-view {
+    margin: auto;
+    width: 1020px;
+    padding-top: 50px;
+}
+
+.post-card-grid-block {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post-card-block {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,.04);
+    transition: box-shadow .25s ease-in,transform .25s ease-in;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 245px;
+    margin: 5px;
+}
+
+.post-card-block:hover {
+    box-shadow: 0 6px 19px 0 rgba(0,0,0, .12);
+}
+
+.post-card-img {
+    display: block;
+    cursor: pointer;
+
+}
+
+.post-card-block .post-card-img {
+    transition: all 0.4s linear;
+}
+
+.post-card-img img {
+    height: 230px;
+    width: 250px;
+    object-fit: cover;
+}
+
+/*.post-card-block:hover .post-card-img {*/
+/*    transform: scale(1.04);*/
+/*    height: 230px;*/
+/*}*/
+
+.post-card-content {
+    padding: 1rem;
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+}
+
+.post-card-content h4 {
+    font-size: 1rem;
+    margin: 0 0 0.25rem;
+    line-height: 1.5;
+    word-break: break-word;
+    color: #212529;
+}
+
+.post-card-content p {
+    word-break: break-word;
+    word-wrap: break-word;
+    font-size: .875rem;
+    line-height: 1.5;
+    color: #495057;
+    margin: 0 0 .9rem;
+}
+
+.post-card-text {
+    height: 3.9375rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+}
+
+.post-card-date {
+    line-height: 1.5;
+    color: #868e96;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.post-card-footer {
+    padding: 0.625rem 1rem;
+    border-top: 1px solid #f1f3f5;
+    display: flex;
+    font-size: .75rem;
+    line-height: 1.5;
+    justify-content: space-between;
+}
+
+/*프로필 사진과 by 저자 를 묶는 div*/
+.user-profile {
+    display: flex;
+}
+
+.user-name {
+    display: block;
+    color: #848484;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 10px;
+}
+
+.post-card-likes {
+    padding: 10px 10px 0 0;
+}

@@ -276,7 +276,10 @@ function MyBlogPage() {
                     <div className="tag">
                         <div className="tagList">태그목록</div>
                         <ul>
-                            <li>
+                            <li
+                                onClick={()=>{
+                                    navigate("./postsbytag");
+                                }}>
                                 전체보기 <p>(50)</p>
                             </li>
                             <li>
