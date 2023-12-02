@@ -20,8 +20,9 @@ function PostView() {
     const [contents, setContents] = useState("");
     const [summary, setSummary] = useState("");
     const [postKey, setPostKey] = useState("");
+
     //추가
-    const [tags, setTags] = useState([]); 
+    const [tags, setTags] = useState([]);
     const navigate = useNavigate();
     let state = {
         posts: []
@@ -51,7 +52,7 @@ function PostView() {
             summary: summary,
             postKey: postKey
         };
-    
+
         // PostService.updatePost를 호출하여 서버에 업데이트 요청을 보냅니다.
         PostService.updatePost(postId, updatedPost)
             .then(() => {
@@ -64,27 +65,27 @@ function PostView() {
                 console.error('Error updating post: ', error);
             });
     };
-    
 
-    
-    
-    
+
+
+
+
 
     const handleDelete = () => {
         const confirmDelete = window.confirm("정말 삭제하시겠습니까?");
         if (confirmDelete) {
 
-        PostService.deletePost(postId)
-            .then(() => {
-                // Optionally, you can handle any success actions here, if needed
-                console.log('Post deleted successfully');
-                // Redirect to the desired page after deletion
-                window.location.href = '/myblogpage/' + userId; // Redirect to home page after deletion
-            })
-            .catch((error) => {
-                // Handle delete error
-                console.error('Error deleting post: ', error);
-            });
+            PostService.deletePost(postId)
+                .then(() => {
+                    // Optionally, you can handle any success actions here, if needed
+                    console.log('Post deleted successfully');
+                    // Redirect to the desired page after deletion
+                    window.location.href = '/myblogpage/' + userId; // Redirect to home page after deletion
+                })
+                .catch((error) => {
+                    // Handle delete error
+                    console.error('Error deleting post: ', error);
+                });
         }
     };
 
@@ -107,7 +108,7 @@ function PostView() {
                             ))}
 
 
-                            
+
                         </div>
                     </div>
 
@@ -120,25 +121,23 @@ function PostView() {
                     <div className="Post_contents">
                         <div className="row"><br /><br /><br />
                             {/* 마크다운 */}
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown>
-                            {/* <Viewer initialValue={contents || ''} /> */}
-                            {/* 마크다운 */}<br /><br /><br /><br />
+                            {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown> */}
                             
-                            {/* <Viewer initialValue={contents || ''} /> */}
-                            {/* 마크다운 */}
+                            <Viewer key={contents} initialValue={contents} />
+                            {/* 마크다운 */}<br /><br /><br /><br />
                         </div>
                     </div>
 
-                    <div className="row"><br/>
-                    <Comment postId={postId} />
+                    <div className="row"><br />
+                        <Comment postId={postId} />
 
                     </div>
 
                 </div>
 
                 <div id='Mains-right'>
-                     <button id="post_edit_button" onClick={handleUpdate}>수정</button>
-                     <button id="post_delete_button" onClick={handleDelete}>삭제</button>
+                    <button id="post_edit_button" onClick={handleUpdate}>수정</button>
+                    <button id="post_delete_button" onClick={handleDelete}>삭제</button>
 
                 </div>
 
