@@ -1,6 +1,7 @@
 .common {
-    margin: 50px 14% 0 14%;
-    padding: 10px;
+    margin: auto;
+    width: 1080px;
+    padding-top: 30px;
     display: flex;
     flex-direction: row;
     position: relative;

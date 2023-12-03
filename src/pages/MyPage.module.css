@@ -3,23 +3,26 @@
 }
 
 .tab {
-    padding: 30px 0 0 90px;
+    padding: 30px 0 0 80px;
     display: flex;
     flex-direction: row;
 }
 
 .tab-name {
     display: flex;
-    padding: 0 10px;
+    padding: 0 60px;
 }
 
-.tab-name div {
+.tab-name h4 {
     align-self: center;
+    margin: 0
 }
 
 .tab-icon {
     align-self: center;
     padding-right: 6px;
+    width: 24px;
+    height: 20px;
 }
 
 .tab-item div {

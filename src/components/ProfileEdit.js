@@ -392,8 +392,8 @@ function ProfileEdit() {
 }
 
 const ToggleBtn = styled.button`
-  width: 48px;
-  height: 24px;
+  width: 36px;
+  height: 22px;
   border-radius: 30px;
   border: none;
   cursor: pointer;

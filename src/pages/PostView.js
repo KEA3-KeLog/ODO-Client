@@ -11,6 +11,7 @@ import Comment from "../components/Comment";
 
 import { useNavigate } from "react-router-dom";
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import UserService from "../service/UserService";
 
 
 function PostView() {
@@ -20,6 +21,7 @@ function PostView() {
     const [contents, setContents] = useState("");
     const [summary, setSummary] = useState("");
     const [postKey, setPostKey] = useState("");
+    const [userName, setUserName] = useState("");
     //추가
     const [tags, setTags] = useState([]); 
     const navigate = useNavigate();
@@ -39,6 +41,9 @@ function PostView() {
             setSummary(res.data.summary);
             setPostKey(res.data.postKey);
         });
+        UserService.getUser(userId).then(function (res) {
+            setUserName(res.data.blog_nickname);
+        })
     }, []);
 
     const handleUpdate = () => {
@@ -101,7 +106,7 @@ function PostView() {
                     <div className='Post_head'>
                         <div className="row">
                             <h1 id="title">{title}</h1>
-                            <text id="thin">by <text id="bold">hyun_dev</text> · 2023.09.27</text><br /><br />
+                            <text id="thin">by <text id="bold">{userName}</text> · 2023.09.27</text><br /><br />
                             {tags.map((tag, index) => (
                                 <button key={index} id="tag">{tag}</button>
                             ))}

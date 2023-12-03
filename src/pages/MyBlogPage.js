@@ -95,7 +95,8 @@ function MyBlogPage() {
       </div>
       <div className="PostCardBlockContents">
         <div className="PostCardBlockTag">
-          <span>{v.tag}</span>
+            <span>TAG</span>
+          {/*<span>{v.tag}</span>*/}
         </div>
         <div className="PostCardBlockContents_Link">
           <h4 className="PostCardBlockContents_Title">
@@ -108,7 +109,8 @@ function MyBlogPage() {
           </div>
         </div>
         <div className="PostCardBlockDate">
-          <span>2023-10-01</span>
+            {console.log(typeof(v.createTime))}
+          <span>{v.createdTime}</span>
         </div>
       </div>
     </div>))
@@ -221,7 +223,7 @@ function MyBlogPage() {
                             </div>
                         </div>
                         <div className="Introduce">
-                            <div className="blogName">hyun_dev</div>
+                            <div className="blogName">{localStorage.getItem("blogName")}</div>
                             <div className="subIntro">
                                 안녕하세요~ <br/>
                                 잔디밭 채우고 싶은 <br/>
@@ -295,7 +297,7 @@ function MyBlogPage() {
                     </div>
                 </div>
                 <div className="child second">
-                    <div className="searcharea">
+                    <div className="search-area">
                         <div className="select-menu">
                             {/*<SelectBox options={OPTIONS} defaultValue="title"></SelectBox>*/}
                             <div className={"dropdown"}>

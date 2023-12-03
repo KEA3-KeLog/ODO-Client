@@ -2,30 +2,12 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 100%;
+    width: 1080px;
+    margin: auto;
+    padding-top: 30px;
 }
 
-.banner {
-    background-color: #ebebeb;
-    height: 110px;
-    margin-top: 40px;
-    width: 100%;
-    display: flex;
-}
-
-.banner .text-wrapper {
-    color: #000000;
-    font-family: "Roboto-SemiBold", Helvetica;
-    font-size: 28px;
-    font-weight: 600;
-    margin: 40px 0 0 10%;
-    letter-spacing: 0;
-    line-height: normal;
-    white-space: nowrap;
-}
-
-.banner .icon-shop-store {
+.icon-shop-store {
     height: 27px;
     margin: 48px 0 0 10px;
     width: 35px;
@@ -34,7 +16,6 @@
 .point-area {
     display: flex;
     flex-direction: row;
-    margin: 50px 0 0 14%;
 }
 
 .point-title {
@@ -49,7 +30,6 @@
 
 .screen .text-wrapper-16 {
     color: #000000;
-    font-family: "Roboto-SemiBold", Helvetica;
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 0;
@@ -61,23 +41,24 @@
 .content {
     display: flex;
     flex-direction: column;
-    margin: 50px 8% 0 14%;
+    margin: auto;
+    padding-top: 30px;
 }
 
 .frame {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .item {
-    background: var(--bg-element1);
+    background: #fff;
     border-radius: 4px;
     box-shadow: 0 6px 19px 0 rgba(0,0,0,.09);
     border-color: #939393;
-    /*border-radius: 10px;*/
     height: 240px;
-    width: 270px;
+    width: 250px;
     text-align: center;
     margin: 5px;
 }
@@ -117,6 +98,7 @@
     border: 1px solid;
     border-color: #d9d9d9;
     border-radius: 20px;
+    font-size: 12px;
 }
 
 .item-btn-2 {
@@ -126,6 +108,7 @@
     border-radius: 20px;
     color: white;
     font-weight: bold;
+    font-size: 12px;
 }
 
 /*상품 상세설명 모달 관련 css*/
@@ -144,11 +127,10 @@
 .detail-modal {
     position: fixed;
     top: 30%;
-    left: 34%;
-    padding: 60px;
-    background-color: #ffffff;
+    left: 40%;
+    padding: 20px;
+    background-color: #fff;
     width: 350px;
-    height: 350px;
     /*모달 애니메이션*/
     animation: modal-show 0.4s;
     overflow: hidden;
@@ -157,16 +139,21 @@
     z-index : 100;
 }
 
-.item-image-container {
-    display: flex;
-    border: none;
-    border-radius: 16px;
-    padding: 6px 12px;
+.header {
+    width: 100%;
 }
 
-.item-image {
-    max-width: 70px;
-    height: 70px;
+.header h3 {
+    margin: 0;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.item-description {
+    flex: 1;
 }
 
 .item-status-container {
@@ -177,7 +164,7 @@
 
 .item-title {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 10px 0 10px 0;
 }
 
@@ -186,7 +173,22 @@
 }
 
 .item-docs {
-    width: 350px;
-    text-align: center;
-    padding: 10px 0 10px 0;
+    word-break: break-word;
+    word-wrap: break-word;
+    font-size: .85rem;
+}
+
+.item-img-container {
+    flex: .5;
+    display: flex;
+    border: none;
+    border-radius: 16px;
+    padding: 6px 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-img-container img {
+    max-width: 70px;
+    height: 70px;
 }

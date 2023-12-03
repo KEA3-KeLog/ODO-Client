@@ -1,10 +1,12 @@
 import styles from './Navigationbar.module.css'
 import {forwardRef, useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import UserService from "../service/UserService";
 
 function Navigationbar(props) {
     const navigate = useNavigate();
     const userId = props.userId;
+    const [userName, setUserName] = useState("");
 
     // isModalOpen이 true 이면 모달창 열림
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +14,9 @@ function Navigationbar(props) {
     const modalRef = useRef();
 
     useEffect(()=>{
+        UserService.getUser(userId).then(function (res) {
+            setUserName(res.data.blog_nickname);
+        })
         const handleClickOutside=(e)=>{
             if (isModalOpen && !modalRef.current.contains(e.target)) {
                 setIsModalOpen(false);
@@ -41,9 +46,9 @@ function Navigationbar(props) {
                 <input type={"button"}
                        className={styles[`nav-logo`]}
                 />
-                <button className={styles[`user-name`]}
+                <button className={styles[`blog-name`]}
                         onClick={handleBlogNameClick}
-                >hyun_dev</button>
+                >{userName}</button>
             </div>
             <div ref={modalRef}>
                 {

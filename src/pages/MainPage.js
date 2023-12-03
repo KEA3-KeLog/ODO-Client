@@ -19,6 +19,8 @@ function MainPage() {
     const id = location.state;
     const [login, setLogin] = useState(false);
 
+    const [userName, setUserName] = useState("");
+
     useEffect(() => {
         if (id != null) {
             setLogin(true);
@@ -36,6 +38,12 @@ function MainPage() {
             setState({posts: res.data});
         });
     }, []);
+
+    const getUserName = (userId) => {
+        UserService.getUser(userId).then(function (res) {
+            setUserName(res.data.blog_nickname);
+        })
+    }
 
     // useEffect(() => {
     //     // Fetch user information and update the state
@@ -58,42 +66,44 @@ function MainPage() {
     // Ensure that the list has a maximum length of MAX_DISPLAY_ITEMS
     const truncatedPosts = state.posts.slice(0, MAX_DISPLAY_ITEMS);
 
-    const upToDateList = truncatedPosts.reverse().map((v) => (
-        <div className={styles[`post-card-block`]} key={v.postId} onClick={() => {
-            navigate("/postview/" + v.postId, {
-                state: v.userId,
-            });
-        }}>
-            <div className={styles[`img-block`]}>
-                <img className={styles[`post-view-1-image`]}
-                     src={"http://localhost:8080/api/image/" + v.fileNewName
-                     }
-                />
-            </div>
-            <div className={styles[`post-view-1-content`]}>
-                <span className={styles[`post-view-1-title`]}>{v.title}</span>
-                <p className={styles[`post-view-1-text`]}>
-                    {v.summary.length > MAX_SUMMARY_LENGTH
-                        ? v.summary.slice(0, MAX_SUMMARY_LENGTH) + "..."
-                        : v.summary
-                    }
-                </p>
-                <p className={styles[`post-view-1-date`]}>2023-10-01</p>
-                <div className={styles[`post-view-1-footer`]}>
-                    <div className={styles[`post-view-1-profile`]}>
-                        <img
-                            alt={""}
-                            src={require("../assets/author_profile.svg").default}
-                        />
-                        <p className={styles[`post-view-1-author-name`]}>
-                            by <span style={{color: "black", fontWeight: "650"}}>{v.username}</span>
-                        </p>
+    const upToDateList = truncatedPosts.reverse().map((v) => {
+        getUserName(v.userId);
+        return (
+            <div className={styles[`post-card-block`]} key={v.postId} onClick={() => {
+                navigate("/postview/" + v.postId, {
+                    state: v.userId,
+                });
+            }}>
+                <div className={styles[`img-block`]}>
+                    <img className={styles[`post-view-1-image`]}
+                         src={"http://localhost:8080/api/image/" + v.fileNewName}
+                    />
+                </div>
+                <div className={styles[`post-view-1-content`]}>
+                    <span className={styles[`post-view-1-title`]}>{v.title}</span>
+                    <p className={styles[`post-view-1-text`]}>
+                        {v.summary.length > MAX_SUMMARY_LENGTH
+                            ? v.summary.slice(0, MAX_SUMMARY_LENGTH) + "..."
+                            : v.summary
+                        }
+                    </p>
+                    <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                    <div className={styles[`post-view-1-footer`]}>
+                        <div className={styles[`post-view-1-profile`]}>
+                            <img
+                                alt={""}
+                                src={require("../assets/author_profile.svg").default}
+                            />
+                            <p className={styles[`post-view-1-author-name`]}>
+                                by <span style={{color: "black", fontWeight: "650"}}>{userName}</span>
+                            </p>
+                        </div>
+                        <div className={styles[`post-view-1-like`]}>🖤 12</div>
                     </div>
-                    <div className={styles[`post-view-1-like`]}>🖤 12</div>
                 </div>
             </div>
-        </div>
-    ));
+        )
+    });
     return (
         <>
             <div className={styles[`section-main-bg`]}>

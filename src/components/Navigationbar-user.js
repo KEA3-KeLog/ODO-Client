@@ -72,7 +72,7 @@ function NavigationbarUser() {
                            className={styles[`nav-logo`]}
                            onClick={handleBlogLogoClick}
                     />
-                    <button className={styles[`user-name`]}
+                    <button className={styles[`blog-name`]}
                             onClick={handleBlogNameClick}
                     >{localStorage.getItem("blogName")}
                     </button>
