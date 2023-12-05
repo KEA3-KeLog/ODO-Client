@@ -13,10 +13,9 @@ const ItemStatus = styled.div`
   height: 17px;
   border-radius: 10px;
   border: 1px black solid;
-  margin-top: 14px;
+  padding-top: 3px;
   font-size: 10px;
   text-align: center;
-  padding-top: 3px;
   font-weight: bold;
   color: black;
   background: white;
@@ -136,9 +135,7 @@ function Inventory(props) {
                                 </div>
                                 <div className={styles[`item-status-container`]}>
                                     <div className={styles[`item-title`]}>{item.itemName}</div>
-                                    <div className={styles[`item-status`]}>
-                                        <ItemStatus on={"true"}>사용중</ItemStatus>
-                                    </div>
+                                    <ItemStatus on={"true"}>사용중</ItemStatus>
                                 </div>
                             </button>
                         </div>

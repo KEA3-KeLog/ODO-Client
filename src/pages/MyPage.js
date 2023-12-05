@@ -65,7 +65,7 @@ function MyPage() {
                     <img className={styles[`tab-icon`]}
                         src={require('../assets/icon_home.svg').default}
                     />
-                    <div>마이페이지</div>
+                    <h4>마이페이지</h4>
                 </div>
                 <TabButton
                     id="store"
@@ -74,7 +74,7 @@ function MyPage() {
                         getClick(e);
                     }}>
                     <img className={styles[`tab-icon`]}
-                        src={require('../assets/icon_shopstore_gray.svg').default}
+                        src={require('../assets/icon_shopstore_black.svg').default}
                     />
                     <div>상점</div>
                 </TabButton>
@@ -132,11 +132,12 @@ const TabButton = styled.button`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     border: none;
     margin: 0 10px;
     padding: 6px 10px;
     border-radius: 14px;
-    height: 36px;
+    height: 30px;
     text-align: center;
     background: none;
     font-size: 16px;

@@ -11,6 +11,7 @@ import SignIn2 from "./pages/SignIn-2";
 import LoginRedirectPage from "./components/LoginRedirectPage";
 import MyPage from "./pages/MyPage";
 import EditPost from './pages/EditPost';
+import PostsByTag from './pages/PostsByTag';
 
 function App() {
     return (
@@ -26,6 +27,8 @@ function App() {
                 <Route path={'/signin2'} element={<SignIn2/>}/>
                 <Route path={'/oauth/redirected/:sns'} element={<LoginRedirectPage />}></Route>
                 <Route path='/mypage/:userId' element={<MyPage />} />
+                <Route path='/mypage/:userId/postsbytag' element={<PostsByTag />} />
+                <Route path='/postsbytag' element={<PostsByTag />} />
             </Routes>
         </div>
     );

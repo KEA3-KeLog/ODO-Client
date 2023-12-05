@@ -7,29 +7,29 @@
 
 .common {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
 }
 
 .hamburger-menu {
     background: url("../assets/icon_hamburger-menu.svg") no-repeat;
     width: 40px;
-    height: 40px;
+    margin-right: 10px;
     border: none;
 }
 
 .nav-logo {
     background: url("../assets/nav-logo.svg") no-repeat;
     width: 40px;
-    margin-left: 20px;
+    height: 40px;
     border: none;
 }
 
-.user-name {
+.blog-name {
     font-size: 20px;
     font-weight: 600;
-    margin: 6px 0 0 10px;
     border: none;
     background: none;
+    text-align: center;
 }
 
 .user-menu {

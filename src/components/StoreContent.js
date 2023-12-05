@@ -48,11 +48,11 @@ function StoreContent() {
 
     }, [isDetailModalOpen]);
 
-    const getItems = async() => {
+    const getItems = async () => {
         try {
             const response = await StoreService.getAllItems();
             console.log(response.data);
-            
+
             setStoreItems(response.data);
         } catch (error) {
             console.log('Error fetching store data: ', error);
@@ -105,7 +105,7 @@ function StoreContent() {
     }
 
     const handlePurchase = (itemNum, productName, price) => {
-        itemNum = parseInt(itemNum,10);
+        itemNum = parseInt(itemNum, 10);
         const Point = userPoint - price
         if (userItem.includes(itemNum)) {
             alert("이미 인벤토리에 있습니다!")
@@ -214,17 +214,23 @@ function StoreContent() {
 const DetailModal = ({item}) => {
     return (
         <div className={styles[`detail-modal`]}>
-            <div className={styles[`item-image-container`]}>
-                <img className={styles[`item-image`]}
-                     src={require(`../assets/store-item-${item.itemId}.svg`)}
-                />
+            <div className={styles[`header`]}>
+                <h3>상세 설명</h3>
             </div>
-            <div className={styles[`item-title`]}>{item.itemName}</div>
-            <div className={styles[`item-docs`]}>
-                상세설명: <br/>
-                {item.itemInfo}
+            <hr />
+            <div className={styles[`modal-content`]}>
+                <div className={styles[`item-description`]}>
+                    <div className={styles[`item-title`]}>{item.itemName}</div>
+                    <div className={styles[`item-docs`]}>
+                        {item.itemInfo}
+                    </div>
+                </div>
+                <div className={styles[`item-img-container`]}>
+                    <img
+                         src={require(`../assets/store-item-${item.itemId}.svg`)}
+                    />
+                </div>
             </div>
-
         </div>
     )
 }

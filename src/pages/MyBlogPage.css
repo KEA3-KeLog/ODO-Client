@@ -1,10 +1,13 @@
 /* MyBlogPage.css */
 .container {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    justify-content: center;
     align-items: stretch;
-    margin: 0 100px;
-    padding: 0px;
+    width: 1080px;
+    /*margin: 0 100px;*/
+    margin: auto;
+    padding: 0;
 }
 
 .child {
@@ -13,7 +16,6 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    
 }
 
 .first {
@@ -22,7 +24,7 @@
 }
 
 .second {
-    flex: 2.5;
+    flex: 2;
     position: relative;
 }
 
@@ -96,8 +98,7 @@
 
 .blogName{
     color: #000;
-    font-family: Roboto;
-    font-size: 24px;
+    font-size: 22px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -107,8 +108,7 @@
 
 .subIntro{
     color: #000;
-    font-family: Roboto;
-    font-size: 9px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -169,7 +169,6 @@
 
 .tagList{
     color: #000;
-    font-family: Roboto;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -215,7 +214,7 @@ ul li p {
     background: black;
 }
 
-.searcharea,
+.search-area,
 .new-contents,
 .works {
     padding: 10px;
@@ -224,13 +223,12 @@ ul li p {
     justify-content: flex-start;
 }
 
-.searcharea {
+.search-area {
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid black;
     padding-bottom: 6px;
-    width: 900px;
 }
 
 .select-menu {
@@ -308,11 +306,11 @@ ul li p {
 
 .PostCardBlock{
     width: 200px;
-    background: var(--bg-element1);
-    border-radius: 4px;
-    box-shadow: 0 6px 19px 0 rgba(0,0,0,.04);
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 6px 19px 0 rgba(0,0,0,.08);
     transition: box-shadow .25s ease-in,transform .25s ease-in;
-    margin:  0.3rem;
+    margin: 4px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -322,6 +320,7 @@ ul li p {
     display: block;
     text-decoration: none;
     cursor: pointer;
+    height: 140px;
 }
 
 .PostCardBlock .PostCardBlockImage {
@@ -347,12 +346,13 @@ ul li p {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 140px;
+    object-fit: cover;
     display: block;
 }
 
 .PostCardBlockContents{
-    padding: 1rem;
+    padding: .8rem;
     display: flex;
     flex: 1 1;
     flex-direction: column;
@@ -364,10 +364,10 @@ ul li p {
 }
 .PostCardBlockContents_Title{
     font-size: 1rem;
-    margin: 0 0 0.25rem;
+    margin: 0 0 .5rem;
     line-height: 1.5;
     word-break: break-word;
-    color: var(--text1);
+    color: #212529;
 }
 .PostCardBlockContents_subtitle{
     display: -webkit-box;
@@ -377,20 +377,18 @@ ul li p {
     text-overflow: ellipsis;
     word-break: break-word;
     word-wrap: break-word;
-    font-size: .875rem;
+    font-size: .84rem;
     line-height: 1.5;
-    color: var(--text2);
+    color: #495057;
     margin: 0 0 1.5rem;
 }
 .PostCardBlockTag{
-    font-size: .75rem;
+    font-size: .6rem;
     line-height: 1.5;
-    color: '#636363';
+    color: #636363;
 }
 .PostCardBlockDate{
-
     color: #848484;
-    font-family: Roboto;
     font-size: 9px;
     font-style: normal;
     font-weight: 500;
