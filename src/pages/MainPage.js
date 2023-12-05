@@ -64,9 +64,11 @@ function MainPage() {
     const MAX_DISPLAY_ITEMS = 4;
 
     // Ensure that the list has a maximum length of MAX_DISPLAY_ITEMS
-    const truncatedPosts = state.posts.slice(0, MAX_DISPLAY_ITEMS);
 
-    const upToDateList = truncatedPosts.reverse().map((v) => {
+
+    const latestPosts = state.posts.slice(-MAX_DISPLAY_ITEMS).reverse();
+
+    const upToDateList = latestPosts.map((v) => {
         getUserName(v.userId);
         return (
             <div className={styles[`post-card-block`]} key={v.postId} onClick={() => {

@@ -44,8 +44,7 @@ class Comment extends Component {
     const { postId } = this.props;
 
     // Get userId from localStorage
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    const userId = userData ? userData.memberId : null;
+    const userId = localStorage.getItem("memberId");
 
     // Check if userId is available
     if (!userId) {

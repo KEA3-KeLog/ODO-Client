@@ -41,6 +41,7 @@ const CommentList = ({ list }) => {
         };
 
         fetchUserNicknames();
+        console.log(userNicknames);
     }, [list]);
 
     // 나머지 코드는 이전과 동일
