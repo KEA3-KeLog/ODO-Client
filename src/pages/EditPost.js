@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import PostService from "../service/PostService";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Viewer } from '@toast-ui/react-editor';
-
+import TTSService from "../service/TTSService";
 import MarkdownEditor from "./MarkdownEditor";
 import NavBar from "../components/Navigationbar";
 import ImageService from "../service/ImageService";
@@ -215,6 +215,7 @@ return (
           id="post_submit_button"
           onClick={(e) => {
             e.preventDefault();
+            TTSService.requestVoice(contents, userId);
             PostService.updatePost(postId, post).then((res) => {
               navigate(`/myblogpage/${userId}`);
               

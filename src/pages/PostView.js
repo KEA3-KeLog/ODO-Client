@@ -11,6 +11,7 @@ import Comment from "../components/Comment";
 
 import { useNavigate } from "react-router-dom";
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import TTSService from "../service/TTSService";
 
 
 function PostView() {
@@ -20,7 +21,6 @@ function PostView() {
     const [contents, setContents] = useState("");
     const [summary, setSummary] = useState("");
     const [postKey, setPostKey] = useState("");
-
     //추가
     const [tags, setTags] = useState([]);
     const navigate = useNavigate();
@@ -88,6 +88,16 @@ function PostView() {
                 });
         }
     };
+    const handlePlay = () => {
+        TTSService.playVoice(postId)
+    }
+    const pause = () => {
+        TTSService.pause();
+    }
+
+    const resume = () => {
+        TTSService.resume();
+    }
 
 
     return (
@@ -138,7 +148,12 @@ function PostView() {
                 <div id='Mains-right'>
                     <button id="post_edit_button" onClick={handleUpdate}>수정</button>
                     <button id="post_delete_button" onClick={handleDelete}>삭제</button>
-
+                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                    <button id="post_edit_button" onClick={handlePlay}>재생</button>
+                    <br/>
+                    <button id="post_edit_button" onClick={pause}>pause</button>
+                    <br/>
+                    <button id="post_edit_button" onClick={resume}>resume</button>
                 </div>
 
             </div>

@@ -10,7 +10,7 @@ import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
-
+import TTSService from "../service/TTSService";
 function WritePost() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -60,6 +60,7 @@ function WritePost() {
     try {
       // 이미지를 업로드하고 서버에 저장
       const img = await ImageService.uploadImage(formData);
+
       const url = img.data;
   
       // 이미지 URL을 에디터에 추가
@@ -241,6 +242,7 @@ console.log(tagList);
             id="post_submit_button"
             onClick={(e) => {
               e.preventDefault();
+              TTSService.requestVoice(contents, userId);
               PostService.createPost(post).then((res) => {
                 navigate("/postview/" + res.data, {
                   state: post.userId,
