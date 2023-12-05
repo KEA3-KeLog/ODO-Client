@@ -6,12 +6,10 @@ import React, {useRef, useState} from "react";
 import SideProfileUser from "./SideProfile-user";
 import {defaultUrlTransform} from "react-markdown";
 
-function Header(props) {
+function Header() {
     let navigate = useNavigate();
-    // sideProfile=0 클릭안해서 안보이는 상태
-    // sideProfile=1 로그인 안 된 상태
-    // sideProfile=2 로그인 되서 프로필이 보임
-    const [sideProfile, setSideProfile] = useState(0);
+
+    const [showProfile, setShowProfile] = useState(false);
 
     return (
         <>
@@ -29,17 +27,8 @@ function Header(props) {
                     <button
                         className={styles[`icon-profile-button`]}
                         onClick={() => {
-                            // 로그인 안 된 상태
-                            if (sideProfile===0 && !props.sideProfileUser) {
-                                setSideProfile(1);
-                            }
-                            // 로그인 된 상태 -> 유저 프로필 모달
-                            else if (sideProfile===0 && props.sideProfileUser) {
-                                setSideProfile(2);
-                                // changeProfileImage();
-                            } else {
-                                setSideProfile(0);
-                        }}}
+                            setShowProfile(!showProfile);
+                        }}
                     >
                         <img id={"profileImg"}
                             alt={""}
@@ -65,22 +54,21 @@ function Header(props) {
                 <p className={styles[`section-main-bg-subtitle`]}>ODO와 함께 시작하세요</p>
                 <button className={styles[`section-main-bg-button`]}>자세히보기</button>
             </div>
-            <ShowSideProfile sideProfile={sideProfile} id={props.id}/>
+            {
+                // 버튼 안 눌렀을 때 -> null
+                // 버튼 눌렀을 때 -> 스토리지에 "memeberId" 값이 있는지 확인
+                !showProfile
+                ? null
+                    : (localStorage.getItem("memberId")
+                    ? <SideProfileUser />
+                        :<SideProfile />
+                    )
+            }
         </>
     );
 }
 
 export default Header;
-
-function ShowSideProfile(props) {
-    if (props.sideProfile==0) {
-        return null;
-    } else if (props.sideProfile==1) {
-        return <SideProfile/>;
-    } else {
-        return <SideProfileUser id={props.id}/>
-    }
-}
 
 function changeProfileImage() {
     let profileImg = document.getElementById("profileImg");

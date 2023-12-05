@@ -1,16 +1,20 @@
 import styles from './Navigationbar-user.module.css'
 import {forwardRef, useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import StoreService from "../service/StoreService";
 
-function NavigationbarUser(props) {
+function NavigationbarUser() {
     const navigate = useNavigate();
-    const userId = props.userId;
+    const userId = localStorage.getItem("memberId");
+
+    const [userPoint, setUserPoint] = useState("-");
 
     // isModalOpen이 true 이면 모달창 열림
     const [isModalOpen, setIsModalOpen] = useState(false);
     const modalRef = useRef();
 
     useEffect(() => {
+        userpointAPI(userId);
         // Modal 영역 밖 클릭 시 모달창 닫기
         const handleClickOutside = (e) => {
             if (isModalOpen && !modalRef.current.contains(e.target)) {
@@ -22,6 +26,23 @@ function NavigationbarUser(props) {
             window.removeEventListener("click", handleClickOutside);
         };
     }, [isModalOpen]);
+
+    const userpointAPI = async (userId) => {
+        try {
+            const response = await StoreService.getPoint(userId); // Update the URL accordingly
+            setUserPoint(response.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            setUserPoint("-");
+        }
+    };
+    const updatePoint = async (userId, Point) => {
+        try {
+            await StoreService.updatePoint(userId, Point);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    }
 
     const handleBlogNameClick = () => {
         navigate(`../../myblogpage/${userId}`);
@@ -53,7 +74,7 @@ function NavigationbarUser(props) {
                     />
                     <button className={styles[`user-name`]}
                             onClick={handleBlogNameClick}
-                    >hyun_dev
+                    >{localStorage.getItem("blogName")}
                     </button>
                 </div>
                 <div className={styles[`user-menu`]}>
@@ -61,7 +82,7 @@ function NavigationbarUser(props) {
                         <img
                             src={require("../assets/icon_point_gray.svg").default}
                         />
-                        <div>1,150</div>
+                        <div>{userPoint}</div>
                     </button>
                     <button onClick={handleMyPageClick}>
                         <img

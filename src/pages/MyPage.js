@@ -58,8 +58,8 @@ function MyPage() {
     }, [currentTab])
 
     return (
-        <>
-            <NavBarUser userId={userId} />
+        <div className={styles.screen}>
+            <NavBarUser />
             <div className={styles[`tab`]}>
                 <div className={styles[`tab-name`]}>
                     <img className={styles[`tab-icon`]}
@@ -115,7 +115,7 @@ function MyPage() {
             </div>
             <hr />
             <TabContent tab={tab} userId={userId} />
-        </>
+        </div>
     )
 }
 

@@ -92,8 +92,10 @@ const onKeyUp = useCallback(
   const handleAddImage = async (blob, callback) => {
     const formData = new FormData();
     formData.append("file", blob);
-    formData.append("postKey", postKey); // postId 사용
+    formData.append("postKey", postKey);// postId 사용
+    formData.append("title",title); // title 같이 전송해봄
     console.log(formData);
+  
     try {
       // 이미지를 업로드하고 서버에 저장
       const img = await ImageService.updateImage(formData);

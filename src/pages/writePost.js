@@ -56,7 +56,7 @@ function WritePost() {
     const formData = new FormData();
     formData.append("file", blob);
     formData.append("postKey", postKey);
-  
+    
     try {
       // 이미지를 업로드하고 서버에 저장
       const img = await ImageService.uploadImage(formData);

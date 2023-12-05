@@ -3,9 +3,11 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import UserService from "../service/UserService";
 
-function SideProfile(props) {
+function SideProfile() {
     const navigate = useNavigate();
-    const userId = props.id;
+    const userId = localStorage.getItem("memberId");
+
+    // 유저 정보를 담아둘 state
     const [state, setState] = useState({});
 
     // userId 를 back에 보냄
@@ -13,7 +15,6 @@ function SideProfile(props) {
     // 그럼 back에서 가져온 정보를 여기에 다시 보냄
     useEffect(() => {
         UserService.getUser(userId).then(function (res) {
-            console.log(res);
             setState(res.data);
         });
     }, []);
@@ -46,10 +47,10 @@ function SideProfile(props) {
                 <div className={styles[`box-horizontal`]}/>
                 <div className={styles[`section-router`]}>
                     <button onClick={()=>{
-                        navigate(`./mypage/${props.id}`);
+                        navigate(`./mypage/${userId}`);
                     }}>마이페이지</button>
                     <button onClick={()=>{
-                        navigate(`./myblogpage/${props.id}`);
+                        navigate(`./myblogpage/${userId}`);
                     }}>내 블로그</button>
                     <button onClick={()=>{
                         navigate('./login');

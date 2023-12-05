@@ -1,3 +1,7 @@
+.screen {
+    margin-bottom: 200px;
+}
+
 .tab {
     padding: 30px 0 0 90px;
     display: flex;

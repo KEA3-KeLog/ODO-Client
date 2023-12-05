@@ -13,14 +13,20 @@ import Calendar from 'react-calendar';  // Import react-calendar
 import ReactCalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
-import yellowImage from '../image/1.png';
-import whiteImage from '../image/2.png';
-import greenImage from '../image/3.png';
+// import yellowImage from '../image/1.png';
+// import whiteImage from '../image/2.png';
+// import greenImage from '../image/3.png';
 
 import axios from 'axios';
 
 function MyBlogPage() {
     const [dateCounts, setDateCounts] = useState({});
+
+    const [newDate, setNewDate] = useState('');
+    const newEntry = { count: 1 };
+
+    const [streakFreeze, setStreakFreeze] = useState({});
+
 
     const userId = useParams().userId;
     const [state, setState] = useState({
@@ -35,6 +41,30 @@ function MyBlogPage() {
       setState({ posts: res.data });
     });
   }, []);
+
+
+  useEffect(() => {
+    // 서버에서 날짜별 포스트 개수를 가져오는 API 호출
+    axios.get('http://localhost:8080/api/post/countByDate')
+      .then(response => {
+        setDateCounts(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching post counts:', error);
+      });
+  }, []); // 빈 배열은 한 번만 호출하도록 설정
+
+
+  useEffect(() => {
+    // 서버에서 날짜별 포스트 개수를 가져오는 API 호출
+    axios.get('http://localhost:8080/api/post/countFreeze')
+      .then(response => {
+        setStreakFreeze(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching post counts:', error);
+      });
+  }, []); // 빈 배열은 한 번만 호출하도록 설정
 
   let length = state.posts.length;
   var postArr = [];
@@ -94,9 +124,47 @@ function MyBlogPage() {
         navigate(`../../writepost/${userId}`);
     };
 
+
+
+
+    
+    
+    const dateCountsArray = Object.values(dateCounts);
+
+    const handleAddNewEntry = () => {
+        // Check if the newDate is not empty
+        if (newDate.trim() !== '') {
+            // Create a new entry with the entered date and a count of 1
+            const entryToAdd = { ...newEntry, date: newDate };
+    
+            // Log the data to be sent in the POST request
+            console.log('Data to be sent in the POST request:', entryToAdd);
+    
+            // Assuming dateCounts is a state variable, update it with the new entry
+            setDateCounts((prevDateCounts) => ({
+                ...prevDateCounts,
+                [newDate]: entryToAdd,
+            }));
+    
+            // Reset the newDate input
+            setNewDate('');
+    
+            // Send a POST request to your server to add the new entry
+            axios.post('http://localhost:8080/api/post/addNewValue', entryToAdd)
+                .then(response => {
+                    // Handle the response if needed
+                    console.log('New entry added successfully(react):', response.data);
+                })
+                .catch(error => {
+                    console.error('Error adding new entry(react):', error);
+                });
+        }
+    };
+      const updatedDateCounts = dateCountsArray.concat(streakFreeze);
+
     return (
         <>
-            <NavBarUser userId={userId}/>
+            <NavBarUser />
             <div className="container">
                 <ion-icon name="chevron-down-outline"></ion-icon>
                 <div className="child first">
@@ -270,7 +338,7 @@ function MyBlogPage() {
                         <ReactCalendarHeatmap
               startDate={new Date('2022-12-31')}
               endDate={new Date('2023-12-30')}
-              values={Array.isArray(dateCounts) ? dateCounts : []}
+              values={Array.isArray(updatedDateCounts) ? updatedDateCounts : []}
               
               classForValue={(value) => {
                 if (!value) {
@@ -357,9 +425,9 @@ function MyBlogPage() {
 /> */}
 
 
-<div style={{ display: 'flex' }}>
+{/* <div style={{ display: 'flex' }}> */}
 {/* 포스팅 사진 */}
-<div style={{ flex: '70%' }}>
+{/* <div style={{ flex: '70%' }}>
 <Calendar
   tileContent={({ date, view }) => {
     const formattedDate = date.toISOString().split('T')[0];
@@ -409,15 +477,15 @@ function MyBlogPage() {
       return null;
     }
   }}
-/>
+/> */}
 
 
-    </div>
+    {/* </div> */}
 {/* Calendar */}
 
 
 
-<div style={{ flex: '100%' }}>
+{/* <div style={{ flex: '100%' }}>
     <img
       src={require("../image/123.png")}
       className="postnotice"
@@ -425,7 +493,7 @@ function MyBlogPage() {
       style={{ maxWidth: '100%', height: '50%' }}
     />
   </div>
-            </div>
+            </div> */}
                         
 
                         </div>

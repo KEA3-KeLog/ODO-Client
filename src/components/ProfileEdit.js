@@ -9,10 +9,7 @@ import ProfileUpdateService from "../service/ProfileUpdateService";
 
 
 function ProfileEdit() {
-    const localUserData = JSON.parse(localStorage.getItem('userData'));
-    const userId = localUserData.memberId;
-
-
+    const userId = localStorage.getItem("memberId");
 
     const [profileData, setProfileData] = useState(null);
     const [blogName, setUserBlogName] = useState("");
@@ -63,7 +60,6 @@ function ProfileEdit() {
             setUserEmail(response.data.userEmail);
             setReviewRecieved(response.data.reviewReceived);
             setUpdateRecieved(response.data.updateReceived);
-
         }
         catch(error){
             console.error(error);
@@ -83,19 +79,7 @@ function ProfileEdit() {
 
         const formData = new FormData();
         formData.append("uploadVoiceFile", file);
-        console.log("2. userId는:", userId);
         formData.append("userId", userId);
-
-        // FormData의 key 확인
-        for (let key of formData.keys()) {
-            console.log(key);
-        }
-
-// FormData의 value 확인
-        for (let value of formData.values()) {
-            console.log(value);
-        }
-
 
         const voiceFile = await VoiceFileService.uploadVoiceFile(formData);
 
@@ -107,7 +91,6 @@ function ProfileEdit() {
         const file = target.files[0];
         const formData = new FormData();
         formData.append("uploadVoiceFile", file);
-        console.log("1. userId는:", userId);
         formData.append("userId", userId);
 
         const voiceFile = await VoiceFileService.uploadVoiceFile(formData);
@@ -210,7 +193,8 @@ function ProfileEdit() {
                 console.log(profileData);
                 //const response = await ProfileUpdateService.UpdateUserInfo(userId,profileData);
                 const response = await axios.post(`http://localhost:8080/profile/api/profileupdate/${userId}`,profileData);
-                console.log(response.data);
+                console.log("response data: ",response.data);
+                localStorage.setItem("blogName", blogName);
             }else{
                 alert("변경 사항이 없습니다.")
             }
@@ -337,7 +321,9 @@ function ProfileEdit() {
                             <div className={styles[`toggle-name`]}>업데이트 소식</div>
                         </div>
                     </div>
-                    <button onClick={handlePageSave}>저장</button>
+                    <button
+                        className={"saveButton"}
+                        onClick={handlePageSave}>저장</button>
                 </div>
                 {/*프로필 편집 화면 오른쪽 내용*/}
                 <div className={styles[`second`]}>
@@ -350,10 +336,8 @@ function ProfileEdit() {
                             <div>마이 AI 보이스</div>
                         </div>
 
-                        {/*
-                        isActive 값에 따라 className을 제어합니다.
-                        드래그 앤 드롭 css가 가끔 안되는 문제 있음.
-                        */}
+                        {/*isActive 값에 따라 className을 제어합니다.
+                        드래그 앤 드롭 css가 가끔 안되는 문제 있음.*/}
                         <label
                             className={`inputFile${isActive ? ' active' : ''}`}
                             onDragEnter={handleDragStart}
