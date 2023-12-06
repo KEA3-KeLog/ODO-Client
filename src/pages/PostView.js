@@ -223,16 +223,4 @@ function PostView() {
     );
 }
 
-
-const PlayTts = ({play}) => {
-    return [
-        <button
-            id={'재생'}
-            className={'player'}>
-            <img id={'play-icon'}
-                 src={require("../assets/Polygon 4.svg").default} />
-        </button>
-    ][play]
-}
-
 export default PostView;
