@@ -126,6 +126,9 @@ function PostView() {
             <div className='Head' />
             <div className='Mains'>
                 <div id='Mains-left'>
+                    <div className={'player'}>
+
+                    </div>
                 </div>
 
                 <div>

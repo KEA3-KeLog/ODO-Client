@@ -140,6 +140,12 @@ function MyBlogPage() {
         navigate(`../../writepost/${userId}`);
     };
 
+    const handleProfileEditClick = () => {
+        navigate(`../../mypage/${userId}`,{
+            state: 3
+        });
+    }
+
 
 
 
@@ -250,7 +256,7 @@ function MyBlogPage() {
                         </div>
                         <div className="buttons">
                             <button onClick={handleWritePostButtonClick}>글 작성</button>
-                            <button>프로필 편집</button>
+                            <button onClick={handleProfileEditClick}>프로필 편집</button>
                         </div>
                         <div className="firstLink">
                             <div style={{marginRight: "10px"}}>

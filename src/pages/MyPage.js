@@ -2,7 +2,7 @@ import styles from './MyPage.module.css';
 import NavBarUser from '../components/Navigationbar-user';
 import Inventory from "../components/Inventory";
 import ProfileEdit from "../components/ProfileEdit";
-import { useParams } from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import { useEffect, useState } from "react";
 import FollowList from "../components/FollowList";
 import StoreContent from "../components/StoreContent";
@@ -11,9 +11,10 @@ import styled from "styled-components";
 function MyPage() {
     const userId = useParams().userId;
 
+    const location = useLocation();
 
     // 상점 0 / 인벤토리 1 / 팔로우 목록 2 / 프로필 편집 3
-    const [tab, setTab] = useState(1);
+    const [tab, setTab] = useState(0);
 
     // 현재 tab의 id
     // 현재 어디 tab인지 사용자에게 알려주기 위한 스타일 입니다.
@@ -40,6 +41,12 @@ function MyPage() {
     const getClick = (e) => {
         setCurrentTab(e.currentTarget.id);
     }
+
+    useEffect(() => {
+        if (location.state) {
+            setTab(location.state);
+        }
+    }, []);
 
     useEffect(() => {
         // 현재 방문 중인 tab 의 버튼 디자인 변경
