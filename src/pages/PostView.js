@@ -39,6 +39,12 @@ function PostView() {
     const location = useLocation();
     const userId = location.state;
 
+
+    // tts 재생관련 state: 0 초기 / 1 재생 / 2 멈춤 / 3 재개
+    const [play, setPlay] = useState(0);
+
+
+
     useEffect(() => {
         console.log("userId: ", userId);
         console.log("memeberId: ", localStorage.getItem("memberId"));
@@ -105,14 +111,20 @@ function PostView() {
         }
     };
     const handlePlay = () => {
-        TTSService.playVoice(postId)
+        TTSService.playVoice(postId);
+        setPlay(1);
+        // console.log("play 버튼 눌림")
     }
     const pause = () => {
         TTSService.pause();
+        setPlay(2);
+        // console.log("pause 버튼 눌림")
     }
 
     const resume = () => {
         TTSService.resume();
+        setPlay(3);
+        // console.log("resume 버튼 눌림")
     }
 
 
@@ -125,9 +137,40 @@ function PostView() {
             }
             <div className='Head' />
             <div className='Mains'>
-                <div id='Mains-left'>
-                    <div className={'player'}>
 
+                <div id='Mains-left'>
+                    <div className={'left-menu'}>
+                        <div id={'Mains-left'}></div>
+                        <div>
+
+                            {
+                                play === 0
+                                    ? <button
+                                        id={'초기-누르면 재생 시작'}
+                                        className={'player'}
+                                        onClick={handlePlay}>
+                                        <img id={'play-icon'}
+                                             src={require("../assets/icon_play.svg").default}/>
+                                    </button>
+                                    : (play === 2
+                                            ? <button
+                                                id={'멈춤-누르면 재개'}
+                                                className={'player'}
+                                                onClick={resume}>
+                                                <img id={'play-icon'}
+                                                     src={require("../assets/icon_pause.svg").default}/>
+                                            </button>
+                                            : <button
+                                                id={'재개-누르면 멈춤'}
+                                                className={'player'}
+                                                onClick={pause}>
+                                                <img id={'play-icon'}
+                                                     src={require("../assets/icon_play.svg").default}/>
+                                            </button>
+                                    )
+                            }
+
+                        </div>
                     </div>
                 </div>
 
@@ -155,7 +198,7 @@ function PostView() {
                         <div className="row"><br /><br /><br />
                             {/* 마크다운 */}
                             {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>{contents}</ReactMarkdown> */}
-                            
+
                             <Viewer key={contents} initialValue={contents} />
                             {/* 마크다운 */}<br /><br /><br /><br />
                         </div>
@@ -172,17 +215,24 @@ function PostView() {
                     <button id="post_edit_button" onClick={handleUpdate}>수정</button>
                     <button id="post_delete_button" onClick={handleDelete}>삭제</button>
                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                    <button id="post_edit_button" onClick={handlePlay}>재생</button>
-                    <br/>
-                    <button id="post_edit_button" onClick={pause}>pause</button>
-                    <br/>
-                    <button id="post_edit_button" onClick={resume}>resume</button>
                 </div>
 
             </div>
 
         </>
     );
-};
+}
+
+
+const PlayTts = ({play}) => {
+    return [
+        <button
+            id={'재생'}
+            className={'player'}>
+            <img id={'play-icon'}
+                 src={require("../assets/Polygon 4.svg").default} />
+        </button>
+    ][play]
+}
 
 export default PostView;
