@@ -13,11 +13,8 @@ import Calendar from 'react-calendar';  // Import react-calendar
 import ReactCalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
-// import yellowImage from '../image/1.png';
-// import whiteImage from '../image/2.png';
-// import greenImage from '../image/3.png';
-
 import axios from 'axios';
+import UserService from "../service/UserService";
 
 function formatDateTime(dateTimeString) {
   const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
@@ -26,6 +23,13 @@ function formatDateTime(dateTimeString) {
 }
 
 function MyBlogPage() {
+
+    // 유저 정보 변수
+    const userId = useParams().userId;
+    const [userName, setUserName] = useState("");
+    const [userBlogName, setUserBlogName] = useState("");
+
+
     const [dateCounts, setDateCounts] = useState({});
 
     const [newDate, setNewDate] = useState('');
@@ -34,7 +38,6 @@ function MyBlogPage() {
     const [streakFreeze, setStreakFreeze] = useState({});
 
 
-    const userId = useParams().userId;
     const [state, setState] = useState({
         posts: [],
     });
@@ -46,6 +49,11 @@ function MyBlogPage() {
     PostService.getPosts(userId).then(function (res) {
       setState({ posts: res.data });
     });
+
+    UserService.getUser(userId).then(function (res) {
+        setUserBlogName(res.data.blog_name);
+        setUserName(res.data.blog_nickname);
+    })
   }, []);
 
 
@@ -135,8 +143,8 @@ function MyBlogPage() {
 
 
 
-    
-    
+
+
     const dateCountsArray = Object.values(dateCounts);
 
     const handleAddNewEntry = () => {
@@ -144,19 +152,19 @@ function MyBlogPage() {
         if (newDate.trim() !== '') {
             // Create a new entry with the entered date and a count of 1
             const entryToAdd = { ...newEntry, date: newDate };
-    
+
             // Log the data to be sent in the POST request
             console.log('Data to be sent in the POST request:', entryToAdd);
-    
+
             // Assuming dateCounts is a state variable, update it with the new entry
             setDateCounts((prevDateCounts) => ({
                 ...prevDateCounts,
                 [newDate]: entryToAdd,
             }));
-    
+
             // Reset the newDate input
             setNewDate('');
-    
+
             // Send a POST request to your server to add the new entry
             axios.post('http://localhost:8080/api/post/addNewValue', entryToAdd)
                 .then(response => {
@@ -172,7 +180,11 @@ function MyBlogPage() {
 
     return (
         <>
-            <NavBarUser />
+            {
+                userId === localStorage.getItem("memberId")
+                    ? <NavBarUser/>
+                    : <NavBar userId={userId}/>
+            }
             <div className="container">
                 <ion-icon name="chevron-down-outline"></ion-icon>
                 <div className="child first">
@@ -229,7 +241,7 @@ function MyBlogPage() {
                             </div>
                         </div>
                         <div className="Introduce">
-                            <div className="blogName">{localStorage.getItem("blogName")}</div>
+                            <div className="blogName">{userName}</div>
                             <div className="subIntro">
                                 안녕하세요~ <br/>
                                 잔디밭 채우고 싶은 <br/>
@@ -345,12 +357,12 @@ function MyBlogPage() {
                             <span className="workTitle">2023 블로그 기여도</span>
                         </div>
                         <div>
-                            
+
                         <ReactCalendarHeatmap
               startDate={new Date('2022-12-31')}
               endDate={new Date('2023-12-30')}
               values={Array.isArray(updatedDateCounts) ? updatedDateCounts : []}
-              
+
               classForValue={(value) => {
                 if (!value) {
                   return 'color-empty';
@@ -505,7 +517,7 @@ function MyBlogPage() {
     />
   </div>
             </div> */}
-                        
+
 
                         </div>
                     </div>

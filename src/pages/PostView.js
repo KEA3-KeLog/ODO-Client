@@ -6,6 +6,7 @@ import { useLocation, useParams } from "react-router-dom";
 import ReactMarkdown from 'react-markdown'; // 마크다운
 import remarkGfm from 'remark-gfm';
 import NavBar from "../components/Navigationbar"; // 마크다운
+import NavBarUser from "../components/Navigationbar-user";
 import { Viewer } from '@toast-ui/react-editor';
 import Comment from "../components/Comment";
 
@@ -39,6 +40,9 @@ function PostView() {
     const userId = location.state;
 
     useEffect(() => {
+        console.log("userId: ", userId);
+        console.log("memeberId: ", localStorage.getItem("memberId"));
+
         PostService.getOnePost(postId).then(res => {
             console.log(res);
             // setTag(res.data.tag);
@@ -114,7 +118,11 @@ function PostView() {
 
     return (
         <>
-            <NavBar userId={userId} />
+            {
+                userId == localStorage.getItem("memberId")
+                    ? <NavBarUser />
+                    : <NavBar userId={userId}/>
+            }
             <div className='Head' />
             <div className='Mains'>
                 <div id='Mains-left'>

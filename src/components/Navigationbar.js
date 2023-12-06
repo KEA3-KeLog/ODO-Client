@@ -5,8 +5,12 @@ import UserService from "../service/UserService";
 
 function Navigationbar(props) {
     const navigate = useNavigate();
+
+    // 유저 정보 변수
     const userId = props.userId;
     const [userName, setUserName] = useState("");
+    const [userBlogName, setUserBlogName] = useState("");
+
 
     // isModalOpen이 true 이면 모달창 열림
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,6 +20,7 @@ function Navigationbar(props) {
     useEffect(()=>{
         UserService.getUser(userId).then(function (res) {
             setUserName(res.data.blog_nickname);
+            setUserBlogName(res.data.blog_name);
         })
         const handleClickOutside=(e)=>{
             if (isModalOpen && !modalRef.current.contains(e.target)) {
@@ -32,6 +37,10 @@ function Navigationbar(props) {
         navigate(`../../myblogpage/${userId}`);
     };
 
+    const handleBlogLogoClick = () => {
+        navigate(`../../`, {state: userId});
+    }
+
     return (
         <>
             <div className={styles.navigation}>
@@ -45,10 +54,11 @@ function Navigationbar(props) {
                 />
                 <input type={"button"}
                        className={styles[`nav-logo`]}
+                       onClick={handleBlogLogoClick}
                 />
                 <button className={styles[`blog-name`]}
                         onClick={handleBlogNameClick}
-                >{userName}</button>
+                >{userBlogName}</button>
             </div>
             <div ref={modalRef}>
                 {
