@@ -19,6 +19,12 @@ import 'react-calendar-heatmap/dist/styles.css';
 
 import axios from 'axios';
 
+function formatDateTime(dateTimeString) {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+  const dateTime = new Date(dateTimeString);
+  return dateTime.toLocaleString('en-US', options).replace(/,/g, '');
+}
+
 function MyBlogPage() {
     const [dateCounts, setDateCounts] = useState({});
 
@@ -110,7 +116,7 @@ function MyBlogPage() {
         </div>
         <div className="PostCardBlockDate">
             {console.log(typeof(v.createTime))}
-          <span>{v.createdTime}</span>
+          <span>{formatDateTime(v.createdTime)}</span>
         </div>
       </div>
     </div>))

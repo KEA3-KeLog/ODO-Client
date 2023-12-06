@@ -14,6 +14,11 @@ import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import TTSService from "../service/TTSService";
 import UserService from "../service/UserService";
 
+function formatDateTime(dateTimeString) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+    const dateTime = new Date(dateTimeString);
+    return dateTime.toLocaleString('en-US', options).replace(/,/g, '');
+  }
 
 function PostView() {
     const postId = useParams().postId;
@@ -23,6 +28,7 @@ function PostView() {
     const [summary, setSummary] = useState("");
     const [postKey, setPostKey] = useState("");
     const [userName, setUserName] = useState("");
+    const [createdTime, setCreatedTime] = useState("");
     //추가
     const [tags, setTags] = useState([]);
     const navigate = useNavigate();
@@ -40,6 +46,7 @@ function PostView() {
             setTitle(res.data.title);
             setContents(res.data.contents);
             setSummary(res.data.summary);
+            setCreatedTime(res.data.createdTime);
             setPostKey(res.data.postKey);
         });
         UserService.getUser(userId).then(function (res) {
@@ -117,7 +124,7 @@ function PostView() {
                     <div className='Post_head'>
                         <div className="row">
                             <h1 id="title">{title}</h1>
-                            <text id="thin">by <text id="bold">{userName}</text> · 2023.09.27</text><br /><br />
+                            <text id="thin">by <text id="bold">{userName}</text> · {formatDateTime(createdTime)}</text><br /><br />
                             {tags.map((tag, index) => (
                                 <button key={index} id="tag">{tag}</button>
                             ))}

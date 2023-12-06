@@ -90,9 +90,6 @@ function WritePost() {
 
 
 
-
-console.log(tag);
-console.log(tagList);
   
 
   

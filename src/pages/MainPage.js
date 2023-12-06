@@ -1,17 +1,24 @@
 import styles from "./MainPage.module.css";
 import Header from "../components/Header";
-import {useInView} from "react-intersection-observer";
-import React, {useEffect, useState} from "react";
-import {useNavigate, useLocation} from "react-router-dom";
+import { useInView } from "react-intersection-observer";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import PostService from "../service/PostService";
 import ItemsCarousel from 'react-items-carousel';
 import UserService from "../service/UserService"; // Import the UserService
+
+
+function formatDateTime(dateTimeString) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+    const dateTime = new Date(dateTimeString);
+    return dateTime.toLocaleString('en-US', options).replace(/,/g, '');
+}
 
 function MainPage() {
     // const [activeItemIndex, setActiveItemIndex] = useState(0);
     // const chevronWidth = 40;
 
-    const {ref, inView} = useInView({
+    const { ref, inView } = useInView({
         threshold: 0.5
     });
 
@@ -19,8 +26,8 @@ function MainPage() {
     const id = location.state;
     const [login, setLogin] = useState(false);
 
-    const [userName, setUserName] = useState("");
 
+    const [userNames, setUserNames] = useState({});
     useEffect(() => {
         if (id != null) {
             setLogin(true);
@@ -35,31 +42,13 @@ function MainPage() {
 
     useEffect(() => {
         PostService.getAllPost().then(function (res) {
-            setState({posts: res.data});
+            setState({ posts: res.data });
         });
     }, []);
 
-    const getUserName = (userId) => {
-        UserService.getUser(userId).then(function (res) {
-            setUserName(res.data.blog_nickname);
-        })
-    }
 
-    // useEffect(() => {
-    //     // Fetch user information and update the state
-    //     const fetchUserInfo = async () => {
-    //         const updatedPosts = await Promise.all(
-    //             state.posts.map(async (post) => {
-    //                 const userRes = await UserService.getUser(post.userId);
-    //                 const username = userRes.data.blog_nickname;
-    //                 return { ...post, username };
-    //             })
-    //         );
-    //         setState({ posts: updatedPosts });
-    //     };
 
-    //     fetchUserInfo();
-    // }, [state.posts]);
+
     const MAX_SUMMARY_LENGTH = 100;
     const MAX_DISPLAY_ITEMS = 4;
 
@@ -68,8 +57,22 @@ function MainPage() {
 
     const latestPosts = state.posts.slice(-MAX_DISPLAY_ITEMS).reverse();
 
+    useEffect(() => {
+        // Fetch user names for all posts
+        Promise.all(state.posts.map(post => UserService.getUser(post.userId)))
+            .then(responses => {
+                const userNamesMap = {};
+                responses.forEach((res, index) => {
+                    userNamesMap[state.posts[index].userId] = res.data.blog_nickname;
+                });
+                setUserNames(userNamesMap);
+            })
+            .catch(error => {
+                console.error("Error fetching user names:", error);
+            });
+    }, [state.posts]);
+
     const upToDateList = latestPosts.map((v) => {
-        getUserName(v.userId);
         return (
             <div className={styles[`post-card-block`]} key={v.postId} onClick={() => {
                 navigate("/postview/" + v.postId, {
@@ -78,7 +81,7 @@ function MainPage() {
             }}>
                 <div className={styles[`img-block`]}>
                     <img className={styles[`post-view-1-image`]}
-                         src={"http://localhost:8080/api/image/" + v.fileNewName}
+                        src={"http://localhost:8080/api/image/" + v.fileNewName}
                     />
                 </div>
                 <div className={styles[`post-view-1-content`]}>
@@ -89,7 +92,7 @@ function MainPage() {
                             : v.summary
                         }
                     </p>
-                    <p className={styles[`post-view-1-date`]}>2023-10-01</p>
+                    <p className={styles[`post-view-1-date`]}>{formatDateTime(v.createdTime)}</p>
                     <div className={styles[`post-view-1-footer`]}>
                         <div className={styles[`post-view-1-profile`]}>
                             <img
@@ -97,23 +100,24 @@ function MainPage() {
                                 src={require("../assets/author_profile.svg").default}
                             />
                             <p className={styles[`post-view-1-author-name`]}>
-                                by <span style={{color: "black", fontWeight: "650"}}>{userName}</span>
+                                by <span style={{ color: "black", fontWeight: "650" }}>{userNames[v.userId]}</span>
                             </p>
                         </div>
-                        <div className={styles[`post-view-1-like`]}>🖤 12</div>
+                        <div className={styles[`post-view-1-like`]}>🖤 0</div>
                     </div>
                 </div>
             </div>
         )
     });
+
     return (
         <>
             <div className={styles[`section-main-bg`]}>
-                <Header/>
+                <Header />
             </div>
 
             <div className={styles[`section-content`]}>
-                <div className={styles[`h-fontstyle`]}>오늘의<br/>키워드를<br/>확인하세요</div>
+                <div className={styles[`h-fontstyle`]}>오늘의<br />키워드를<br />확인하세요</div>
                 <div className={styles[`section-tag`]}>
                     <div className={styles[`section-tag-1`]}>
                         <div className={styles[`tag-item`]}>Javascript</div>
@@ -156,7 +160,7 @@ function MainPage() {
                     <div className={styles.dropdown}>
                         <button className={styles[`dropdown-btn`]}>
                             블로그 검색
-                            <span className={styles[`dropdown-btn-icon`]}/>
+                            <span className={styles[`dropdown-btn-icon`]} />
                         </button>
                         <div className={styles[`dropdown-item`]}>
                             <a href="#">제목 검색</a>
@@ -164,15 +168,15 @@ function MainPage() {
                         </div>
                     </div>
                     <input type={"text"} className={styles[`input-style`]}
-                           placeholder={"'현영'님이 작성한 블로그 클론 코딩 회고록! 지금 검색해 보세요."}/>
-                    <div className={styles[`search-icon`]}/>
+                        placeholder={"'현영'님이 작성한 블로그 클론 코딩 회고록! 지금 검색해 보세요."} />
+                    <div className={styles[`search-icon`]} />
                 </div>
             </div>
 
             <div className={styles[`section-post`]}>
                 <button className={styles[`move-to-posts`]}>
                     연관포스트
-                    <span className={styles[`move-to-posts-icon`]}/>
+                    <span className={styles[`move-to-posts-icon`]} />
                 </button>
                 <div className={styles[`section-post-view-1`]}>
                     <div className={styles[`post-card-block`]}>
@@ -192,7 +196,7 @@ function MainPage() {
                                         src={require("../assets/author_profile.svg").default}
                                     />
                                     <p className={styles[`post-view-1-author-name`]}>by <span
-                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                        style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                 </div>
                                 <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
@@ -215,7 +219,7 @@ function MainPage() {
                                         src={require("../assets/author_profile.svg").default}
                                     />
                                     <p className={styles[`post-view-1-author-name`]}>by <span
-                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                        style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                 </div>
                                 <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
@@ -238,7 +242,7 @@ function MainPage() {
                                         src={require("../assets/author_profile.svg").default}
                                     />
                                     <p className={styles[`post-view-1-author-name`]}>by <span
-                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                        style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                 </div>
                                 <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
@@ -261,7 +265,7 @@ function MainPage() {
                                         src={require("../assets/author_profile.svg").default}
                                     />
                                     <p className={styles[`post-view-1-author-name`]}>by <span
-                                        style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                        style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                 </div>
                                 <div className={styles[`post-view-1-like`]}>🖤 12</div>
                             </div>
@@ -273,15 +277,15 @@ function MainPage() {
             <div className={styles[`section-post`]}>
                 <button className={styles[`move-to-posts`]}>
                     인기포스트
-                    <span className={styles[`move-to-posts-icon`]}/>
+                    <span className={styles[`move-to-posts-icon`]} />
                 </button>
                 <div className={styles[`section-post-view-2`]}>
                     {/*첫번째 아이템*/}
                     <div className={styles[`post-view-2-frame-1`]}>
                         <div className={styles[`post-view-2-item`]}>
                             <img className={styles[`post-view-2-item-img`]}
-                                 alt={"post image"}
-                                 src={require('../assets/Rectangle 10.png')}
+                                alt={"post image"}
+                                src={require('../assets/Rectangle 10.png')}
                             />
                             <div className={styles[`post-view-1-content`]}>
                                 <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
@@ -295,7 +299,7 @@ function MainPage() {
                                             src={require("../assets/author_profile.svg").default}
                                         />
                                         <p className={styles[`post-view-1-author-name`]}>by <span
-                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                            style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                     </div>
                                     <div className={styles[`post-view-1-like`]}>🖤 12</div>
                                 </div>
@@ -306,8 +310,8 @@ function MainPage() {
                     <div className={styles[`post-view-2-frame-2`]}>
                         <div className={styles[`post-view-2-item`]}>
                             <img className={styles[`post-view-2-item-img`]}
-                                 alt={"post image"}
-                                 src={require('../assets/Rectangle 20.png')}
+                                alt={"post image"}
+                                src={require('../assets/Rectangle 20.png')}
                             />
                             <div className={styles[`post-view-1-content`]}>
                                 <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
@@ -321,7 +325,7 @@ function MainPage() {
                                             src={require("../assets/author_profile.svg").default}
                                         />
                                         <p className={styles[`post-view-1-author-name`]}>by <span
-                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                            style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                     </div>
                                     <div className={styles[`post-view-1-like`]}>🖤 12</div>
                                 </div>
@@ -329,8 +333,8 @@ function MainPage() {
                         </div>
                         <div className={styles[`post-view-2-item`]}>
                             <img className={styles[`post-view-2-item-img`]}
-                                 alt={"post image"}
-                                 src={require('../assets/Rectangle 20.png')}
+                                alt={"post image"}
+                                src={require('../assets/Rectangle 20.png')}
                             />
                             <div className={styles[`post-view-1-content`]}>
                                 <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
@@ -344,7 +348,7 @@ function MainPage() {
                                             src={require("../assets/author_profile.svg").default}
                                         />
                                         <p className={styles[`post-view-1-author-name`]}>by <span
-                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                            style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                     </div>
                                     <div className={styles[`post-view-1-like`]}>🖤 12</div>
                                 </div>
@@ -352,8 +356,8 @@ function MainPage() {
                         </div>
                         <div className={styles[`post-view-2-item`]}>
                             <img className={styles[`post-view-2-item-img`]}
-                                 alt={"post image"}
-                                 src={require('../assets/Rectangle 20.png')}
+                                alt={"post image"}
+                                src={require('../assets/Rectangle 20.png')}
                             />
                             <div className={styles[`post-view-1-content`]}>
                                 <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
@@ -367,7 +371,7 @@ function MainPage() {
                                             src={require("../assets/author_profile.svg").default}
                                         />
                                         <p className={styles[`post-view-1-author-name`]}>by <span
-                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                            style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                     </div>
                                     <div className={styles[`post-view-1-like`]}>🖤 12</div>
                                 </div>
@@ -375,8 +379,8 @@ function MainPage() {
                         </div>
                         <div className={styles[`post-view-2-item`]}>
                             <img className={styles[`post-view-2-item-img`]}
-                                 alt={"post image"}
-                                 src={require('../assets/Rectangle 20.png')}
+                                alt={"post image"}
+                                src={require('../assets/Rectangle 20.png')}
                             />
                             <div className={styles[`post-view-1-content`]}>
                                 <span className={styles[`post-view-1-title`]}>프로그래밍의 순간들</span>
@@ -390,7 +394,7 @@ function MainPage() {
                                             src={require("../assets/author_profile.svg").default}
                                         />
                                         <p className={styles[`post-view-1-author-name`]}>by <span
-                                            style={{color: "black", fontWeight: "650"}}>hyun_dev</span></p>
+                                            style={{ color: "black", fontWeight: "650" }}>hyun_dev</span></p>
                                     </div>
                                     <div className={styles[`post-view-1-like`]}>🖤 12</div>
                                 </div>
@@ -403,7 +407,7 @@ function MainPage() {
             <div className={styles[`section-post`]}>
                 <button className={styles[`move-to-posts`]}>
                     최신포스트
-                    <span className={styles[`move-to-posts-icon`]}/>
+                    <span className={styles[`move-to-posts-icon`]} />
                 </button>
                 <div className={styles[`section-post-view-1`]}>
                     {upToDateList}
@@ -415,3 +419,4 @@ function MainPage() {
 }
 
 export default MainPage;
+

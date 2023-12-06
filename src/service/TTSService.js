@@ -33,8 +33,13 @@ class TTSService {
                 responseType: 'blob'
             })
             .then(response => {
-                this.audio.src = URL.createObjectURL(response.data);
-                this.audio.play();
+                if (response.status === 200) {
+                    console.log("ok");
+                    this.audio.src = URL.createObjectURL(response.data);
+                    this.audio.play();
+                } else {
+                    console.error("Unexpected response status: " + response.status);
+                }
             })
             .catch(error => {
                 if (error.response && error.response.status === 404) {
