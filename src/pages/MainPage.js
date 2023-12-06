@@ -69,7 +69,7 @@ function MainPage() {
     const latestPosts = state.posts.slice(-MAX_DISPLAY_ITEMS).reverse();
 
     const upToDateList = latestPosts.map((v) => {
-        getUserName(v.userId);
+        // getUserName(v.userId);
         return (
             <div className={styles[`post-card-block`]} key={v.postId} onClick={() => {
                 navigate("/postview/" + v.postId, {
