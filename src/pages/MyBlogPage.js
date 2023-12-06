@@ -28,7 +28,7 @@ function MyBlogPage() {
     const userId = useParams().userId;
     const [userName, setUserName] = useState("");
     const [userBlogName, setUserBlogName] = useState("");
-
+    const [introduction, setIntroduction] = useState("");
 
     const [dateCounts, setDateCounts] = useState({});
 
@@ -53,9 +53,11 @@ function MyBlogPage() {
     UserService.getUser(userId).then(function (res) {
         setUserBlogName(res.data.blog_name);
         setUserName(res.data.blog_nickname);
+        setIntroduction(res.data.introduction);
+        console.log(res.data);
     })
   }, []);
-
+  console.log(introduction);
 
   useEffect(() => {
     // 서버에서 날짜별 포스트 개수를 가져오는 API 호출
@@ -249,9 +251,7 @@ function MyBlogPage() {
                         <div className="Introduce">
                             <div className="blogName">{userName}</div>
                             <div className="subIntro">
-                                안녕하세요~ <br/>
-                                잔디밭 채우고 싶은 <br/>
-                                프론트 앤드 개발자 입니다.
+                                {introduction}
                             </div>
                         </div>
                         <div className="buttons">
