@@ -47,9 +47,19 @@ function Inventory(props) {
         getInven(userId);
     },[])
 
-    const handleItemStatusClick = () => {
-        setItemStatus(!itemStatus);
-    }
+
+    const handleEquipItem = async (itemId) => {
+        try {
+            // 여기에서 item을 장착하는 로직을 수행합니다.
+            await InvenService.equipItem(userId, itemId);
+            setItemStatus(!itemStatus);
+            // 성공적으로 장착이 되었다면 다른 필요한 로직을 수행할 수 있습니다.
+            console.log(`Item ${itemId}이(가) 장착되었습니다.`);
+        } catch (error) {
+            console.error(`장착 중 오류 발생: ${error.message}`);
+            // 실패했을 경우에 대한 처리를 여기에 추가할 수 있습니다.
+        }
+    };
 
     const getpoint = async (userId) => {
         try {
@@ -142,22 +152,21 @@ function Inventory(props) {
                                 <div className={styles[`item-status-container`]}>
                                     <div className={styles[`item-title`]}>{item.itemName}</div>
 
-                                    {
-                                        itemStatus
-                                            ?
-                                            <ItemStatus
-                                                onClick={handleItemStatusClick}
-                                                on={itemStatus}>
-                                                사용중
-                                            </ItemStatus>
-                                            :
-                                            <ItemStatus
-                                                onClick={handleItemStatusClick}
-                                                on={itemStatus}>
-                                                장착하기
-                                            </ItemStatus>
-
-                                    }
+                                    {itemStatus ? (
+                                        <ItemStatus
+                                            onClick={() => handleEquipItem(item.itemId)}
+                                            on={itemStatus}
+                                        >
+                                            사용중
+                                        </ItemStatus>
+                                    ) : (
+                                        <ItemStatus
+                                            onClick={() => handleEquipItem(item.itemId)}
+                                            on={itemStatus}
+                                        >
+                                            장착하기
+                                        </ItemStatus>
+                                    )}
                                     {/*<ItemStatus*/}
                                     {/*    onClick={handleItemStatusClick}*/}
                                     {/*    on={itemStatus}>*/}
