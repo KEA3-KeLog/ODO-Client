@@ -48,18 +48,15 @@ function Inventory(props) {
         status(items);
     },[])
 
-    const handleItemStatusClick = (itemId) => {
-        setItemStatus((prevItemStatus) => ({
-            ...prevItemStatus,
-            [itemId]: !prevItemStatus[itemId],
-        }));
-    }
 
     const handleEquipItem = async (itemId) => {
         try {
             // 여기에서 item을 장착하는 로직을 수행합니다.
             await InvenService.equipItem(userId, itemId);
-            setItemStatus(!itemStatus);
+            setItemStatus((prevItemStatus) => ({
+                ...prevItemStatus,
+                [itemId]: !prevItemStatus[itemId],
+            }));
             // 성공적으로 장착이 되었다면 다른 필요한 로직을 수행할 수 있습니다.
             console.log(`Item ${itemId}이(가) 장착되었습니다.`);
         } catch (error) {
@@ -173,7 +170,7 @@ function Inventory(props) {
                                         itemStatus[item.itemId]
                                             ? (
                                                 <ItemStatus
-                                                    onClick={() => handleItemStatusClick(item.itemId)}
+                                                    onClick={() => handleEquipItem(item.itemId)}
                                                     on={itemStatus[item.itemId]}
                                                 >
                                                     사용중
@@ -181,7 +178,7 @@ function Inventory(props) {
                                             )
                                             : (
                                                 <ItemStatus
-                                                    onClick={() => handleItemStatusClick(item.itemId)}
+                                                    onClick={() => handleEquipItem(item.itemId)}
                                                     on={itemStatus[item.itemId]}
                                                 >
                                                     장착하기
