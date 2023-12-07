@@ -161,7 +161,7 @@ function PostView() {
                                         className={'player'}
                                         onClick={handlePlay}>
                                         <img id={'play-icon'}
-                                             src={require("../assets/icon_play.svg").default}/>
+                                             src={require("../assets/icon_pause.svg").default}/>
                                     </button>
                                     : (play === 2
                                             ? <button
@@ -169,14 +169,14 @@ function PostView() {
                                                 className={'player'}
                                                 onClick={resume}>
                                                 <img id={'play-icon'}
-                                                     src={require("../assets/icon_pause.svg").default}/>
+                                                     src={require("../assets/icon_play.svg").default}/>
                                             </button>
                                             : <button
                                                 id={'재개-누르면 멈춤'}
                                                 className={'player'}
                                                 onClick={pause}>
                                                 <img id={'play-icon'}
-                                                     src={require("../assets/icon_play.svg").default}/>
+                                                     src={require("../assets/icon_pause.svg").default}/>
                                             </button>
                                     )
                             }
