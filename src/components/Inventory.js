@@ -36,7 +36,7 @@ function Inventory(props) {
     const [itemDetail, setItemDetail] = useState();
     const [modalOpen, setModalOpen] = useState(false);
 
-    const [itemStatus, setItemStatus] = useState(false);
+    const [itemStatus, setItemStatus] = useState([]);
 
     const [newDate, setNewDate] = useState('');
     const [dateCounts, setDateCounts] = useState({});
@@ -45,10 +45,14 @@ function Inventory(props) {
     useEffect(() => {
         getpoint(userId);
         getInven(userId);
+        status(items);
     },[])
 
-    const handleItemStatusClick = () => {
-        setItemStatus(!itemStatus);
+    const handleItemStatusClick = (itemId) => {
+        setItemStatus((prevItemStatus) => ({
+            ...prevItemStatus,
+            [itemId]: !prevItemStatus[itemId],
+        }));
     }
 
     const getpoint = async (userId) => {
@@ -64,10 +68,20 @@ function Inventory(props) {
         try {
             const response = await InvenService.getItems(userId);
             setItems(response.data);
+
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
     }
+
+    const status = (items) => {
+        const initialStatus = {};
+        items.forEach((item) => {
+            initialStatus[item.itemId] = false;
+        });
+        setItemStatus(initialStatus);
+        console.log(itemStatus);
+    };
 
     const clickItemDetail = (item) => {
         setModalOpen(true);
@@ -143,26 +157,24 @@ function Inventory(props) {
                                     <div className={styles[`item-title`]}>{item.itemName}</div>
 
                                     {
-                                        itemStatus
-                                            ?
-                                            <ItemStatus
-                                                onClick={handleItemStatusClick}
-                                                on={itemStatus}>
-                                                사용중
-                                            </ItemStatus>
-                                            :
-                                            <ItemStatus
-                                                onClick={handleItemStatusClick}
-                                                on={itemStatus}>
-                                                장착하기
-                                            </ItemStatus>
-
+                                        itemStatus[item.itemId]
+                                            ? (
+                                                <ItemStatus
+                                                    onClick={() => handleItemStatusClick(item.itemId)}
+                                                    on={itemStatus[item.itemId]}
+                                                >
+                                                    사용중
+                                                </ItemStatus>
+                                            )
+                                            : (
+                                                <ItemStatus
+                                                    onClick={() => handleItemStatusClick(item.itemId)}
+                                                    on={itemStatus[item.itemId]}
+                                                >
+                                                    장착하기
+                                                </ItemStatus>
+                                            )
                                     }
-                                    {/*<ItemStatus*/}
-                                    {/*    onClick={handleItemStatusClick}*/}
-                                    {/*    on={itemStatus}>*/}
-                                    {/*    사용중*/}
-                                    {/*</ItemStatus>*/}
                                 </div>
                             </button>
                         </div>

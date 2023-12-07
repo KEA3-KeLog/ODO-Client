@@ -196,7 +196,7 @@
 
 .post-card-block:hover .post-view-1-image {
     transform: scale(1.04);
-    height: 230px;
+    object-fit: cover;
 }
 
 .post-view-1-content {
