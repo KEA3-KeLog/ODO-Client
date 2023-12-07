@@ -8,6 +8,7 @@ function Navigationbar(props) {
 
     // 유저 정보 변수
     const userId = props.userId;
+    
     const [userName, setUserName] = useState("");
     const [userBlogName, setUserBlogName] = useState("");
 
