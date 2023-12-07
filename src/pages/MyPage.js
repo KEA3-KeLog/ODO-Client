@@ -1,5 +1,5 @@
 import styles from './MyPage.module.css';
-import NavBarUser from '../components/Navigationbar-user';
+import NavBar from '../components/Navigationbar';
 import Inventory from "../components/Inventory";
 import ProfileEdit from "../components/ProfileEdit";
 import {useLocation, useParams} from "react-router-dom";
@@ -66,7 +66,7 @@ function MyPage() {
 
     return (
         <div className={styles.screen}>
-            <NavBarUser />
+            <NavBar userId={userId} />
             <div className={styles[`tab`]}>
                 <div className={styles[`tab-name`]}>
                     <img className={styles[`tab-icon`]}

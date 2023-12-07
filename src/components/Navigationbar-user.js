@@ -3,7 +3,7 @@ import {forwardRef, useEffect, useRef, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import StoreService from "../service/StoreService";
 
-function NavigationbarUser() {
+function NavigationbarUser(props) {
     const navigate = useNavigate();
     const userId = localStorage.getItem("memberId");
 
@@ -14,7 +14,7 @@ function NavigationbarUser() {
     const modalRef = useRef();
 
     useEffect(() => {
-        userpointAPI(userId);
+
         // Modal 영역 밖 클릭 시 모달창 닫기
         const handleClickOutside = (e) => {
             if (isModalOpen && !modalRef.current.contains(e.target)) {
@@ -26,6 +26,10 @@ function NavigationbarUser() {
             window.removeEventListener("click", handleClickOutside);
         };
     }, [isModalOpen]);
+
+    useEffect(() => {
+        userpointAPI(userId);
+    }, [userPoint])
 
     const userpointAPI = async (userId) => {
         try {

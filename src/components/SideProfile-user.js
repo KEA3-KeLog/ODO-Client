@@ -2,13 +2,15 @@ import styles from './SideProfile-user.module.css';
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import UserService from "../service/UserService";
+import StoreService from "../service/StoreService";
 
 function SideProfile() {
     const navigate = useNavigate();
-    const userId = localStorage.getItem("memberId");
 
-    // 유저 정보를 담아둘 state
+    // 유저 정보
+    const userId = localStorage.getItem("memberId");
     const [state, setState] = useState({});
+    const [userPoint, setUserPoint] = useState();
 
     // userId 를 back에 보냄
     // -> back 에서 userId를 받으면 그걸로 oauth_member 조회, 해당 userId의 blog name, nickname, email, 프로필 사진 가져옴
@@ -18,7 +20,19 @@ function SideProfile() {
             setState(res.data);
             console.log(res.data);
         });
+
+        userpointAPI(userId);
     }, []);
+
+    const userpointAPI = async (userId) => {
+        try {
+            const response = await StoreService.getPoint(userId); // Update the URL accordingly
+            setUserPoint(response.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            setUserPoint("-");
+        }
+    };
 
     const logout = () => {
         localStorage.clear();
@@ -41,7 +55,7 @@ function SideProfile() {
                         <div className={styles[`user-profile-info-email`]}>{state.email}</div>
                         <div className={styles[`user-profile-point`]}>
                             <div className={styles.icon}/>
-                            <div className={styles.point}>1,150</div>
+                            <div className={styles.point}>{userPoint}</div>
                         </div>
                     </div>
                 </div>
