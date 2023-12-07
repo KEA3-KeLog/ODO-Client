@@ -32,6 +32,8 @@ function MyBlogPage() {
     const [introduction, setIntroduction] = useState("");
     const [profileImageUrl, setProfileImageUrl] = useState("");
 
+    const [subscribe, setSubscribe] = useState(false);
+
     const [dateCounts, setDateCounts] = useState({});
 
     const [newDate, setNewDate] = useState('');
@@ -57,6 +59,10 @@ function MyBlogPage() {
     //   });
     // });
     // console.log(tags);
+
+    const handleClickSubscribe = () => {
+        setSubscribe(!subscribe);
+    }
 
 
   useEffect(() => {
@@ -289,9 +295,26 @@ function MyBlogPage() {
                                     <button onClick={handleWritePostButtonClick}>글 작성</button>
                                     <button onClick={handleProfileEditClick}>프로필 편집</button>
                                 </div>
-                                : <div className="buttons">
-                                    <button>구독</button>
-                                </div>
+                                : (
+                                    !subscribe
+                                        ? <div
+                                            className="buttons"
+                                            onClick={handleClickSubscribe}
+                                        >
+                                            <button>구독</button>
+                                        </div>
+                                        :
+                                        <div
+                                            className="buttons"
+                                            onClick={handleClickSubscribe} >
+                                            <button>구독 중
+                                            <img
+                                                src={require("../assets/icon_sendsvg.svg").default} />
+                                            </button>
+                                        </div>
+                                )
+
+
                         }
                         <div className="firstLink">
                             <div style={{marginRight: "10px", marginBottom: "4px"}}>
