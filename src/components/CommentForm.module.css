@@ -1,0 +1,40 @@
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.text-area {
+    resize: none;
+    margin-right: 10px;
+    margin-bottom: 1.5rem;
+    min-height: 4.125rem;
+    border: 1px solid #b8b8b8;
+    padding: 1.2rem 1rem 1.5rem;
+    border-radius: 2px;
+    color: #212529;
+    background-color: #FFF;
+}
+
+.text-area:focus {
+    outline: none;
+}
+
+.submit-wrapper {
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.submit-wrapper button {
+    border: none;
+    margin-right: 10px;
+    background-color: #cecece;
+    color: #3f3f3f;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0 1.75rem;
+    height: 2.32rem;
+    font-weight: bolder;
+    outline: none;
+    font-size: 1rem;
+}

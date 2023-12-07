@@ -1,6 +1,5 @@
-
 import UserService from "../service/UserService";
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "./Comment.module.css"; // 모듈 스타일을 import
 
 const formatDateTime = (dateTimeString) => {
@@ -18,7 +17,7 @@ const formatDateTime = (dateTimeString) => {
     const formattedDateTime = new Intl.DateTimeFormat('ko-KR', options).format(new Date(dateTimeString));
     return formattedDateTime;
 };
-const CommentList = ({ list }) => {
+const CommentList = ({list}) => {
     const [userNicknames, setUserNicknames] = useState({});
 
     useEffect(() => {
@@ -51,18 +50,32 @@ const CommentList = ({ list }) => {
             <h3>댓글 목록</h3>
             <ul className={styles.commentList}>
                 {list.map((comment, index) => (
-                    <li key={index} className={styles.commentItem}>
-                        <div className={styles.commentId}>
-                            <strong>{userNicknames[comment.userId]}</strong>
-                        </div>
-                        <div className={styles.commentContents}>
-                            {comment.contents}
-                        </div>
-                        <div className={styles.commentTime}>
-                            {formatDateTime(comment.createdTime)}
-                        </div>
-                    </li>
+                    <>
+                        <li key={index} className={styles.commentItem}>
+
+                            <div className={styles.profile}>
+                                <img
+                                    className={styles[`profile-img`]}
+                                    src={require("../assets/author_profile.svg").default}
+                                />
+                                <div className={styles.commentId}>
+                                    <strong>{userNicknames[comment.userId]}</strong>
+                                    <div className={styles.commentTime}>
+                                        {formatDateTime(comment.createdTime)}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={styles.commentContents}>
+                                {comment.contents}
+                            </div>
+
+                        </li>
+
+                        <hr/>
+                    </>
                 ))}
+
             </ul>
         </div>
     );
