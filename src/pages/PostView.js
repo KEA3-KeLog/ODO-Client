@@ -161,7 +161,7 @@ function PostView() {
                                         className={'player'}
                                         onClick={handlePlay}>
                                         <img id={'play-icon'}
-                                             src={require("../assets/icon_pause.svg").default}/>
+                                             src={require("../assets/icon_play.svg").default}/>
                                     </button>
                                     : (play === 2
                                             ? <button
