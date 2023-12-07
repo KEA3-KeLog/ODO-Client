@@ -15,6 +15,7 @@ function formatDateTime(dateTimeString) {
 }
 
 function MainPage() {
+    
     // const [activeItemIndex, setActiveItemIndex] = useState(0);
     // const chevronWidth = 40;
 

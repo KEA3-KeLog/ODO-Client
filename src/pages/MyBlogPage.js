@@ -226,8 +226,8 @@ function MyBlogPage() {
                 <ion-icon name="chevron-down-outline"></ion-icon>
                 <div className="child first">
                     <div className="profile">
-                        <div className="profile_image">
-                            <img src={profileImageUrl} alt="Profile"/>
+                        <div >
+                            <img src={profileImageUrl} className="profile_image" alt="Profile"/>
                         </div>
                         <div className="volumeControl">
                             {

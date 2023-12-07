@@ -2,6 +2,7 @@ import UserService from "../service/UserService";
 import React, {useEffect, useState} from 'react';
 import styles from "./Comment.module.css"; // 모듈 스타일을 import
 
+
 const formatDateTime = (dateTimeString) => {
     const options = {
         year: 'numeric',
@@ -19,6 +20,7 @@ const formatDateTime = (dateTimeString) => {
 };
 const CommentList = ({list}) => {
     const [userNicknames, setUserNicknames] = useState({});
+    const [userprofileImgs, setUserProfileImgs] = useState({});
 
     useEffect(() => {
         const fetchUserNicknames = async () => {
@@ -29,13 +31,18 @@ const CommentList = ({list}) => {
                 );
 
                 const nicknameMap = {};
+                const profileImgMap = {};
                 userNicknameData.forEach((resource, index) => {
                     const userId = list[index].userId; // list에 있는 userId 사용
+                    console.log(resource.data);
                     const nickname = resource.data.blog_nickname;
+                    const profileImg = resource.data.profile_image_url;
+                    profileImgMap[userId] = profileImg;
                     nicknameMap[userId] = nickname;
                 });
 
                 setUserNicknames(nicknameMap);
+                setUserProfileImgs(profileImgMap);
             }
         };
 
@@ -56,7 +63,7 @@ const CommentList = ({list}) => {
                             <div className={styles.profile}>
                                 <img
                                     className={styles[`profile-img`]}
-                                    src={require("../assets/author_profile.svg").default}
+                                    src={userprofileImgs[comment.userId]}
                                 />
                                 <div className={styles.commentId}>
                                     <strong>{userNicknames[comment.userId]}</strong>
