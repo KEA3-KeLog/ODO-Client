@@ -254,12 +254,18 @@ function MyBlogPage() {
                                 {introduction}
                             </div>
                         </div>
-                        <div className="buttons">
-                            <button onClick={handleWritePostButtonClick}>글 작성</button>
-                            <button onClick={handleProfileEditClick}>프로필 편집</button>
-                        </div>
+                        {
+                            userId === localStorage.getItem("memberId")
+                                ? <div className="buttons">
+                                    <button onClick={handleWritePostButtonClick}>글 작성</button>
+                                    <button onClick={handleProfileEditClick}>프로필 편집</button>
+                                </div>
+                                : <div className="buttons">
+                                    <button>구독</button>
+                                </div>
+                        }
                         <div className="firstLink">
-                            <div style={{marginRight: "10px"}}>
+                            <div style={{marginRight: "10px", marginBottom: "4px"}}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="14"
@@ -351,9 +357,9 @@ function MyBlogPage() {
                     </div>
                     <div className="new-contents">
                         <div>
-                            <strong>최신글</strong>
+                            <div className={"workTitle"}>최신글</div>
                         </div>
-                        <br></br>
+                        <br/>
                         <div className="PostCard">
                             {postList}
                         </div>
