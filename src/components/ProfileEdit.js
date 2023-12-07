@@ -6,6 +6,7 @@ import VoiceFileService from "../service/VoiceFileService";
 
 import axios from "axios";
 import ProfileUpdateService from "../service/ProfileUpdateService";
+import UserService from "../service/UserService";
 
 
 function ProfileEdit() {
@@ -20,6 +21,7 @@ function ProfileEdit() {
     const [socialc, setUserSocialC] = useState("");
     const [sociald, setUserSocialD] = useState("");
     const [userEmail, setUserEmail] = useState("");
+    const [profileImageUrl, setProfileImageUrl] = useState("");
     const [reviewReceived, setReviewRecieved] = useState("");
     const [updateReceived, setUpdateRecieved] = useState("");
 
@@ -58,6 +60,7 @@ function ProfileEdit() {
             setUserSocialC(response.data.socialc);
             setUserSocialD(response.data.sociald);
             setUserEmail(response.data.userEmail);
+            setProfileImageUrl(response.data.profileImageUrl);
             setReviewRecieved(response.data.reviewReceived);
             setUpdateRecieved(response.data.updateReceived);
         }
@@ -171,7 +174,23 @@ function ProfileEdit() {
     //     setIsFormChanged(true);
     // };
 
+    const [selectedImage, setSelectedImage] = useState(null);
 
+    const handleImageChange = async (e) => {
+        const file = e.target.files[0];
+        // 이미지 파일을 상태에 설정
+        setSelectedImage(file);
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("userId", userId);
+    
+        // 이미지 업로드
+        await UserService.uploadProfileImg(formData);
+        console.log("Image uploaded!");
+    
+        // 페이지 새로고침
+        window.location.reload();
+    };
 
     const handlePageSave = async () => {
         console.log(blogName);
@@ -381,11 +400,21 @@ function ProfileEdit() {
                     <div className={styles[`element-title`]}>
                         프로필 사진
                     </div>
-                    <img
-                        className={styles[`profile-img`]}
-                        src={require("../assets/author_profile.svg").default}
-                    />
+                    <div>
+                            <img
+                                className={styles[`profile-img`]}
+                                src={profileImageUrl}
+                                alt="Selected"
+                            />
+                        </div>
 
+                    <div>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

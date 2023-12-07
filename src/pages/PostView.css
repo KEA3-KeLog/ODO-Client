@@ -65,3 +65,11 @@
 #Mains-right {
     border-left: solid 1px #FFFFFF;
 }
+.user-profile-img {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

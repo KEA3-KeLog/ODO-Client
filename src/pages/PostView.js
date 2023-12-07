@@ -30,6 +30,8 @@ function PostView() {
     const [postKey, setPostKey] = useState("");
     const [userName, setUserName] = useState("");
     const [createdTime, setCreatedTime] = useState("");
+    const [profileImageUrl, setProfileImageUrl] = useState("");
+
     //추가
     const [tags, setTags] = useState([]);
     const navigate = useNavigate();
@@ -55,6 +57,8 @@ function PostView() {
         });
         UserService.getUser(userId).then(function (res) {
             setUserName(res.data.blog_nickname);
+            setProfileImageUrl(res.data.profile_image_url)
+
         })
     }, []);
 
@@ -134,7 +138,11 @@ function PostView() {
                 <div>
                     <div className='Post_head'>
                         <div className="row">
+
                             <h1 id="title">{title}</h1>
+                                           
+                            <img src={profileImageUrl} className="user-profile-img" alt="Profile"/>
+
                             <text id="thin">by <text id="bold">{userName}</text> · {formatDateTime(createdTime)}</text><br /><br />
                             {tags.map((tag, index) => (
                                 <button key={index} id="tag">{tag}</button>

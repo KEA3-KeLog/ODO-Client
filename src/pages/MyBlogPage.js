@@ -29,6 +29,7 @@ function MyBlogPage() {
     const [userName, setUserName] = useState("");
     const [userBlogName, setUserBlogName] = useState("");
     const [introduction, setIntroduction] = useState("");
+    const [profileImageUrl, setProfileImageUrl] = useState("");
 
     const [dateCounts, setDateCounts] = useState({});
 
@@ -54,10 +55,10 @@ function MyBlogPage() {
         setUserBlogName(res.data.blog_name);
         setUserName(res.data.blog_nickname);
         setIntroduction(res.data.introduction);
+        setProfileImageUrl(res.data.profile_image_url)
         console.log(res.data);
     })
   }, []);
-  console.log(introduction);
 
   useEffect(() => {
     // 서버에서 날짜별 포스트 개수를 가져오는 API 호출
@@ -198,7 +199,7 @@ function MyBlogPage() {
                 <div className="child first">
                     <div className="profile">
                         <div className="profile_image">
-                            <img src={require("../image/Ellipse 15.png")} alt="Profile"/>
+                            <img src={profileImageUrl} alt="Profile"/>
                         </div>
                         <div className="volumeControl">
                             {

@@ -396,6 +396,12 @@ ul li p {
     letter-spacing: -0.4px;
 }
 
+.profile_image{
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .works div {
     margin-bottom: 20px; /* 원하는 간격만큼 설정 */
 }

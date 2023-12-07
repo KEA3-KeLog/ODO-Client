@@ -16,6 +16,7 @@ function SideProfile() {
     useEffect(() => {
         UserService.getUser(userId).then(function (res) {
             setState(res.data);
+            console.log(res.data);
         });
     }, []);
 
@@ -34,7 +35,7 @@ function SideProfile() {
                 </div>
                 <div className={styles[`user-profile`]}>
                     <img className={styles[`user-profile-img`]}
-                         src={require("../assets/author_profile.svg").default}/>
+                         src={state.profile_image_url}/>
                     <div className={styles[`user-profile-info`]}>
                         <h4>{state.blog_name}</h4>
                         <div className={styles[`user-profile-info-email`]}>{state.email}</div>
