@@ -44,6 +44,13 @@ function PostView() {
     const [play, setPlay] = useState(0);
 
 
+    const [editMenu, setEditMenu] = useState(false);
+
+    const handleEditMenuClick = () => {
+        setEditMenu(!editMenu);
+    }
+
+
 
     useEffect(() => {
         console.log("userId: ", userId);
@@ -212,9 +219,46 @@ function PostView() {
                 </div>
 
                 <div id='Mains-right'>
-                    <button id="post_edit_button" onClick={handleUpdate}>수정</button>
-                    <button id="post_delete_button" onClick={handleDelete}>삭제</button>
-                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+                    {
+                        userId == localStorage.getItem("memberId")
+                            ?
+                            <button
+                                onClick={handleEditMenuClick}
+                                id={"post_edit_menu"}>
+                                <img
+                                    src={require("../assets/Group 13.svg").default}/>
+                            </button>
+                            : null
+
+                    }
+
+
+                    {
+                        editMenu
+                            ?
+                            <div
+                                id={"post_edit_menu_wrapper"}>
+                                <button
+                                    className={"edit_button"}
+                                    id={"post_edit"}
+                                    onClick={handleUpdate}>
+                                    수정하기
+                                    <img
+                                        src={require("../assets/icon_edit post.svg").default}/>
+                                </button>
+                                <button
+                                    className={"delete_button"}
+                                    id={"post_edit"}
+                                    onClick={handleDelete}>
+                                    삭제하기
+                                    <img
+                                        src={require("../assets/icon_delete.svg").default}/>
+                                </button>
+                            </div>
+                            : null
+                    }
+
                 </div>
 
             </div>
