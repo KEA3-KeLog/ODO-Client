@@ -162,6 +162,7 @@
 .post-card-block {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin: 2px;
     width: 250px;
     border-radius: 1px;
@@ -226,6 +227,7 @@
 .post-view-1-footer {
     display: flex;
     justify-content: space-between;
+    padding: 6px 5px 5px 5px;
 }
 
 /*프로필 사진과 by저자 를 묶는 div*/
