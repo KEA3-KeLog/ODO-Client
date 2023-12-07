@@ -78,7 +78,7 @@ function WritePost() {
       if (typeof window !== "undefined") {
         if (e.keyCode === 13 && e.target.value.trim() !== "") {
           // 중복된 태그 확인
-          if (!tagList.includes("#" + e.target.value.trim())) {
+          if (!tagList.includes( "#" + e.target.value.trim())) {
             setTagList((prevTags) => [...prevTags, "#" + e.target.value.trim()]);
           }
           setTag(""); // Clear the input after adding a tag
@@ -90,6 +90,10 @@ function WritePost() {
 
 
 
+
+console.log(tag);
+console.log(tagList);
+console.log(userId);
   
 
   
@@ -239,7 +243,7 @@ function WritePost() {
             id="post_submit_button"
             onClick={(e) => {
               e.preventDefault();
-              TTSService.requestVoice(contents, userId);
+              // TTSService.requestVoice(contents, userId);
               PostService.createPost(post).then((res) => {
                 navigate("/postview/" + res.data, {
                   state: post.userId,

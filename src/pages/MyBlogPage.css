@@ -80,6 +80,7 @@
     width: 80%;
     -webkit-appearance: none;
     background: transparent;
+    margin-bottom: 3px;
 }
 
 .slider:focus {
@@ -92,9 +93,10 @@
     background: black;
     width: 12px;
     height: 12px;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     position: relative;
+    margin-top: 4px;
 }
 
 
@@ -399,6 +401,7 @@ ul li p {
 }
 
 .profile_image{
+    
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
