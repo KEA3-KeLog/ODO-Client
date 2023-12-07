@@ -12,6 +12,7 @@ import Calendar from 'react-calendar';  // Import react-calendar
 
 import ReactCalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
+import PostTagService from "../service/PostTagService";
 
 import axios from 'axios';
 import UserService from "../service/UserService";
@@ -45,6 +46,18 @@ function MyBlogPage() {
 
     const navigate = useNavigate();
 
+    const [postTags, setPostTags] = useState([]);
+
+
+    // const [tags, setTags] = useState([]);
+    // useEffect(() => {
+    //   PostService.getAllPost().then(res => {
+    //       console.log("asd"+res);
+    //       setTags(res.data.tagList);
+    //   });
+    // });
+    // console.log(tags);
+
 
   useEffect(() => {
     PostService.getPosts(userId).then(function (res) {
@@ -59,6 +72,19 @@ function MyBlogPage() {
         console.log(res.data);
     })
   }, []);
+
+  useEffect(() => {
+    // 서버에서 날짜별 포스트 개수를 가져오는 API 호출
+    axios.get(`http://localhost:8080/api/post-tags/count/${userId}`)
+      .then(response => {
+        setPostTags(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching post counts:', error);
+      });
+  }, []); // 빈 배열은 한 번만 호출하도록 설정
+  
+  
 
   useEffect(() => {
     // 서버에서 날짜별 포스트 개수를 가져오는 API 호출
@@ -112,7 +138,9 @@ function MyBlogPage() {
       </div>
       <div className="PostCardBlockContents">
         <div className="PostCardBlockTag">
-            <span>TAG</span>
+
+            {v.tagList}
+
           {/*<span>{v.tag}</span>*/}
         </div>
         <div className="PostCardBlockContents_Link">
@@ -306,8 +334,11 @@ function MyBlogPage() {
                         </div>
                     </div>
                     <div className="horizontal-line"/>
+
+
+
                     <div className="tag">
-                        <div className="tagList">태그목록</div>
+                        {/* <div className="tagList">태그목록</div>
                         <ul>
                             <li
                                 onClick={()=>{
@@ -324,7 +355,24 @@ function MyBlogPage() {
                             <li>
                                 SpringBoot <p>(4)</p>
                             </li>
-                        </ul>
+                        </ul> */}
+                        
+
+                        <div className="tag">
+    <div className="tagList">태그목록</div>
+    <ul>
+        {/* <li onClick={() => navigate("./postsbytag")}>전체보기 <p>(50)</p></li> */}
+        {postTags.map(tag => (
+            <li key={tag.id}>
+                {tag.tag} <p>({tag.tagCount})</p>
+            </li>
+        ))}
+    </ul>
+</div>
+
+
+
+                        
                     </div>
                 </div>
                 <div className="child second">

@@ -26,6 +26,7 @@ function MainPage() {
     const id = location.state;
     const [login, setLogin] = useState(false);
 
+    const [userName, setUserName] = useState('');
 
     const [userNames, setUserNames] = useState({});
     useEffect(() => {
