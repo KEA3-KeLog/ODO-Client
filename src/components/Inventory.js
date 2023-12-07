@@ -36,6 +36,8 @@ function Inventory(props) {
     const [itemDetail, setItemDetail] = useState();
     const [modalOpen, setModalOpen] = useState(false);
 
+    const [itemStatus, setItemStatus] = useState(false);
+
     const [newDate, setNewDate] = useState('');
     const [dateCounts, setDateCounts] = useState({});
     const newEntry = { count: 1 };
@@ -44,6 +46,10 @@ function Inventory(props) {
         getpoint(userId);
         getInven(userId);
     },[])
+
+    const handleItemStatusClick = () => {
+        setItemStatus(!itemStatus);
+    }
 
     const getpoint = async (userId) => {
         try {
@@ -135,7 +141,28 @@ function Inventory(props) {
                                 </div>
                                 <div className={styles[`item-status-container`]}>
                                     <div className={styles[`item-title`]}>{item.itemName}</div>
-                                    <ItemStatus on={"true"}>사용중</ItemStatus>
+
+                                    {
+                                        itemStatus
+                                            ?
+                                            <ItemStatus
+                                                onClick={handleItemStatusClick}
+                                                on={itemStatus}>
+                                                사용중
+                                            </ItemStatus>
+                                            :
+                                            <ItemStatus
+                                                onClick={handleItemStatusClick}
+                                                on={itemStatus}>
+                                                장착하기
+                                            </ItemStatus>
+
+                                    }
+                                    {/*<ItemStatus*/}
+                                    {/*    onClick={handleItemStatusClick}*/}
+                                    {/*    on={itemStatus}>*/}
+                                    {/*    사용중*/}
+                                    {/*</ItemStatus>*/}
                                 </div>
                             </button>
                         </div>
