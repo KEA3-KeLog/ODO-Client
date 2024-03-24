@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { userApi } from '../api/Api';
 
-const USER_API_BASE_URL = "http://localhost:8080/oauth/api/user/";
+const USER_API_BASE_URL = userApi;
 
 class UserService {
     getUser(userId) {

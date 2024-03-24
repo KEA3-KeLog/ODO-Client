@@ -1,0 +1,10 @@
+export const commentApi = process.env.REACT_APP_COMMENT_API_KEY;
+export const imageApi = process.env.REACT_APP_IMAGE_API_KEY;
+export const invenApi = process.env.REACT_APP_INVEN_API_KEY;
+export const postApi = process.env.REACT_APP_POST_API_KEY;
+export const postTagApi = process.env.REACT_APP_POST_TAG_API_KEY;
+export const profileApi = process.env.REACT_APP_PROFILE_API_KEY;
+export const storeApi = process.env.REACT_APP_STORE_API_KEY;
+export const ttsApi = process.env.REACT_APP_TTS_API_KEY;
+export const userApi = process.env.REACT_APP_USER_API_KEY;
+export const voiceApi = process.env.REACT_APP_VOICE_API_KEY;

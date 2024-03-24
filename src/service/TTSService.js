@@ -1,6 +1,6 @@
 import axios from "axios";
-
-const POST_API_BASE_URL = "http://localhost:8000/api/tts";
+import { ttsApi } from "../api/Api";
+const POST_API_BASE_URL = ttsApi;
 
 class TTSService {
     constructor() {

@@ -1,6 +1,6 @@
 import axios from 'axios';
-
-const POST_API_BASE_URL = "http://localhost:8080/api/post";
+import { postApi } from '../api/Api';
+const POST_API_BASE_URL = postApi;
 
 class PostService {
     getAllPost() {

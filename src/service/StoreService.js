@@ -1,16 +1,17 @@
 import axios from 'axios';
+import { storeApi } from '../api/Api';
 
-const USER_POINT_API_BASE_URL = "http://localhost:8080/store/api/userpoint/";
+const USER_POINT_API_BASE_URL = `${storeApi}/userpoint/`;
 
-const UPDATE_USER_POINT_API_BASE_URL = "http://localhost:8080/store/api/purchase/";
+const UPDATE_USER_POINT_API_BASE_URL =  `${storeApi}/purchase/`;
 
-const UPDATE_USER_INVEN_API_BASE_URL = "http://localhost:8080/store/api/inven/";
+const UPDATE_USER_INVEN_API_BASE_URL =  `${storeApi}/inven/`;
 
-const UPDATE_ITEM_LOG =  "http://localhost:8080/store/api/itemlog/";
+const UPDATE_ITEM_LOG =   `${storeApi}/itemlog/`;
 
-const INVENTORY_CHECKING = "http://localhost:8080/store/api/invencheck/";
+const INVENTORY_CHECKING =  `${storeApi}/invencheck/`;
 
-const GET_ALL_ITEMS = "http://localhost:8080/store/api/getAllItems";
+const GET_ALL_ITEMS =  `${storeApi}/getAllItems`;
 
 class StoreService {
     

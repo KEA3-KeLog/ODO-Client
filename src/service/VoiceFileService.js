@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { voiceApi } from '../api/Api';
 
-const VOICEFILE_API_BASE_URL = "http://localhost:8000/api/uploadvoicefile";
+const VOICEFILE_API_BASE_URL = voiceApi;
 
 class VoiceFileService {
     uploadVoiceFile(formData) {

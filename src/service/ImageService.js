@@ -1,6 +1,7 @@
 import axios from "axios";
+import { imageApi } from "../api/Api";
 
-const POST_API_BASE_URL = "http://localhost:8080/api/image";
+const POST_API_BASE_URL = imageApi;
 
 class ImageService {
 

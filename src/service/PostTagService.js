@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { postTagApi } from '../api/Api';
 
-const POSTTAG_API_BASE_URL = "http://localhost:8000/api/post-tags/count/";
+const POSTTAG_API_BASE_URL = postTagApi;
 
 class PostTagService {
     getPostTags(userId) {

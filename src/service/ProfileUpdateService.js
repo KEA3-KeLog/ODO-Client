@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { profileApi } from '../api/Api';
+const USER_INVEN_API_BASE_URL = `${profileApi}/userprofile/`;
 
-const USER_INVEN_API_BASE_URL = "http://localhost:8080/profile/api/userprofile/";
-
-const USER_PROFILE_API_BASE_URL = "http://localhost:8080/profile/api/profileupdate/";
+const USER_PROFILE_API_BASE_URL = `${profileApi}/profileupdate/`;
 
 
 class ProfileUpdateService {

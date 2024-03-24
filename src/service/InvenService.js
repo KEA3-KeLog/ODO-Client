@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { invenApi } from '../api/Api';
 
-const USER_INVEN_API_BASE_URL = "http://localhost:8080/Inven/api/userInventory/";
+const USER_INVEN_API_BASE_URL = invenApi;
 
 
 class InvenService {
